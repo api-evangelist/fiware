@@ -12,7 +12,9 @@ apis:
       perform updates and bring access to context.
 name: FIWARE
 tags:
-  - Bookmark
+  - Devices
+  - Internet of Things
+  - Standards
 type: Index
 image: >-
   https://kinlane-productions2.s3.amazonaws.com/apis-json-icons/fiwarespecifications-clipboard-open-api-specifications-for-fiware-generic-enablers.png
