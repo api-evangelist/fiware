@@ -1,6 +1,22 @@
 aid: fiware
+name: FIWARE
+description: >-
+  A framework based around supplying a cornerstone function required in any
+  smart solution: the need to manage context information, enabling to
+  perform updates and bring access to context.
+type: Index
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+access: 3rd-Party
+created: '2024-07-02'
+modified: '2026-03-16'
+position: Consumer
+tags:
+  - Devices
+  - Internet of Things
+  - Standards
 url: >-
-  https://example.com/apis/fiwarespecifications-clipboard-open-api-specifications-for-fiware-generic-enablers.yml
+  https://raw.githubusercontent.com/api-evangelist/fiware/refs/heads/main/apis.yml
+specificationVersion: '0.19'
 apis:
   - aid: fiware:fiware
     name: FIWARE
@@ -10,23 +26,18 @@ apis:
       A framework based around supplying a cornerstone function required in any
       smart solution: the need to manage context information, enabling to
       perform updates and bring access to context.
-name: FIWARE
-tags:
-  - Devices
-  - Internet of Things
-  - Standards
-type: Index
-image: >-
-  https://kinlane-productions2.s3.amazonaws.com/apis-json-icons/fiwarespecifications-clipboard-open-api-specifications-for-fiware-generic-enablers.png
-access: 3rd-Party
-created: '2024-07-02'
-modified: '2024-11-15'
-position: Consumer
-description: >-
-  A framework based around supplying a cornerstone function required in any
-  smart solution: the need to manage context information, enabling to perform
-  updates and bring access to context.
+    properties:
+      - type: Documentation
+        url: https://fiware-orion.readthedocs.io/
+      - type: GitHub Organization
+        url: https://github.com/FIWARE
+common:
+  - type: Website
+    url: https://www.fiware.org/
+  - type: GitHub Organization
+    url: https://github.com/FIWARE
+  - type: Documentation
+    url: https://fiware-orion.readthedocs.io/
 maintainers:
-  - FN: API Evangelist
-    email: info@apievangelist.com
-specificationVersion: '0.16'
+  - FN: Kin Lane
+    email: kin@apievangelist.com
