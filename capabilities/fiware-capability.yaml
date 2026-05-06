@@ -1,0 +1,1068 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ETSI ISG CIM / NGSI-LD API
+  description: This OAS file describes the NGSI-LD API defined by the ETSI ISG CIM group. This Cross-domain Context Information
+    Management API allows to provide, consume and subscribe to context information in multiple scenarios and involving multiple
+    stakeholders
+  tags:
+  - Fiware
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: fiware
+    baseUri: https://api.example.com
+    description: ETSI ISG CIM / NGSI-LD API HTTP API.
+    resources:
+    - name: entities
+      path: /entities/
+      operations:
+      - name: queryentities
+        method: GET
+        description: Retrieve a set of entities which matches a specific query from an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createentity
+        method: POST
+        description: Create a new Entity within an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: entities-entityid
+      path: /entities/{entityId}
+      operations:
+      - name: retrieveentitybyid
+        method: GET
+        description: Retrieve an specific Entity from an NGSI-LD system. It's possible to specify the Entity attributes to
+          be retrieved by using query parameters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: removeentitybyid
+        method: DELETE
+        description: Removes an specific Entity from an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: entities-entityid-attrs
+      path: /entities/{entityId}/attrs/
+      operations:
+      - name: appendentityattrs
+        method: POST
+        description: Append new Entity attributes to an existing Entity within an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateentityattrs
+        method: PATCH
+        description: Update existing Entity attributes within an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: entities-entityid-attrs-attrid
+      path: /entities/{entityId}/attrs/{attrId}
+      operations:
+      - name: partialattrupdate
+        method: PATCH
+        description: Update existing Entity attributes within an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: removeentityattr
+        method: DELETE
+        description: Removes an existing Entity attribute within an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: subscriptions
+      path: /subscriptions/
+      operations:
+      - name: retrievesubscriptions
+        method: GET
+        description: Retrieves the subscriptions available in an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createsubscription
+        method: POST
+        description: Creates a new Subscription within an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: subscriptions-subscriptionid
+      path: /subscriptions/{subscriptionId}
+      operations:
+      - name: retrievesubscriptionbyid
+        method: GET
+        description: Retrieves a specific Subscription from an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatesubscription
+        method: PATCH
+        description: Updates a specific Subscription within an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: removesubscription
+        method: DELETE
+        description: Removes a specific Subscription from an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: csourceregistrations
+      path: /csourceRegistrations/
+      operations:
+      - name: querycsources
+        method: GET
+        description: Retrieve a set of context sources which matches a specific query from an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: registercsource
+        method: POST
+        description: Registers a new context source within an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: csourceregistrations-registrationid
+      path: /csourceRegistrations/{registrationId}
+      operations:
+      - name: retrievecsource
+        method: GET
+        description: Retrieves a specific context source registration from an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: removecsource
+        method: DELETE
+        description: Removes an specific context source registration within an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: csourcesubscriptions
+      path: /csourceSubscriptions/
+      operations:
+      - name: retrievecsourcesubscriptions
+        method: GET
+        description: Retrieves the context source discovery subscriptions available in an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createcsourcesubscription
+        method: POST
+        description: Creates a context source discovery Subscription within an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: csourcesubscriptions-subscriptionid
+      path: /csourceSubscriptions/{subscriptionId}
+      operations:
+      - name: retrievecsourcesubscriptionsbyid
+        method: GET
+        description: Retrieves a specific Subscription from an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatecsourcesubscription
+        method: PATCH
+        description: Updates a specific context source discovery Subscription within an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: removecsourcesubscription
+        method: DELETE
+        description: Removes a specific Context Source Subscription from an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: entityoperations-create
+      path: /entityOperations/create
+      operations:
+      - name: batchentitycreation
+        method: POST
+        description: Batch Entity creation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: entityoperations-update
+      path: /entityOperations/update
+      operations:
+      - name: batchentityupdate
+        method: POST
+        description: Batch Entity update
+        inputParameters:
+        - name: options
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: entityoperations-upsert
+      path: /entityOperations/upsert
+      operations:
+      - name: batchentityupsert
+        method: POST
+        description: Batch Entity upsert
+        inputParameters:
+        - name: options
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: entityoperations-delete
+      path: /entityOperations/delete
+      operations:
+      - name: batchentitydelete
+        method: POST
+        description: Batch Entity delete
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: temporal-entities
+      path: /temporal/entities/
+      operations:
+      - name: querytemporalentities
+        method: GET
+        description: Query temporal evolution of Entities from an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createupdateentitytemporal
+        method: POST
+        description: Create or update temporal representation of an Entity within an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: temporal-entities-entityid
+      path: /temporal/entities/{entityId}
+      operations:
+      - name: retrieveentitytemporalbyid
+        method: GET
+        description: Retrieve the temporal representation of an specific Entity from an NGSI-LD system. It's possible to specify
+          the Entity attributes to be retrieved by using query parameters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: removeentitytemporalbyid
+        method: DELETE
+        description: Removes the temporal representation of an Entity from an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: temporal-entities-entityid-attrs
+      path: /temporal/entities/{entityId}/attrs/
+      operations:
+      - name: addtemporalentityattrs
+        method: POST
+        description: Add new attributes to an existing Temporal Entity within an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: temporal-entities-entityid-attrs-attrid
+      path: /temporal/entities/{entityId}/attrs/{attrId}
+      operations:
+      - name: removeentitytemporalattr
+        method: DELETE
+        description: Attribute from Temporal Representation of Entity deletion
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: temporal-entities-entityid-attrs-attrid-instance
+      path: /temporal/entities/{entityId}/attrs/{attrId}/{instanceId}
+      operations:
+      - name: modifyentitytemporalattrinstance
+        method: PATCH
+        description: Allows modifying a specific Attribute (Property or Relationship) instance, identified by its instanceId,
+          of a Temporal Representation of an Entity.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: removeentitytemporalattrinstance
+        method: DELETE
+        description: Attribute Instance deletion by instance id.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: fiware-rest
+    description: REST adapter for ETSI ISG CIM / NGSI-LD API.
+    resources:
+    - path: /entities/
+      name: queryentities
+      operations:
+      - method: GET
+        name: queryentities
+        description: Retrieve a set of entities which matches a specific query from an NGSI-LD system
+        call: fiware.queryentities
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /entities/
+      name: createentity
+      operations:
+      - method: POST
+        name: createentity
+        description: Create a new Entity within an NGSI-LD system
+        call: fiware.createentity
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /entities/{entityId}
+      name: retrieveentitybyid
+      operations:
+      - method: GET
+        name: retrieveentitybyid
+        description: Retrieve an specific Entity from an NGSI-LD system. It's possible to specify the Entity attributes to
+          be retrieved by using query parameters
+        call: fiware.retrieveentitybyid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /entities/{entityId}
+      name: removeentitybyid
+      operations:
+      - method: DELETE
+        name: removeentitybyid
+        description: Removes an specific Entity from an NGSI-LD system
+        call: fiware.removeentitybyid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /entities/{entityId}/attrs/
+      name: appendentityattrs
+      operations:
+      - method: POST
+        name: appendentityattrs
+        description: Append new Entity attributes to an existing Entity within an NGSI-LD system
+        call: fiware.appendentityattrs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /entities/{entityId}/attrs/
+      name: updateentityattrs
+      operations:
+      - method: PATCH
+        name: updateentityattrs
+        description: Update existing Entity attributes within an NGSI-LD system
+        call: fiware.updateentityattrs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /entities/{entityId}/attrs/{attrId}
+      name: partialattrupdate
+      operations:
+      - method: PATCH
+        name: partialattrupdate
+        description: Update existing Entity attributes within an NGSI-LD system
+        call: fiware.partialattrupdate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /entities/{entityId}/attrs/{attrId}
+      name: removeentityattr
+      operations:
+      - method: DELETE
+        name: removeentityattr
+        description: Removes an existing Entity attribute within an NGSI-LD system
+        call: fiware.removeentityattr
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /subscriptions/
+      name: retrievesubscriptions
+      operations:
+      - method: GET
+        name: retrievesubscriptions
+        description: Retrieves the subscriptions available in an NGSI-LD system
+        call: fiware.retrievesubscriptions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /subscriptions/
+      name: createsubscription
+      operations:
+      - method: POST
+        name: createsubscription
+        description: Creates a new Subscription within an NGSI-LD system
+        call: fiware.createsubscription
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /subscriptions/{subscriptionId}
+      name: retrievesubscriptionbyid
+      operations:
+      - method: GET
+        name: retrievesubscriptionbyid
+        description: Retrieves a specific Subscription from an NGSI-LD system
+        call: fiware.retrievesubscriptionbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /subscriptions/{subscriptionId}
+      name: updatesubscription
+      operations:
+      - method: PATCH
+        name: updatesubscription
+        description: Updates a specific Subscription within an NGSI-LD system
+        call: fiware.updatesubscription
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /subscriptions/{subscriptionId}
+      name: removesubscription
+      operations:
+      - method: DELETE
+        name: removesubscription
+        description: Removes a specific Subscription from an NGSI-LD system
+        call: fiware.removesubscription
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /csourceRegistrations/
+      name: querycsources
+      operations:
+      - method: GET
+        name: querycsources
+        description: Retrieve a set of context sources which matches a specific query from an NGSI-LD system
+        call: fiware.querycsources
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /csourceRegistrations/
+      name: registercsource
+      operations:
+      - method: POST
+        name: registercsource
+        description: Registers a new context source within an NGSI-LD system
+        call: fiware.registercsource
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /csourceRegistrations/{registrationId}
+      name: retrievecsource
+      operations:
+      - method: GET
+        name: retrievecsource
+        description: Retrieves a specific context source registration from an NGSI-LD system
+        call: fiware.retrievecsource
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /csourceRegistrations/{registrationId}
+      name: removecsource
+      operations:
+      - method: DELETE
+        name: removecsource
+        description: Removes an specific context source registration within an NGSI-LD system
+        call: fiware.removecsource
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /csourceSubscriptions/
+      name: retrievecsourcesubscriptions
+      operations:
+      - method: GET
+        name: retrievecsourcesubscriptions
+        description: Retrieves the context source discovery subscriptions available in an NGSI-LD system
+        call: fiware.retrievecsourcesubscriptions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /csourceSubscriptions/
+      name: createcsourcesubscription
+      operations:
+      - method: POST
+        name: createcsourcesubscription
+        description: Creates a context source discovery Subscription within an NGSI-LD system
+        call: fiware.createcsourcesubscription
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /csourceSubscriptions/{subscriptionId}
+      name: retrievecsourcesubscriptionsbyid
+      operations:
+      - method: GET
+        name: retrievecsourcesubscriptionsbyid
+        description: Retrieves a specific Subscription from an NGSI-LD system
+        call: fiware.retrievecsourcesubscriptionsbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /csourceSubscriptions/{subscriptionId}
+      name: updatecsourcesubscription
+      operations:
+      - method: PATCH
+        name: updatecsourcesubscription
+        description: Updates a specific context source discovery Subscription within an NGSI-LD system
+        call: fiware.updatecsourcesubscription
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /csourceSubscriptions/{subscriptionId}
+      name: removecsourcesubscription
+      operations:
+      - method: DELETE
+        name: removecsourcesubscription
+        description: Removes a specific Context Source Subscription from an NGSI-LD system
+        call: fiware.removecsourcesubscription
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /entityOperations/create
+      name: batchentitycreation
+      operations:
+      - method: POST
+        name: batchentitycreation
+        description: Batch Entity creation
+        call: fiware.batchentitycreation
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /entityOperations/update
+      name: batchentityupdate
+      operations:
+      - method: POST
+        name: batchentityupdate
+        description: Batch Entity update
+        call: fiware.batchentityupdate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /entityOperations/upsert
+      name: batchentityupsert
+      operations:
+      - method: POST
+        name: batchentityupsert
+        description: Batch Entity upsert
+        call: fiware.batchentityupsert
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /entityOperations/delete
+      name: batchentitydelete
+      operations:
+      - method: POST
+        name: batchentitydelete
+        description: Batch Entity delete
+        call: fiware.batchentitydelete
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /temporal/entities/
+      name: querytemporalentities
+      operations:
+      - method: GET
+        name: querytemporalentities
+        description: Query temporal evolution of Entities from an NGSI-LD system
+        call: fiware.querytemporalentities
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /temporal/entities/
+      name: createupdateentitytemporal
+      operations:
+      - method: POST
+        name: createupdateentitytemporal
+        description: Create or update temporal representation of an Entity within an NGSI-LD system
+        call: fiware.createupdateentitytemporal
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /temporal/entities/{entityId}
+      name: retrieveentitytemporalbyid
+      operations:
+      - method: GET
+        name: retrieveentitytemporalbyid
+        description: Retrieve the temporal representation of an specific Entity from an NGSI-LD system. It's possible to specify
+          the Entity attributes to be retrieved by using query parameters
+        call: fiware.retrieveentitytemporalbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /temporal/entities/{entityId}
+      name: removeentitytemporalbyid
+      operations:
+      - method: DELETE
+        name: removeentitytemporalbyid
+        description: Removes the temporal representation of an Entity from an NGSI-LD system
+        call: fiware.removeentitytemporalbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /temporal/entities/{entityId}/attrs/
+      name: addtemporalentityattrs
+      operations:
+      - method: POST
+        name: addtemporalentityattrs
+        description: Add new attributes to an existing Temporal Entity within an NGSI-LD system
+        call: fiware.addtemporalentityattrs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /temporal/entities/{entityId}/attrs/{attrId}
+      name: removeentitytemporalattr
+      operations:
+      - method: DELETE
+        name: removeentitytemporalattr
+        description: Attribute from Temporal Representation of Entity deletion
+        call: fiware.removeentitytemporalattr
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /temporal/entities/{entityId}/attrs/{attrId}/{instanceId}
+      name: modifyentitytemporalattrinstance
+      operations:
+      - method: PATCH
+        name: modifyentitytemporalattrinstance
+        description: Allows modifying a specific Attribute (Property or Relationship) instance, identified by its instanceId,
+          of a Temporal Representation of an Entity.
+        call: fiware.modifyentitytemporalattrinstance
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /temporal/entities/{entityId}/attrs/{attrId}/{instanceId}
+      name: removeentitytemporalattrinstance
+      operations:
+      - method: DELETE
+        name: removeentitytemporalattrinstance
+        description: Attribute Instance deletion by instance id.
+        call: fiware.removeentitytemporalattrinstance
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: fiware-mcp
+    transport: http
+    description: MCP adapter for ETSI ISG CIM / NGSI-LD API for AI agent use.
+    tools:
+    - name: queryentities
+      description: Retrieve a set of entities which matches a specific query from an NGSI-LD system
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: fiware.queryentities
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createentity
+      description: Create a new Entity within an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: fiware.createentity
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieveentitybyid
+      description: Retrieve an specific Entity from an NGSI-LD system. It's possible to specify the Entity attributes to be
+        retrieved by using query parameters
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: fiware.retrieveentitybyid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: removeentitybyid
+      description: Removes an specific Entity from an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: fiware.removeentitybyid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: appendentityattrs
+      description: Append new Entity attributes to an existing Entity within an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: fiware.appendentityattrs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updateentityattrs
+      description: Update existing Entity attributes within an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: fiware.updateentityattrs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: partialattrupdate
+      description: Update existing Entity attributes within an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: fiware.partialattrupdate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: removeentityattr
+      description: Removes an existing Entity attribute within an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: fiware.removeentityattr
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrievesubscriptions
+      description: Retrieves the subscriptions available in an NGSI-LD system
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: fiware.retrievesubscriptions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createsubscription
+      description: Creates a new Subscription within an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: fiware.createsubscription
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrievesubscriptionbyid
+      description: Retrieves a specific Subscription from an NGSI-LD system
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: fiware.retrievesubscriptionbyid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updatesubscription
+      description: Updates a specific Subscription within an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: fiware.updatesubscription
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: removesubscription
+      description: Removes a specific Subscription from an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: fiware.removesubscription
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: querycsources
+      description: Retrieve a set of context sources which matches a specific query from an NGSI-LD system
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: fiware.querycsources
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: registercsource
+      description: Registers a new context source within an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: fiware.registercsource
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrievecsource
+      description: Retrieves a specific context source registration from an NGSI-LD system
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: fiware.retrievecsource
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: removecsource
+      description: Removes an specific context source registration within an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: fiware.removecsource
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrievecsourcesubscriptions
+      description: Retrieves the context source discovery subscriptions available in an NGSI-LD system
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: fiware.retrievecsourcesubscriptions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createcsourcesubscription
+      description: Creates a context source discovery Subscription within an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: fiware.createcsourcesubscription
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrievecsourcesubscriptionsbyid
+      description: Retrieves a specific Subscription from an NGSI-LD system
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: fiware.retrievecsourcesubscriptionsbyid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updatecsourcesubscription
+      description: Updates a specific context source discovery Subscription within an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: fiware.updatecsourcesubscription
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: removecsourcesubscription
+      description: Removes a specific Context Source Subscription from an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: fiware.removecsourcesubscription
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: batchentitycreation
+      description: Batch Entity creation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: fiware.batchentitycreation
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: batchentityupdate
+      description: Batch Entity update
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: fiware.batchentityupdate
+      with:
+        options: tools.options
+      inputParameters:
+      - name: options
+        type: string
+        description: options
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: batchentityupsert
+      description: Batch Entity upsert
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: fiware.batchentityupsert
+      with:
+        options: tools.options
+      inputParameters:
+      - name: options
+        type: string
+        description: options
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: batchentitydelete
+      description: Batch Entity delete
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: fiware.batchentitydelete
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: querytemporalentities
+      description: Query temporal evolution of Entities from an NGSI-LD system
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: fiware.querytemporalentities
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createupdateentitytemporal
+      description: Create or update temporal representation of an Entity within an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: fiware.createupdateentitytemporal
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieveentitytemporalbyid
+      description: Retrieve the temporal representation of an specific Entity from an NGSI-LD system. It's possible to specify
+        the Entity attributes to be retrieved by using query parameters
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: fiware.retrieveentitytemporalbyid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: removeentitytemporalbyid
+      description: Removes the temporal representation of an Entity from an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: fiware.removeentitytemporalbyid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: addtemporalentityattrs
+      description: Add new attributes to an existing Temporal Entity within an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: fiware.addtemporalentityattrs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: removeentitytemporalattr
+      description: Attribute from Temporal Representation of Entity deletion
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: fiware.removeentitytemporalattr
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: modifyentitytemporalattrinstance
+      description: Allows modifying a specific Attribute (Property or Relationship) instance, identified by its instanceId,
+        of a Temporal Representation of an Entity.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: fiware.modifyentitytemporalattrinstance
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: removeentitytemporalattrinstance
+      description: Attribute Instance deletion by instance id.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: fiware.removeentitytemporalattrinstance
+      outputParameters:
+      - type: object
+        mapping: $.
