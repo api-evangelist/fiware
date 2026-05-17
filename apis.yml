@@ -6,7 +6,7 @@ description: >-
   NGSI-LD API standardized by ETSI ISG CIM, which allows applications to
   provide, consume, and subscribe to context information in smart cities,
   smart industry, smart agriculture, and smart energy scenarios.
-type: Standard
+kind: standard
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2024-07-02'
@@ -70,7 +70,7 @@ apis:
 common:
   - type: Website
     url: https://www.fiware.org/
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/FIWARE
   - type: Documentation
     url: https://fiware-orion.readthedocs.io/
