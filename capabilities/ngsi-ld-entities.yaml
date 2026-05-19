@@ -1,0 +1,484 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ETSI ISG CIM / NGSI-LD API — Entities
+  description: 'ETSI ISG CIM / NGSI-LD API — Entities. 12 operations. Lead operation: Entities. Self-contained Naftiko capability
+    covering one Fiware business surface.'
+  tags:
+  - Fiware
+  - Entities
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FIWARE_API_KEY: FIWARE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ngsi-ld-entities
+    baseUri: ''
+    description: ETSI ISG CIM / NGSI-LD API — Entities business capability. Self-contained, no shared references.
+    resources:
+    - name: entities
+      path: /entities/
+      operations:
+      - name: queryentities
+        method: GET
+        description: Retrieve a set of entities which matches a specific query from an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createentity
+        method: POST
+        description: Create a new Entity within an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: entities-entityId
+      path: /entities/{entityId}
+      operations:
+      - name: retrieveentitybyid
+        method: GET
+        description: Retrieve an specific Entity from an NGSI-LD system. It's possible to specify the Entity attributes to
+          be retrieved by using query parameters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: removeentitybyid
+        method: DELETE
+        description: Removes an specific Entity from an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: entities-entityId-attrs
+      path: /entities/{entityId}/attrs/
+      operations:
+      - name: appendentityattrs
+        method: POST
+        description: Append new Entity attributes to an existing Entity within an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: updateentityattrs
+        method: PATCH
+        description: Update existing Entity attributes within an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: entities-entityId-attrs-attrId
+      path: /entities/{entityId}/attrs/{attrId}
+      operations:
+      - name: partialattrupdate
+        method: PATCH
+        description: Update existing Entity attributes within an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: removeentityattr
+        method: DELETE
+        description: Removes an existing Entity attribute within an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: entityOperations-create
+      path: /entityOperations/create
+      operations:
+      - name: batchentitycreation
+        method: POST
+        description: Batch Entity creation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: entityOperations-delete
+      path: /entityOperations/delete
+      operations:
+      - name: batchentitydelete
+        method: POST
+        description: Batch Entity delete
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: entityOperations-update
+      path: /entityOperations/update
+      operations:
+      - name: batchentityupdate
+        method: POST
+        description: Batch Entity update
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: options
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: entityOperations-upsert
+      path: /entityOperations/upsert
+      operations:
+      - name: batchentityupsert
+        method: POST
+        description: Batch Entity upsert
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: options
+          in: query
+          type: string
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: ngsi-ld-entities-rest
+    port: 8080
+    description: REST adapter for ETSI ISG CIM / NGSI-LD API — Entities. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/entities
+      name: entities
+      description: REST surface for entities.
+      operations:
+      - method: GET
+        name: queryentities
+        description: Retrieve a set of entities which matches a specific query from an NGSI-LD system
+        call: ngsi-ld-entities.queryentities
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createentity
+        description: Create a new Entity within an NGSI-LD system
+        call: ngsi-ld-entities.createentity
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/entities/{entityid}
+      name: entities-entityid
+      description: REST surface for entities-entityId.
+      operations:
+      - method: GET
+        name: retrieveentitybyid
+        description: Retrieve an specific Entity from an NGSI-LD system. It's possible to specify the Entity attributes to
+          be retrieved by using query parameters
+        call: ngsi-ld-entities.retrieveentitybyid
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: removeentitybyid
+        description: Removes an specific Entity from an NGSI-LD system
+        call: ngsi-ld-entities.removeentitybyid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/entities/{entityid}/attrs
+      name: entities-entityid-attrs
+      description: REST surface for entities-entityId-attrs.
+      operations:
+      - method: POST
+        name: appendentityattrs
+        description: Append new Entity attributes to an existing Entity within an NGSI-LD system
+        call: ngsi-ld-entities.appendentityattrs
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateentityattrs
+        description: Update existing Entity attributes within an NGSI-LD system
+        call: ngsi-ld-entities.updateentityattrs
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/entities/{entityid}/attrs/{attrid}
+      name: entities-entityid-attrs-attrid
+      description: REST surface for entities-entityId-attrs-attrId.
+      operations:
+      - method: PATCH
+        name: partialattrupdate
+        description: Update existing Entity attributes within an NGSI-LD system
+        call: ngsi-ld-entities.partialattrupdate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: removeentityattr
+        description: Removes an existing Entity attribute within an NGSI-LD system
+        call: ngsi-ld-entities.removeentityattr
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/entityoperations/create
+      name: entityoperations-create
+      description: REST surface for entityOperations-create.
+      operations:
+      - method: POST
+        name: batchentitycreation
+        description: Batch Entity creation
+        call: ngsi-ld-entities.batchentitycreation
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/entityoperations/delete
+      name: entityoperations-delete
+      description: REST surface for entityOperations-delete.
+      operations:
+      - method: POST
+        name: batchentitydelete
+        description: Batch Entity delete
+        call: ngsi-ld-entities.batchentitydelete
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/entityoperations/update
+      name: entityoperations-update
+      description: REST surface for entityOperations-update.
+      operations:
+      - method: POST
+        name: batchentityupdate
+        description: Batch Entity update
+        call: ngsi-ld-entities.batchentityupdate
+        with:
+          options: rest.options
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/entityoperations/upsert
+      name: entityoperations-upsert
+      description: REST surface for entityOperations-upsert.
+      operations:
+      - method: POST
+        name: batchentityupsert
+        description: Batch Entity upsert
+        call: ngsi-ld-entities.batchentityupsert
+        with:
+          options: rest.options
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ngsi-ld-entities-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ETSI ISG CIM / NGSI-LD API — Entities. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: retrieve-set-entities-which-matches
+      description: Retrieve a set of entities which matches a specific query from an NGSI-LD system
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ngsi-ld-entities.queryentities
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-entity-within-ngsi
+      description: Create a new Entity within an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ngsi-ld-entities.createentity
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-specific-entity-ngsi-ld
+      description: Retrieve an specific Entity from an NGSI-LD system. It's possible to specify the Entity attributes to be
+        retrieved by using query parameters
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ngsi-ld-entities.retrieveentitybyid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: removes-specific-entity-ngsi-ld
+      description: Removes an specific Entity from an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: ngsi-ld-entities.removeentitybyid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: append-new-entity-attributes-existing
+      description: Append new Entity attributes to an existing Entity within an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ngsi-ld-entities.appendentityattrs
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-existing-entity-attributes-within
+      description: Update existing Entity attributes within an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: ngsi-ld-entities.updateentityattrs
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-existing-entity-attributes-within-2
+      description: Update existing Entity attributes within an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: ngsi-ld-entities.partialattrupdate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: removes-existing-entity-attribute-within
+      description: Removes an existing Entity attribute within an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: ngsi-ld-entities.removeentityattr
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: batch-entity-creation
+      description: Batch Entity creation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ngsi-ld-entities.batchentitycreation
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: batch-entity-delete
+      description: Batch Entity delete
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ngsi-ld-entities.batchentitydelete
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: batch-entity-update
+      description: Batch Entity update
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ngsi-ld-entities.batchentityupdate
+      with:
+        options: tools.options
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: batch-entity-upsert
+      description: Batch Entity upsert
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ngsi-ld-entities.batchentityupsert
+      with:
+        options: tools.options
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

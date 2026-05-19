@@ -1,0 +1,130 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: FIWARE-NGSI v2 Specification — Types
+  description: 'FIWARE-NGSI v2 Specification — Types. 2 operations. Lead operation: List Entity Types. Self-contained Naftiko
+    capability covering one Fiware business surface.'
+  tags:
+  - Fiware
+  - Types
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FIWARE_API_KEY: FIWARE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ngsiv2-types
+    baseUri: http://orion.lab.fiware.org
+    description: FIWARE-NGSI v2 Specification — Types business capability. Self-contained, no shared references.
+    resources:
+    - name: v2-types
+      path: /v2/types/
+      operations:
+      - name: listentitytypes
+        method: GET
+        description: List Entity Types
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: number
+          description: Limit the number of types to be retrieved.
+        - name: offset
+          in: query
+          type: number
+          description: Skip a number of records.
+        - name: options
+          in: query
+          type: string
+          description: Options dictionary.
+    - name: v2-types-entityType
+      path: /v2/types/{entityType}
+      operations:
+      - name: retrieveentitytype
+        method: GET
+        description: Retrieve entity type
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: entityType
+          in: path
+          type: string
+          description: Entity Type
+          required: true
+  exposes:
+  - type: rest
+    namespace: ngsiv2-types-rest
+    port: 8080
+    description: REST adapter for FIWARE-NGSI v2 Specification — Types. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v2/types
+      name: v2-types
+      description: REST surface for v2-types.
+      operations:
+      - method: GET
+        name: listentitytypes
+        description: List Entity Types
+        call: ngsiv2-types.listentitytypes
+        with:
+          limit: rest.limit
+          offset: rest.offset
+          options: rest.options
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v2/types/{entitytype}
+      name: v2-types-entitytype
+      description: REST surface for v2-types-entityType.
+      operations:
+      - method: GET
+        name: retrieveentitytype
+        description: Retrieve entity type
+        call: ngsiv2-types.retrieveentitytype
+        with:
+          entityType: rest.entityType
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ngsiv2-types-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for FIWARE-NGSI v2 Specification — Types. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-entity-types
+      description: List Entity Types
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ngsiv2-types.listentitytypes
+      with:
+        limit: tools.limit
+        offset: tools.offset
+        options: tools.options
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-entity-type
+      description: Retrieve entity type
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ngsiv2-types.retrieveentitytype
+      with:
+        entityType: tools.entityType
+      outputParameters:
+      - type: object
+        mapping: $.

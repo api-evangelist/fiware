@@ -1,0 +1,194 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ETSI ISG CIM / NGSI-LD API — CSourceSubscriptions
+  description: 'ETSI ISG CIM / NGSI-LD API — CSourceSubscriptions. 5 operations. Lead operation: CSourceSubscriptions. Self-contained
+    Naftiko capability covering one Fiware business surface.'
+  tags:
+  - Fiware
+  - CSourceSubscriptions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FIWARE_API_KEY: FIWARE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ngsi-ld-csourcesubscriptions
+    baseUri: ''
+    description: ETSI ISG CIM / NGSI-LD API — CSourceSubscriptions business capability. Self-contained, no shared references.
+    resources:
+    - name: csourceSubscriptions
+      path: /csourceSubscriptions/
+      operations:
+      - name: retrievecsourcesubscriptions
+        method: GET
+        description: Retrieves the context source discovery subscriptions available in an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createcsourcesubscription
+        method: POST
+        description: Creates a context source discovery Subscription within an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: csourceSubscriptions-subscriptionId
+      path: /csourceSubscriptions/{subscriptionId}
+      operations:
+      - name: retrievecsourcesubscriptionsbyid
+        method: GET
+        description: Retrieves a specific Subscription from an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatecsourcesubscription
+        method: PATCH
+        description: Updates a specific context source discovery Subscription within an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: removecsourcesubscription
+        method: DELETE
+        description: Removes a specific Context Source Subscription from an NGSI-LD system
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: ngsi-ld-csourcesubscriptions-rest
+    port: 8080
+    description: REST adapter for ETSI ISG CIM / NGSI-LD API — CSourceSubscriptions. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/csourcesubscriptions
+      name: csourcesubscriptions
+      description: REST surface for csourceSubscriptions.
+      operations:
+      - method: GET
+        name: retrievecsourcesubscriptions
+        description: Retrieves the context source discovery subscriptions available in an NGSI-LD system
+        call: ngsi-ld-csourcesubscriptions.retrievecsourcesubscriptions
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createcsourcesubscription
+        description: Creates a context source discovery Subscription within an NGSI-LD system
+        call: ngsi-ld-csourcesubscriptions.createcsourcesubscription
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/csourcesubscriptions/{subscriptionid}
+      name: csourcesubscriptions-subscriptionid
+      description: REST surface for csourceSubscriptions-subscriptionId.
+      operations:
+      - method: GET
+        name: retrievecsourcesubscriptionsbyid
+        description: Retrieves a specific Subscription from an NGSI-LD system
+        call: ngsi-ld-csourcesubscriptions.retrievecsourcesubscriptionsbyid
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatecsourcesubscription
+        description: Updates a specific context source discovery Subscription within an NGSI-LD system
+        call: ngsi-ld-csourcesubscriptions.updatecsourcesubscription
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: removecsourcesubscription
+        description: Removes a specific Context Source Subscription from an NGSI-LD system
+        call: ngsi-ld-csourcesubscriptions.removecsourcesubscription
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ngsi-ld-csourcesubscriptions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ETSI ISG CIM / NGSI-LD API — CSourceSubscriptions. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: retrieves-context-source-discovery-subscriptions
+      description: Retrieves the context source discovery subscriptions available in an NGSI-LD system
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ngsi-ld-csourcesubscriptions.retrievecsourcesubscriptions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: creates-context-source-discovery-subscription
+      description: Creates a context source discovery Subscription within an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ngsi-ld-csourcesubscriptions.createcsourcesubscription
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieves-specific-subscription-ngsi-ld
+      description: Retrieves a specific Subscription from an NGSI-LD system
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ngsi-ld-csourcesubscriptions.retrievecsourcesubscriptionsbyid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updates-specific-context-source-discovery
+      description: Updates a specific context source discovery Subscription within an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: ngsi-ld-csourcesubscriptions.updatecsourcesubscription
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: removes-specific-context-source-subscription
+      description: Removes a specific Context Source Subscription from an NGSI-LD system
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: ngsi-ld-csourcesubscriptions.removecsourcesubscription
+      outputParameters:
+      - type: object
+        mapping: $.
