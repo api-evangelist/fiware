@@ -1,0 +1,3365 @@
+{
+  "item": [
+    {
+      "id": "a3e4804e-1c94-41a9-96ce-ccc2097b0548",
+      "name": "API Entry Point",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0f7ca40a-35b4-458e-a610-0aa69b8152ac",
+          "name": "Retrieve API Resources",
+          "request": {
+            "name": "Retrieve API Resources",
+            "description": {
+              "content": "This resource does not have any attributes. Instead it offers the initial\nAPI affordances in the form of the links in the JSON body.\nIt is recommended to follow the “url” link values,\n[Link](https://tools.ietf.org/html/rfc5988) or Location headers where\napplicable to retrieve resources. Instead of constructing your own URLs,\nto keep your client decoupled from implementation details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "957c9290-1bf6-480e-96c1-386d1596e6ed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entities_url\": \"/v2/entities\",\n  \"types_url\": \"/v2/types\",\n  \"subscriptions_url\": \"/v2/subscriptions\",\n  \"registrations_url\": \"/v2/registrations\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "34d01f63-81df-4eb3-939e-3beb357e731a",
+      "name": "Entities",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "897a340a-387e-40f0-9e0e-d10d02c7307b",
+          "name": "List Entities",
+          "request": {
+            "name": "List Entities",
+            "description": {
+              "content": "Retrieves a list of entities that match different criteria by id, type, pattern matching (either id or type)\nand/or those which match a query or geographical query (see [Simple Query Language](#simple_query_language) and \n[Geographical Queries](#geographical_queries)). A given entity has to match all the criteria to be retrieved\n(i.e., the criteria is combined in a logical AND way). Note that pattern matching query parameters are incompatible\n(i.e. mutually exclusive) with their corresponding exact matching parameters, i.e. `idPattern` with `id` and\n`typePattern` with `type`.\nThe response payload is an array containing one object per matching entity. Each entity follows\nthe JSON entity representation format (described in \"JSON Entity Representation\" section).\nResponse code:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "A comma-separated list of elements.\nRetrieve entities whose ID matches one of the elements in the list.\nIncompatible with `idPattern`."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "comma-separated list of elements.\nRetrieve entities whose type matches one of the elements in the list.\nIncompatible with `typePattern`."
+                },
+                {
+                  "disabled": false,
+                  "key": "idPattern",
+                  "value": "<string>",
+                  "description": "A correctly formated regular expression.\nRetrieve entities whose ID matches the regular expression. Incompatible with `id`."
+                },
+                {
+                  "disabled": false,
+                  "key": "typePattern",
+                  "value": "<string>",
+                  "description": "A correctly formated regular expression.\nRetrieve entities whose type matches the regular expression. Incompatible with `type`."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "A query expression, composed of a list of statements\nseparated by `;`, i.e., q=statement1;statement2;statement3.\nSee [Simple Query Language specification](#simple_query_language)."
+                },
+                {
+                  "disabled": false,
+                  "key": "mq",
+                  "value": "<string>",
+                  "description": "A query expression for attribute metadata,\ncomposed of a list of statements separated by `;`, i.e., mq=statement1;statement2;statement3.\nSee [Simple Query Language specification](#simple_query_language)."
+                },
+                {
+                  "disabled": false,
+                  "key": "georel",
+                  "value": "<string>",
+                  "description": "Spatial relationship between matching entities and a\nreference shape. See [Geographical Queries](#geographical_queries)."
+                },
+                {
+                  "disabled": false,
+                  "key": "geometry",
+                  "value": "<string>",
+                  "description": "Geografical area to which the query is restricted.\nSee [Geographical Queries](#geographical_queries)."
+                },
+                {
+                  "disabled": false,
+                  "key": "coords",
+                  "value": "<string>",
+                  "description": "List of latitude-longitude\npairs of coordinates separated by ';'. See [Geographical Queries](#geographical_queries)."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<double>",
+                  "description": "Limits the number of entities to be retrieved"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<double>",
+                  "description": "Establishes the offset from where entities are retrieved"
+                },
+                {
+                  "disabled": false,
+                  "key": "attrs",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names whose data\nare to be included in the response.\nThe attributes are retrieved in the order specified by this parameter. If this parameter is\nnot included, the attributes are retrieved in arbitrary order.\nSee \"Filtering out attributes and metadata\" section for more detail."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata",
+                  "value": "<string>",
+                  "description": "A list of metadata names to include in the response.\nSee \"Filtering out attributes and metadata\" section for more detail."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "Criteria for ordering results.\nSee \"Ordering Results\" section for details."
+                },
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "<string>",
+                  "description": "Options dictionary"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "58bb5c2b-7c4f-4076-a6e1-e4df63d7fe49",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idPattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "typePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "georel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "geometry",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coords",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "attrs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"type\": \"Room\",\n    \"id\": \"DC_S1-D41\",\n    \"temperature\": {\n      \"value\": 35.6,\n      \"type\": \"Number\",\n      \"metadata\": {}\n    }\n  },\n  {\n    \"type\": \"Room\",\n    \"id\": \"Boe-Idearium\",\n    \"temperature\": {\n      \"value\": 22.5,\n      \"type\": \"Number\",\n      \"metadata\": {}\n    }\n  },\n  {\n    \"type\": \"Car\",\n    \"id\": \"P-9873-K\",\n    \"speed\": {\n      \"value\": 100,\n      \"type\": \"number\",\n      \"metadata\": {\n        \"accuracy\": {\n          \"value\": 2,\n          \"type\": \"Number\"\n        },\n        \"timestamp\": {\n          \"value\": \"2015-06-04T07:20:27.378Z\",\n          \"type\": \"DateTime\"\n        }\n      }\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "45ceb7e6-0057-4542-977f-4a570186cd4e",
+          "name": "Create Entity",
+          "request": {
+            "name": "Create Entity",
+            "description": {
+              "content": "The payload is an object representing the entity to be created. The object follows\nthe JSON entity representation format (described in a \"JSON Entity Representation\" section).\nResponse:\n* Successful operation uses 201 Created (if upsert option is not used) or 204 No Content (if\n  upsert option is used). Response includes a `Location` header with the URL of the\n  created entity.\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "<string>",
+                  "description": "Options dictionary"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"id\": \"<string>\",\n  \"temperature\": \"<object>\",\n  \"humidity\": \"<object>\",\n  \"location\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f5ff2f7e-9c74-4500-b28b-4902ea95e8ea",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"Room\",\n  \"id\": \"Bcn-Welt\",\n  \"temperature\": {\n    \"value\": 21.7\n  },\n  \"humidity\": {\n    \"value\": 60\n  },\n  \"location\": {\n    \"value\": \"41.3763726, 2.1864475\",\n    \"type\": \"geo:point\",\n    \"metadata\": {\n      \"crs\": {\n        \"value\": \"WGS84\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b83b647-8b7f-465f-a6cd-6707b64d4a8b",
+          "name": "Retrieve Entity",
+          "request": {
+            "name": "Retrieve Entity",
+            "description": {
+              "content": "The response is an object representing the entity identified by the ID. The object follows\nthe JSON entity representation format (described in \"JSON Entity Representation\" section).\nThis operation must return one entity element only, but there may be more than one entity with the\nsame ID (e.g. entities with same ID but different types).\nIn such case, an error message is returned, with the HTTP status code set to 409 Conflict.\nResponse:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "entities",
+                ":entityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+                },
+                {
+                  "disabled": false,
+                  "key": "attrs",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names whose\ndata must be included in the response. The attributes are retrieved in the order specified by\nthis parameter. See \"Filtering out attributes and metadata\" section for more detail.\nIf this parameter is not included, the attributes are retrieved in arbitrary order, and all\nthe attributes of the entity are included in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata",
+                  "value": "<string>",
+                  "description": "A list of metadata names to include in the response.\nSee \"Filtering out attributes and metadata\" section for more detail."
+                },
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "<string>",
+                  "description": "Options dictionary"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) Id of the entity to be retrieved"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "220f5765-5855-45c7-89d2-03b45c722474",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "entities",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attrs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) Id of the entity to be retrieved"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"Room\",\n  \"id\": \"Bcn_Welt\",\n  \"temperature\": {\n    \"value\": 21.7,\n    \"type\": \"Number\"\n  },\n  \"humidity\": {\n    \"value\": 60,\n    \"type\": \"Number\"\n  },\n  \"location\": {\n    \"value\": \"41.3763726, 2.1864475\",\n    \"type\": \"geo:point\",\n    \"metadata\": {\n      \"crs\": {\n        \"value\": \"WGS84\",\n        \"type\": \"Text\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be8179ef-4744-4dcb-baa5-af06fb41c74f",
+          "name": "Remove Entity",
+          "request": {
+            "name": "Remove Entity",
+            "description": {
+              "content": "Delete the entity.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "entities",
+                ":entityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) Id of the entity to be deleted"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "352ef6a0-a499-4ee2-9991-6fa82b0bc565",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "entities",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) Id of the entity to be deleted"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79c3efa4-3851-4aa3-9941-8f06d149a025",
+          "name": "Retrieve Entity Attributes",
+          "request": {
+            "name": "Retrieve Entity Attributes",
+            "description": {
+              "content": "This request is similar to retreiving the whole entity, however this one omits the `id` and `type`\nfields.\nJust like the general request of getting an entire entity, this operation must return only one\nentity element. If more than one entity with the same ID is found (e.g. entities with\nsame ID but different type), an error message is returned, with the HTTP status code set to\n409 Conflict.\nResponse:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "entities",
+                ":entityId",
+                "attrs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+                },
+                {
+                  "disabled": false,
+                  "key": "attrs",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names whose\ndata are to be included in the response. The attributes are retrieved in the order specified\nby this parameter.\nIf this parameter is not included, the attributes are retrieved in arbitrary order, and all\nthe attributes of the entity are included in the response.\nSee \"Filtering out attributes and metadata\" section for more detail."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata",
+                  "value": "<string>",
+                  "description": "A list of metadata names to include in the response.\nSee \"Filtering out attributes and metadata\" section for more detail."
+                },
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "<string>",
+                  "description": "Options dictionary"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) Id of the entity to be retrieved"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "604a519c-0619-402c-a272-92121ed88776",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "entities",
+                    ":entityId",
+                    "attrs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attrs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) Id of the entity to be retrieved"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"temperature\": {\n    \"value\": 21.7,\n    \"type\": \"Number\"\n  },\n  \"humidity\": {\n    \"value\": 60,\n    \"type\": \"Number\"\n  },\n  \"location\": {\n    \"value\": \"41.3763726, 2.1864475\",\n    \"type\": \"geo:point\",\n    \"metadata\": {\n      \"crs\": {\n        \"value\": \"WGS84\",\n        \"type\": \"Text\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96c873d3-969d-4c3c-a622-72d00cacb40e",
+          "name": "Replace all entity attributes",
+          "request": {
+            "name": "Replace all entity attributes",
+            "description": {
+              "content": "The request payload is an object representing the new entity attributes. The object follows\nthe JSON entity representation format (described in a \"JSON Entity Representation\" above), except\nthat `id` and `type` are not allowed.\nThe attributes previously existing in the entity are removed and replaced by the ones in the\nrequest.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "entities",
+                ":entityId",
+                "attrs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+                },
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "<string>",
+                  "description": "Operations options"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) Id of the entity in question."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"temperature\": \"<object>\",\n  \"seatNumber\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0cab2d0e-6653-4456-ae2f-56c521f412e8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "entities",
+                    ":entityId",
+                    "attrs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) Id of the entity in question."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "string"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"temperature\": {\n    \"value\": 25.5\n  },\n  \"seatNumber\": {\n    \"value\": 6\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c714cf9b-7618-4c0a-b537-d208f5f9b2fc",
+          "name": "Update or Append Entity Attributes",
+          "request": {
+            "name": "Update or Append Entity Attributes",
+            "description": {
+              "content": "The request payload is an object representing the attributes to append or update. The object follows\nthe JSON entity representation format (described in \"JSON Entity Representation\" section), except\nthat `id` and `type` are not allowed.\nThe entity attributes are updated with the ones in the payload, depending on\nwhether the `append` operation option is used or not.\n* If `append` is not used: the entity attributes are updated (if they previously exist) or appended\n  (if they don't previously exist) with the ones in the payload.\n* If `append` is used (i.e. strict append semantics): all the attributes in the payload not\n  previously existing in the entity are appended. In addition to that, in case some of the\n  attributes in the payload already exist in the entity, an error is returned.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "entities",
+                ":entityId",
+                "attrs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+                },
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "<string>",
+                  "description": "Operations options"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) Entity id to be updated"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ambientNoise\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b43ddd17-eea0-459f-a574-1258cbc86963",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "entities",
+                    ":entityId",
+                    "attrs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) Entity id to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ambientNoise\": {\n    \"value\": 31.5\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c487e7d-20f7-46aa-9dbd-c52d7d9b4b18",
+          "name": "Update Existing Entity Attributes",
+          "request": {
+            "name": "Update Existing Entity Attributes",
+            "description": {
+              "content": "The request payload is an object representing the attributes to update. The object follows\nthe JSON entity representation format (described in \"JSON Entity Representation\" section), except\nthat `id` and `type` are not allowed.\nThe entity attributes are updated with the ones in the payload. In addition to that, if one or more\nattributes in the payload doesn't exist in the entity, an error is returned.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "entities",
+                ":entityId",
+                "attrs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+                },
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "<string>",
+                  "description": "Operations options"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) Id of the entity to be updated"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"temperature\": \"<object>\",\n  \"seatNumber\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1eafc76f-268d-4dbd-b79c-b757bae5db89",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "entities",
+                    ":entityId",
+                    "attrs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) Id of the entity to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "string"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"temperature\": {\n    \"value\": 25.5\n  },\n  \"seatNumber\": {\n    \"value\": 6\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "013de178-f039-410f-9815-c5f85d2f5944",
+      "name": "Attributes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4aeb91a7-31d3-4c43-98f6-7cd1d3d1a560",
+          "name": "Get attribute data",
+          "request": {
+            "name": "Get attribute data",
+            "description": {
+              "content": "Returns a JSON object with the attribute data of the attribute. The object follows the JSON\nrepresentation for attributes (described in \"JSON Attribute Representation\" section).\nResponse:\n* Successful operation uses 200 OK.\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "entities",
+                ":entityId",
+                "attrs",
+                ":attrName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata",
+                  "value": "<string>",
+                  "description": "A list of metadata names to include in the response.\nSee \"Filtering out attributes and metadata\" section for more detail."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) Id of the entity"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attrName",
+                  "description": "(Required) Name of the attribute to be retrieved."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "86d3eede-3977-457c-be38-330aa56f2edf",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ":attrName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) Id of the entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attrName",
+                      "description": "(Required) Name of the attribute to be retrieved."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": 21.7,\n  \"type\": \"Number\",\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4a6b287-65c9-46c7-a4ea-ea8683944f0f",
+          "name": "Update Attribute Data",
+          "request": {
+            "name": "Update Attribute Data",
+            "description": {
+              "content": "The request payload is an object representing the new attribute data. Previous attribute data\nis replaced by the one in the request. The object follows the JSON representation for attributes\n(described in \"JSON Attribute Representation\" section).\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "entities",
+                ":entityId",
+                "attrs",
+                ":attrName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) Id of the entity to update"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attrName",
+                  "description": "(Required) Attribute name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"value\": \"<double>\",\n  \"metadata\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d40df411-c173-4547-a574-04af55f09e19",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ":attrName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) Id of the entity to update"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attrName",
+                      "description": "(Required) Attribute name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "string"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"value\": 25,\n  \"metadata\": {\n    \"unitCode\": {\n      \"value\": \"CEL\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0cb42cb5-9ae7-4803-a586-7a6f6bfc30af",
+          "name": "Remove a Single Attribute",
+          "request": {
+            "name": "Remove a Single Attribute",
+            "description": {
+              "content": "Removes an entity attribute.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "entities",
+                ":entityId",
+                "attrs",
+                ":attrName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) Id of the entity."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attrName",
+                  "description": "(Required) Attribute name."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3570ce6b-f553-46d6-8c95-9553e71c52e3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ":attrName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) Id of the entity."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attrName",
+                      "description": "(Required) Attribute name."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "fba2a5c9-0ee0-4294-928b-af7827c216e0",
+      "name": "Attribute Value",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a08355de-57b5-49c5-9091-2b70b92b7e37",
+          "name": "Get Attribute Value",
+          "request": {
+            "name": "Get Attribute Value",
+            "description": {
+              "content": "This operation returns the `value` property with the value of the attribute.\n* If attribute value is JSON Array or Object:\n  * If `Accept` header can be expanded to `application/json` or `text/plain` return the value as a JSON with a\n    response type of application/json or text/plain (whichever is the first in `Accept` header or\n    `application/json` in case of `Accept: */*`).\n  * Else return a HTTP error \"406 Not Acceptable: accepted MIME types: application/json, text/plain\"\n* If attribute value is a string, number, null or boolean:\n  * If `Accept` header can be expanded to text/plain return the value as text. In case of a string, citation\n    marks are used at the begining and end.\n  * Else return a HTTP error \"406 Not Acceptable: accepted MIME types: text/plain\"\nResponse:\n* Successful operation uses 200 OK.\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "entities",
+                ":entityId",
+                "attrs",
+                ":attrName",
+                "value"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) Id of the entity in question"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attrName",
+                  "description": "(Required) Name of the attribute to be retrieved."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8547ec31-374e-4e61-bad8-fd194598be86",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ":attrName",
+                    "value"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) Id of the entity in question"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attrName",
+                      "description": "(Required) Name of the attribute to be retrieved."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"address\": \"Ronda de la Comunicacion s/n\",\n  \"zipCode\": 28050,\n  \"city\": \"Madrid\",\n  \"country\": \"Spain\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9cf4cd8-7b67-4bde-a617-417e6b4a2a48",
+          "name": "Update Attribute Value",
+          "request": {
+            "name": "Update Attribute Value",
+            "description": {
+              "content": "The request payload is the new attribute value.\n* If the request payload MIME type is `application/json`, then the value of the attribute is set to\n  the JSON object or array coded in the payload (if the payload is not a valid JSON document,\n  then an error is returned).\n* If the request payload MIME type is `text/plain`, then the following algorithm is applied to the\n  payload:\n  * If the payload starts and ends with citation-marks (`\"`), the value is taken as a string\n    (the citation marks themselves are not considered part of the string)\n  * If `true` or `false`, the value is taken as a boolean.\n  * If `null`, the value is taken as null.\n  * If these first three tests 'fail', the text is interpreted as a number.\n  * If not a valid number, then an error is returned and the attribute's value is unchanged.\nThe payload MIME type in the request is specified in the `Content-Type` HTTP header.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "entities",
+                ":entityId",
+                "attrs",
+                ":attrName",
+                "value"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) Id of the entity to be updated."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attrName",
+                  "description": "(Required) Attribute name."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": \"<string>\",\n  \"zipCode\": \"<integer>\",\n  \"city\": \"<string>\",\n  \"country\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e598851d-5811-40e6-87a4-b124ea544abf",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ":attrName",
+                    "value"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) Id of the entity to be updated."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attrName",
+                      "description": "(Required) Attribute name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "string"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": \"Ronda de la Comunicacion s/n\",\n  \"zipCode\": 28050,\n  \"city\": \"Madrid\",\n  \"country\": \"Spain\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f1f7245c-1459-41c2-814c-55414704b0d2",
+      "name": "Types",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b5d83c3b-7662-4cf1-9b0a-e2529ec989cd",
+          "name": "List Entity Types",
+          "request": {
+            "name": "List Entity Types",
+            "description": {
+              "content": "If the `values` option is not in use, this operation returns a JSON array with the entity types.\nEach element is a JSON object with information about the type:\n* `type` : the entity type name.\n* `attrs` : the set of attribute names along with all the entities of such type, represented in\n  a JSON object whose keys are the attribute names and whose values contain information of such\n  attributes (in particular a list of the types used by attributes with that name along with all the\n  entities).\n* `count` : the number of entities belonging to that type.\nIf the `values` option is used, the operation returns a JSON array with a list of entity type\nnames as strings.\nResults are ordered by entity `type` in alphabetical order.\nResponse code:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "types",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<double>",
+                  "description": "Limit the number of types to be retrieved."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<double>",
+                  "description": "Skip a number of records."
+                },
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "<string>",
+                  "description": "Options dictionary."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "adfecb73-3819-41c4-8e23-2a123ff23778",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "types",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"type\": \"Car\",\n    \"attrs\": {\n      \"speed\": {\n        \"types\": [\n          \"Number\"\n        ]\n      },\n      \"fuel\": {\n        \"types\": [\n          \"gasoline\",\n          \"diesel\"\n        ]\n      },\n      \"temperature\": {\n        \"types\": [\n          \"urn:phenomenum:temperature\"\n        ]\n      }\n    },\n    \"count\": 12\n  },\n  {\n    \"type\": \"Room\",\n    \"attrs\": {\n      \"pressure\": {\n        \"types\": [\n          \"Number\"\n        ]\n      },\n      \"humidity\": {\n        \"types\": [\n          \"percentage\"\n        ]\n      },\n      \"temperature\": {\n        \"types\": [\n          \"urn:phenomenum:temperature\"\n        ]\n      }\n    },\n    \"count\": 7\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cfb45a8d-ea19-4f7b-a940-96cb87afd84b",
+          "name": "Retrieve entity type",
+          "request": {
+            "name": "Retrieve entity type",
+            "description": {
+              "content": "This operation returns a JSON object with information about the type:\n* `attrs` : the set of attribute names along with all the entities of such type, represented in\n  a JSON object whose keys are the attribute names and whose values contain information of such\n  attributes (in particular a list of the types used by attributes with that name along with all the\n  entities).\n* `count` : the number of entities belonging to that type.\nResponse code:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "types",
+                ":entityType"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityType",
+                  "description": "(Required) Entity Type"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "818d8f9c-30fb-4fa2-b77d-f2f8ab27e7f0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "types",
+                    ":entityType"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityType",
+                      "description": "(Required) Entity Type"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"attrs\": {\n    \"pressure\": {\n      \"types\": [\n        \"Number\"\n      ]\n    },\n    \"humidity\": {\n      \"types\": [\n        \"percentage\"\n      ]\n    },\n    \"temperature\": {\n      \"types\": [\n        \"urn:phenomenum:temperature\"\n      ]\n    }\n  },\n  \"count\": 7\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "2427dc1f-3999-472e-9a19-fc5bb70f5738",
+      "name": "Subscriptions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9db28711-bc92-40a3-ac51-0461f2932e36",
+          "name": "List Subscriptions",
+          "request": {
+            "name": "List Subscriptions",
+            "description": {
+              "content": "Returns a list of all the subscriptions present in the system.\nResponse:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<double>",
+                  "description": "Limit the number of subscriptions to be retrieved"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<double>",
+                  "description": "Skip a number of subscriptions"
+                },
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "<string>",
+                  "description": "Options dictionary"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "480ff567-7414-4072-9a02-40eb76a866e2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"abcdefg\",\n    \"description\": \"One subscription to rule them all\",\n    \"subject\": {\n      \"entities\": [\n        {\n          \"id\": \"Bcn_Welt\",\n          \"type\": \"Room\"\n        }\n      ],\n      \"condition\": {\n        \"attrs\": [\n          \"temperature \"\n        ],\n        \"expression\": {\n          \"q\": \"temperature>40\"\n        }\n      }\n    },\n    \"notification\": {\n      \"httpCustom\": {\n        \"url\": \"http://localhost:1234\",\n        \"headers\": {\n          \"X-MyHeader\": \"foo\"\n        },\n        \"qs\": {\n          \"authToken\": \"bar\"\n        }\n      },\n      \"attrsFormat\": \"keyValues\",\n      \"attrs\": [\n        \"temperature\",\n        \"humidity\"\n      ],\n      \"timesSent\": 12,\n      \"lastNotification\": \"2015-10-05T16:00:00Z\",\n      \"lastFailure\": \"2015-10-06T16:00:00Z\"\n    },\n    \"expires\": \"2016-04-05T14:00:00Z\",\n    \"status\": \"failed\",\n    \"throttling\": 5\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a4a0d73-f44c-4b1d-9213-270e157eec9a",
+          "name": "Create Subscription",
+          "request": {
+            "name": "Create Subscription",
+            "description": {
+              "content": "Creates a new subscription.\nThe subscription is represented by a JSON object as described at the beginning of this section.\nResponse:\n* Successful operation uses 201 Created\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subject\": \"<object>\",\n  \"notification\": \"<object>\",\n  \"description\": \"<string>\",\n  \"expires\": \"<string>\",\n  \"throttling\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e087b3a5-41f0-478b-9822-9c28299b39ee",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"One subscription to rule them all\",\n  \"subject\": {\n    \"entities\": [\n      {\n        \"idPattern\": \".*\",\n        \"type\": \"Room\"\n      }\n    ],\n    \"condition\": {\n      \"attrs\": [\n        \"temperature\"\n      ],\n      \"expression\": {\n        \"q\": \"temperature>40\"\n      }\n    }\n  },\n  \"notification\": {\n    \"http\": {\n      \"url\": \"http://localhost:1234\"\n    },\n    \"attrs\": [\n      \"temperature\",\n      \"humidity\"\n    ]\n  },\n  \"expires\": \"2016-04-05T14:00:00Z\",\n  \"throttling\": 5\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2c908bd-d617-4386-9969-3521cae5df38",
+          "name": "Retrieve Subscription",
+          "request": {
+            "name": "Retrieve Subscription",
+            "description": {
+              "content": "The response is the subscription represented by a JSON object as described at the beginning of this\nsection.\nResponse:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "subscriptions",
+                ":subscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) subscription Id."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "56f13e9e-382a-4b68-8123-57ac4cfaf166",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) subscription Id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "006012d6-87a9-43cb-8350-278c3669c962",
+          "name": "Delete subscription",
+          "request": {
+            "name": "Delete subscription",
+            "description": {
+              "content": "Cancels subscription.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "subscriptions",
+                ":subscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) subscription Id."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9fa33c97-b618-4abe-8cb7-28b08dbd2835",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) subscription Id."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02ab3cca-2bef-41e0-ba59-efa789db4144",
+          "name": "Update Subscription",
+          "request": {
+            "name": "Update Subscription",
+            "description": {
+              "content": "Only the fields included in the request are updated in the subscription.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "subscriptions",
+                ":subscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) subscription Id."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"expires\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1285e2c1-e440-4ccd-9953-dd34cd4e4314",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) subscription Id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "string"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expires\": \"2016-04-05T14:00:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "62dcb1c8-63a9-4b03-88e4-47aa063b4146",
+      "name": "Registrations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "05e6f31e-aaf5-42b5-bf89-642fd3217be8",
+          "name": "List Registrations",
+          "request": {
+            "name": "List Registrations",
+            "description": {
+              "content": "Lists all the context provider registrations present in the system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "registrations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<double>",
+                  "description": "Limit the number of registrations to be retrieved"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<double>",
+                  "description": "Skip a number of registrations"
+                },
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "<string>",
+                  "description": "Options dictionary"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fde9002d-748b-4a39-9d74-675c458f5636",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "registrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"abcdefg\",\n    \"description\": \"Example Context Source\",\n    \"dataProvided\": {\n      \"entities\": [\n        {\n          \"id\": \"Bcn_Welt\",\n          \"type\": \"Room\"\n        }\n      ],\n      \"attrs\": [\n        \"temperature\"\n      ]\n    },\n    \"provider\": {\n      \"http\": {\n        \"url\": \"http://contextsource.example.org\"\n      },\n      \"supportedForwardingMode\": \"all\"\n    },\n    \"expires\": \"2017-10-31T12:00:00\",\n    \"status\": \"active\",\n    \"forwardingInformation\": {\n      \"timesSent\": 12,\n      \"lastForwarding\": \"2017-10-06T16:00:00Z\",\n      \"lastSuccess\": \"2017-10-06T16:00:00Z\",\n      \"lastFailure\": \"2017-10-05T16:00:00Z\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cac07e87-b04e-4759-b76a-554163c36e1a",
+          "name": "Create Registration",
+          "request": {
+            "name": "Create Registration",
+            "description": {
+              "content": "Creates a new context provider registration. This is typically used for binding context sources\nas providers of certain data.\nThe registration is represented by a JSON object as described at the beginning of this section.\nResponse:\n* Successful operation uses 201 Created\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "registrations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"dataProvided\": \"<object>\",\n  \"provider\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "44d337fa-0328-43ea-929e-173db4e6f5dc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "registrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"Relative Humidity Context Source\",\n  \"dataProvided\": {\n    \"entities\": [\n      {\n        \"type\": \"Room\"\n      }\n    ],\n    \"attrs\": [\n      \"relativeHumidity\"\n    ]\n  },\n  \"provider\": {\n    \"http\": {\n      \"url\": \"http://localhost:1234\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "682c978c-4011-4248-99af-25be1b28dded",
+          "name": "Retrieve Registration",
+          "request": {
+            "name": "Retrieve Registration",
+            "description": {
+              "content": "The response is the registration represented by a JSON object as described at the beginning of this\nsection.\nResponse:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "registrations",
+                ":registrationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "registrationId",
+                  "description": "(Required) registration Id."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52d8e1e7-59d1-464a-a914-c4f1af6e4e59",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "registrations",
+                    ":registrationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registrationId",
+                      "description": "(Required) registration Id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abcdefg\",\n  \"description\": \"Example Context Source\",\n  \"dataProvided\": {\n    \"entities\": [\n      {\n        \"id\": \"Bcn_Welt\",\n        \"type\": \"Room\"\n      }\n    ],\n    \"attrs\": [\n      \"temperature\"\n    ]\n  },\n  \"provider\": {\n    \"http\": {\n      \"url\": \"http://contextsource.example.org\"\n    },\n    \"supportedForwardingMode\": \"all\"\n  },\n  \"expires\": \"2017-10-31T12:00:00\",\n  \"status\": \"failed\",\n  \"forwardingInformation\": {\n    \"timesSent\": 12,\n    \"lastForwarding\": \"2017-10-06T16:00:00Z\",\n    \"lastFailure\": \"2017-10-06T16:00:00Z\",\n    \"lastSuccess\": \"2017-10-05T18:25:00Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e3afdc5b-047b-4eab-af84-89cb638ba237",
+          "name": "Delete Registration",
+          "request": {
+            "name": "Delete Registration",
+            "description": {
+              "content": "Cancels a context provider registration.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "registrations",
+                ":registrationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "registrationId",
+                  "description": "(Required) registration Id."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc9caaa8-078f-4384-8b26-708c0cb1d663",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "registrations",
+                    ":registrationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registrationId",
+                      "description": "(Required) registration Id."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f5957aeb-3c77-4495-933e-5ad6003cad3e",
+          "name": "Update Registration",
+          "request": {
+            "name": "Update Registration",
+            "description": {
+              "content": "Only the fields included in the request are updated in the registration.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "registrations",
+                ":registrationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "registrationId",
+                  "description": "(Required) registration Id."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"expires\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "165787c1-64b6-4f19-877f-e4a6709a2927",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "registrations",
+                    ":registrationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registrationId",
+                      "description": "(Required) registration Id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "string"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expires\": \"2017-10-04T00:00:00\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "c67e3da2-4be1-4206-9691-20239bbc7266",
+      "name": "Batch Operations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "66ac5d69-5c97-4258-9a43-87b24cd42306",
+          "name": "Update",
+          "request": {
+            "name": "Update",
+            "description": {
+              "content": "This operation allows to create, update and/or delete several entities in a single batch operation.\nThe payload is an object with two properties:\n+ `actionType`, to specify the kind of update action to do: either `append`, `appendStrict`, `update`,\n  `delete`, or `replace`.\n+ `entities`, an array of entities, each entity specified using the JSON entity representation format\n  (described in the section \"JSON Entity Representation\").\nThis operation is split in as many individual operations as entities in the `entities` vector, so\nthe `actionType` is executed for each one of them. Depending on the `actionType`, a mapping with\nregular non-batch operations can be done:\n* `append`: maps to `POST /v2/entities` (if the entity does not already exist) or `POST /v2/entities/<id>/attrs`\n  (if the entity already exists).\n* `appendStrict`: maps to `POST /v2/entities` (if the entity does not already exist) or\n  `POST /v2/entities/<id>/attrs?options=append` (if the entity already exists).\n* `update`: maps to `PATCH /v2/entities/<id>/attrs`.\n* `delete`: maps to `DELETE /v2/entities/<id>/attrs/<attrName>` on every attribute included in the entity or\n  to `DELETE /v2/entities/<id>` if no attribute were included in the entity.\n* `replace`: maps to `PUT /v2/entities/<id>/attrs`.\nResponse:\n* Successful operation uses 204 No Content.\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "op",
+                "update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "<string>",
+                  "description": "Options dictionary"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"actionType\": \"<string>\",\n  \"entities\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2d93329d-88b6-482d-b962-25fbd18d1862",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "op",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"actionType\": \"append\",\n  \"entities\": [\n    {\n      \"type\": \"Room\",\n      \"temperature\": {\n        \"value\": 21.7\n      },\n      \"humidity\": {\n        \"value\": 60\n      }\n    },\n    {\n      \"type\": \"Room\",\n      \"temperature\": {\n        \"value\": 22.9\n      },\n      \"humidity\": {\n        \"value\": 85\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "263cd546-60ee-48eb-b503-ecf13c7ed38e",
+          "name": "Query",
+          "request": {
+            "name": "Query",
+            "description": {
+              "content": "The response payload is an Array containing one object per matching entity, or an empty array `[]` if \nno entities are found. The entities follow the JSON entity representation format\n(described in the section \"JSON Entity Representation\").\nThe payload may contain the following elements (all of them optional):\n+ `entities`: a list of entites to search for. Each element is represented by a JSON object with the\n  following elements:\n    + `id` or `idPattern`: Id or pattern of the affected entities. Both cannot be used at the same\n      time, but one of them must be present.\n    + `type` or `typePattern`: Type or type pattern of the entities to search for. Both cannot be used at\n      the same time. If omitted, it means \"any entity type\".\n+ `attrs`: List of attributes to be provided (if not specified, all attributes).\n+ `expression`: an expression composed of `q`, `mq`, `georel`, `geometry` and `coords` (see \"List\n   entities\" operation above about this field).\n+ `metadata`: a list of metadata names to include in the response.\n   See \"Filtering out attributes and metadata\" section for more detail.\nResponse code:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "op",
+                "query"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<double>",
+                  "description": "Limit the number of entities to be retrieved."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<double>",
+                  "description": "Skip a number of records."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "Criteria for ordering results.\nSee \"Ordering Results\" section for details."
+                },
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "<string>",
+                  "description": "Options dictionary"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entities\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"attrs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"expression\": \"<object>\",\n  \"metadata\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "16fa2a56-5e49-4b02-a706-d5ead1695847",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "op",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entities\": [\n    {\n      \"idPattern\": \".*\",\n      \"type\": \"Room\"\n    },\n    {\n      \"type\": \"P-9873-K\"\n    }\n  ],\n  \"attrs\": [\n    \"temperature\",\n    \"humidity\"\n  ],\n  \"expression\": {\n    \"q\": \"temperature>20\"\n  },\n  \"metadata\": [\n    \"accuracy\",\n    \"timestamp\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"type\": \"Room\",\n    \"id\": \"DC_S1-D41\",\n    \"temperature\": {\n      \"value\": 35.6,\n      \"type\": \"Number\"\n    }\n  },\n  {\n    \"type\": \"Room\",\n    \"id\": \"Boe-Idearium\",\n    \"temperature\": {\n      \"value\": 22.5,\n      \"type\": \"Number\"\n    }\n  },\n  {\n    \"type\": \"Car\",\n    \"id\": \"P-9873-K\",\n    \"temperature\": {\n      \"value\": 40,\n      \"type\": \"Number\",\n      \"accuracy\": 2,\n      \"timestamp\": {\n        \"value\": \"2015-06-04T07:20:27.378Z\",\n        \"type\": \"DateTime\"\n      }\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d7bb84e-e23c-49d0-88b6-b36882bbaa45",
+          "name": "Notify",
+          "request": {
+            "name": "Notify",
+            "description": {
+              "content": "This operation is intended to consume a notification payload so that all the entity data included by such notification is persisted, overwriting if necessary.\nThis operation is useful when one NGSIv2 endpoint is subscribed to another NGSIv2 endpoint (federation scenarios). \nThe request payload must be an NGSIv2 notification payload. \nThe behaviour must be exactly the same as `POST /v2/op/update` with `actionType` equal to `append`.\nResponse code:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "op",
+                "notify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "<string>",
+                  "description": "Options dictionary"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subscriptionId\": \"<string>\",\n  \"data\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "233d5ad4-d5ed-4bd1-b66e-5387b0296f68",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "op",
+                    "notify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subscriptionId\": \"5aeb0ee97d4ef10a12a0262f\",\n  \"data\": [\n    {\n      \"type\": \"Room\",\n      \"temperature\": {\n        \"value\": 35.6,\n        \"type\": \"Number\"\n      }\n    },\n    {\n      \"type\": \"Room\",\n      \"temperature\": {\n        \"value\": 22.5,\n        \"type\": \"Number\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://orion.lab.fiware.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7f8e2ffa-0084-4bee-8477-75bbf69d9a6c",
+    "name": "FIWARE-NGSI v2 Specification",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "TODO: Add a description",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,973 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FIWARE-NGSI v2 Specification",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "API Entry Point",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve API Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2"
+          },
+          "docs": "This resource does not have any attributes. Instead it offers the initial\nAPI affordances in the form of the links in the JSON body.\nIt is recommended to follow the “url” link values,\n[Link](https://tools.ietf.org/html/rfc5988) or Location headers where\napplicable to retrieve resources. Instead of constructing your own URLs,\nto keep your client decoupled from implementation details."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Entities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/entities",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of elements.\nRetrieve entities whose ID matches one of the elements in the list.\nIncompatible with `idPattern`."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "comma-separated list of elements.\nRetrieve entities whose type matches one of the elements in the list.\nIncompatible with `typePattern`."
+              },
+              {
+                "name": "idPattern",
+                "value": "",
+                "type": "query",
+                "description": "A correctly formated regular expression.\nRetrieve entities whose ID matches the regular expression. Incompatible with `id`."
+              },
+              {
+                "name": "typePattern",
+                "value": "",
+                "type": "query",
+                "description": "A correctly formated regular expression.\nRetrieve entities whose type matches the regular expression. Incompatible with `type`."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "A query expression, composed of a list of statements\nseparated by `;`, i.e., q=statement1;statement2;statement3.\nSee [Simple Query Language specification](#simple_query_language)."
+              },
+              {
+                "name": "mq",
+                "value": "",
+                "type": "query",
+                "description": "A query expression for attribute metadata,\ncomposed of a list of statements separated by `;`, i.e., mq=statement1;statement2;statement3.\nSee [Simple Query Language specification](#simple_query_language)."
+              },
+              {
+                "name": "georel",
+                "value": "",
+                "type": "query",
+                "description": "Spatial relationship between matching entities and a\nreference shape. See [Geographical Queries](#geographical_queries)."
+              },
+              {
+                "name": "geometry",
+                "value": "",
+                "type": "query",
+                "description": "Geografical area to which the query is restricted.\nSee [Geographical Queries](#geographical_queries)."
+              },
+              {
+                "name": "coords",
+                "value": "",
+                "type": "query",
+                "description": "List of latitude-longitude\npairs of coordinates separated by ';'. See [Geographical Queries](#geographical_queries)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limits the number of entities to be retrieved"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Establishes the offset from where entities are retrieved"
+              },
+              {
+                "name": "attrs",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of attribute names whose data\nare to be included in the response.\nThe attributes are retrieved in the order specified by this parameter. If this parameter is\nnot included, the attributes are retrieved in arbitrary order.\nSee \"Filtering out attributes and metadata\" section for more detail."
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "A list of metadata names to include in the response.\nSee \"Filtering out attributes and metadata\" section for more detail."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Criteria for ordering results.\nSee \"Ordering Results\" section for details."
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Options dictionary"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of entities that match different criteria by id, type, pattern matching (either id or type)\nand/or those which match a query or geographical query (see [Simple Query Language](#simple_query_language) and \n[Geographical Queries](#geographical_queries)). A given entity has to match all the criteria to be retrieved\n(i.e., the criteria is combined in a logical AND way). Note that pattern matching query parameters are incompatible\n(i.e. mutually exclusive) with their corresponding ex"
+        },
+        {
+          "info": {
+            "name": "Create Entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2/entities",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Options dictionary"
+              }
+            ]
+          },
+          "docs": "The payload is an object representing the entity to be created. The object follows\nthe JSON entity representation format (described in a \"JSON Entity Representation\" section).\nResponse:\n* Successful operation uses 201 Created (if upsert option is not used) or 204 No Content (if\n  upsert option is used). Response includes a `Location` header with the URL of the\n  created entity.\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+        },
+        {
+          "info": {
+            "name": "Retrieve Entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/entities/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the entity to be retrieved"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+              },
+              {
+                "name": "attrs",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of attribute names whose\ndata must be included in the response. The attributes are retrieved in the order specified by\nthis parameter. See \"Filtering out attributes and metadata\" section for more detail.\nIf this parameter is not included, the attributes are retrieved in arbitrary order, and all\nthe attributes of the entity are included in the response."
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "A list of metadata names to include in the response.\nSee \"Filtering out attributes and metadata\" section for more detail."
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Options dictionary"
+              }
+            ]
+          },
+          "docs": "The response is an object representing the entity identified by the ID. The object follows\nthe JSON entity representation format (described in \"JSON Entity Representation\" section).\nThis operation must return one entity element only, but there may be more than one entity with the\nsame ID (e.g. entities with same ID but different types).\nIn such case, an error message is returned, with the HTTP status code set to 409 Conflict.\nResponse:\n* Successful operation uses 200 OK\n* Errors use a non-2xx an"
+        },
+        {
+          "info": {
+            "name": "Remove Entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v2/entities/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the entity to be deleted"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+              }
+            ]
+          },
+          "docs": "Delete the entity.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+        },
+        {
+          "info": {
+            "name": "Retrieve Entity Attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/entities/:entityId/attrs",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the entity to be retrieved"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+              },
+              {
+                "name": "attrs",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of attribute names whose\ndata are to be included in the response. The attributes are retrieved in the order specified\nby this parameter.\nIf this parameter is not included, the attributes are retrieved in arbitrary order, and all\nthe attributes of the entity are included in the response.\nSee \"Filtering out attributes and metadata\" section for more detail."
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "A list of metadata names to include in the response.\nSee \"Filtering out attributes and metadata\" section for more detail."
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Options dictionary"
+              }
+            ]
+          },
+          "docs": "This request is similar to retreiving the whole entity, however this one omits the `id` and `type`\nfields.\nJust like the general request of getting an entire entity, this operation must return only one\nentity element. If more than one entity with the same ID is found (e.g. entities with\nsame ID but different type), an error message is returned, with the HTTP status code set to\n409 Conflict.\nResponse:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See"
+        },
+        {
+          "info": {
+            "name": "Update or Append Entity Attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2/entities/:entityId/attrs",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity id to be updated"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Operations options"
+              }
+            ]
+          },
+          "docs": "The request payload is an object representing the attributes to append or update. The object follows\nthe JSON entity representation format (described in \"JSON Entity Representation\" section), except\nthat `id` and `type` are not allowed.\nThe entity attributes are updated with the ones in the payload, depending on\nwhether the `append` operation option is used or not.\n* If `append` is not used: the entity attributes are updated (if they previously exist) or appended\n  (if they don't previously exis"
+        },
+        {
+          "info": {
+            "name": "Replace all entity attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v2/entities/:entityId/attrs",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the entity in question."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Operations options"
+              }
+            ]
+          },
+          "docs": "The request payload is an object representing the new entity attributes. The object follows\nthe JSON entity representation format (described in a \"JSON Entity Representation\" above), except\nthat `id` and `type` are not allowed.\nThe attributes previously existing in the entity are removed and replaced by the ones in the\nrequest.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+        },
+        {
+          "info": {
+            "name": "Update Existing Entity Attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v2/entities/:entityId/attrs",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the entity to be updated"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Operations options"
+              }
+            ]
+          },
+          "docs": "The request payload is an object representing the attributes to update. The object follows\nthe JSON entity representation format (described in \"JSON Entity Representation\" section), except\nthat `id` and `type` are not allowed.\nThe entity attributes are updated with the ones in the payload. In addition to that, if one or more\nattributes in the payload doesn't exist in the entity, an error is returned.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an "
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Attributes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get attribute data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/entities/:entityId/attrs/:attrName",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the entity"
+              },
+              {
+                "name": "attrName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the attribute to be retrieved."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "A list of metadata names to include in the response.\nSee \"Filtering out attributes and metadata\" section for more detail."
+              }
+            ]
+          },
+          "docs": "Returns a JSON object with the attribute data of the attribute. The object follows the JSON\nrepresentation for attributes (described in \"JSON Attribute Representation\" section).\nResponse:\n* Successful operation uses 200 OK.\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+        },
+        {
+          "info": {
+            "name": "Update Attribute Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v2/entities/:entityId/attrs/:attrName",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the entity to update"
+              },
+              {
+                "name": "attrName",
+                "value": "",
+                "type": "path",
+                "description": "Attribute name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+              }
+            ]
+          },
+          "docs": "The request payload is an object representing the new attribute data. Previous attribute data\nis replaced by the one in the request. The object follows the JSON representation for attributes\n(described in \"JSON Attribute Representation\" section).\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+        },
+        {
+          "info": {
+            "name": "Remove a Single Attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v2/entities/:entityId/attrs/:attrName",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the entity."
+              },
+              {
+                "name": "attrName",
+                "value": "",
+                "type": "path",
+                "description": "Attribute name."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+              }
+            ]
+          },
+          "docs": "Removes an entity attribute.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Attribute Value",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Attribute Value",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/entities/:entityId/attrs/:attrName/value",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the entity in question"
+              },
+              {
+                "name": "attrName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the attribute to be retrieved."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+              }
+            ]
+          },
+          "docs": "This operation returns the `value` property with the value of the attribute.\n* If attribute value is JSON Array or Object:\n  * If `Accept` header can be expanded to `application/json` or `text/plain` return the value as a JSON with a\n    response type of application/json or text/plain (whichever is the first in `Accept` header or\n    `application/json` in case of `Accept: */*`).\n  * Else return a HTTP error \"406 Not Acceptable: accepted MIME types: application/json, text/plain\"\n* If attribute va"
+        },
+        {
+          "info": {
+            "name": "Update Attribute Value",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v2/entities/:entityId/attrs/:attrName/value",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the entity to be updated."
+              },
+              {
+                "name": "attrName",
+                "value": "",
+                "type": "path",
+                "description": "Attribute name."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+              }
+            ]
+          },
+          "docs": "The request payload is the new attribute value.\n* If the request payload MIME type is `application/json`, then the value of the attribute is set to\n  the JSON object or array coded in the payload (if the payload is not a valid JSON document,\n  then an error is returned).\n* If the request payload MIME type is `text/plain`, then the following algorithm is applied to the\n  payload:\n  * If the payload starts and ends with citation-marks (`\"`), the value is taken as a string\n    (the citation marks t"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Entity Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/types/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of types to be retrieved."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Skip a number of records."
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Options dictionary."
+              }
+            ]
+          },
+          "docs": "If the `values` option is not in use, this operation returns a JSON array with the entity types.\nEach element is a JSON object with information about the type:\n* `type` : the entity type name.\n* `attrs` : the set of attribute names along with all the entities of such type, represented in\n  a JSON object whose keys are the attribute names and whose values contain information of such\n  attributes (in particular a list of the types used by attributes with that name along with all the\n  entities).\n*"
+        },
+        {
+          "info": {
+            "name": "Retrieve entity type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/types/:entityType",
+            "params": [
+              {
+                "name": "entityType",
+                "value": "",
+                "type": "path",
+                "description": "Entity Type"
+              }
+            ]
+          },
+          "docs": "This operation returns a JSON object with information about the type:\n* `attrs` : the set of attribute names along with all the entities of such type, represented in\n  a JSON object whose keys are the attribute names and whose values contain information of such\n  attributes (in particular a list of the types used by attributes with that name along with all the\n  entities).\n* `count` : the number of entities belonging to that type.\nResponse code:\n* Successful operation uses 200 OK\n* Errors use a "
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/subscriptions",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of subscriptions to be retrieved"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Skip a number of subscriptions"
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Options dictionary"
+              }
+            ]
+          },
+          "docs": "Returns a list of all the subscriptions present in the system.\nResponse:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+        },
+        {
+          "info": {
+            "name": "Create Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2/subscriptions",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a new subscription.\nThe subscription is represented by a JSON object as described at the beginning of this section.\nResponse:\n* Successful operation uses 201 Created\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+        },
+        {
+          "info": {
+            "name": "Retrieve Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/subscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "subscription Id."
+              }
+            ]
+          },
+          "docs": "The response is the subscription represented by a JSON object as described at the beginning of this\nsection.\nResponse:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+        },
+        {
+          "info": {
+            "name": "Update Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v2/subscriptions/:subscriptionId",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "subscription Id."
+              }
+            ]
+          },
+          "docs": "Only the fields included in the request are updated in the subscription.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+        },
+        {
+          "info": {
+            "name": "Delete subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v2/subscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "subscription Id."
+              }
+            ]
+          },
+          "docs": "Cancels subscription.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Registrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Registrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/registrations",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of registrations to be retrieved"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Skip a number of registrations"
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Options dictionary"
+              }
+            ]
+          },
+          "docs": "Lists all the context provider registrations present in the system."
+        },
+        {
+          "info": {
+            "name": "Create Registration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2/registrations",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a new context provider registration. This is typically used for binding context sources\nas providers of certain data.\nThe registration is represented by a JSON object as described at the beginning of this section.\nResponse:\n* Successful operation uses 201 Created\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+        },
+        {
+          "info": {
+            "name": "Retrieve Registration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/registrations/:registrationId",
+            "params": [
+              {
+                "name": "registrationId",
+                "value": "",
+                "type": "path",
+                "description": "registration Id."
+              }
+            ]
+          },
+          "docs": "The response is the registration represented by a JSON object as described at the beginning of this\nsection.\nResponse:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+        },
+        {
+          "info": {
+            "name": "Update Registration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v2/registrations/:registrationId",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "registrationId",
+                "value": "",
+                "type": "path",
+                "description": "registration Id."
+              }
+            ]
+          },
+          "docs": "Only the fields included in the request are updated in the registration.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+        },
+        {
+          "info": {
+            "name": "Delete Registration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v2/registrations/:registrationId",
+            "params": [
+              {
+                "name": "registrationId",
+                "value": "",
+                "type": "path",
+                "description": "registration Id."
+              }
+            ]
+          },
+          "docs": "Cancels a context provider registration.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Batch Operations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2/op/update",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Options dictionary"
+              }
+            ]
+          },
+          "docs": "This operation allows to create, update and/or delete several entities in a single batch operation.\nThe payload is an object with two properties:\n+ `actionType`, to specify the kind of update action to do: either `append`, `appendStrict`, `update`,\n  `delete`, or `replace`.\n+ `entities`, an array of entities, each entity specified using the JSON entity representation format\n  (described in the section \"JSON Entity Representation\").\nThis operation is split in as many individual operations as enti"
+        },
+        {
+          "info": {
+            "name": "Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2/op/query",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of entities to be retrieved."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Skip a number of records."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Criteria for ordering results.\nSee \"Ordering Results\" section for details."
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Options dictionary"
+              }
+            ]
+          },
+          "docs": "The response payload is an Array containing one object per matching entity, or an empty array `[]` if \nno entities are found. The entities follow the JSON entity representation format\n(described in the section \"JSON Entity Representation\").\nThe payload may contain the following elements (all of them optional):\n+ `entities`: a list of entites to search for. Each element is represented by a JSON object with the\n  following elements:\n    + `id` or `idPattern`: Id or pattern of the affected entities"
+        },
+        {
+          "info": {
+            "name": "Notify",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2/op/notify",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Options dictionary"
+              }
+            ]
+          },
+          "docs": "This operation is intended to consume a notification payload so that all the entity data included by such notification is persisted, overwriting if necessary.\nThis operation is useful when one NGSIv2 endpoint is subscribed to another NGSIv2 endpoint (federation scenarios). \nThe request payload must be an NGSIv2 notification payload. \nThe behaviour must be exactly the same as `POST /v2/op/update` with `actionType` equal to `append`.\nResponse code:\n* Successful operation uses 200 OK\n* Errors use a"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

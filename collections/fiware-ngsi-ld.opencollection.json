@@ -1,0 +1,1044 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ETSI ISG CIM / NGSI-LD API",
+    "version": "latest"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Context Information",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "queryEntities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/entities/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of URIs to be retrieved"
+              },
+              {
+                "name": "idPattern",
+                "value": "",
+                "type": "query",
+                "description": "Regular expression that must be matched by Entity ids"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of Entity type names to be retrieved"
+              },
+              {
+                "name": "attrs",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of attribute names (properties or relationships) to be retrieved"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Query"
+              },
+              {
+                "name": "georel",
+                "value": "",
+                "type": "query",
+                "description": "Geo-relationship"
+              },
+              {
+                "name": "geometry",
+                "value": "",
+                "type": "query",
+                "description": "Geometry"
+              },
+              {
+                "name": "coordinates",
+                "value": "",
+                "type": "query",
+                "description": "Coordinates serialized as a string"
+              },
+              {
+                "name": "geoproperty",
+                "value": "",
+                "type": "query",
+                "description": "The name of the property that contains the geo-spatial data that will be used to resolve the geoquery"
+              },
+              {
+                "name": "csf",
+                "value": "",
+                "type": "query",
+                "description": "Context Source Filter"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Pagination limit"
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Options dictionary"
+              }
+            ]
+          },
+          "docs": "Retrieve a set of entities which matches a specific query from an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "createEntity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/entities/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Entity within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "retrieveEntityById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/entities/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              },
+              {
+                "name": "attrs",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of attribute names (properties or relationships) to be retrieved"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity Type"
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Options dictionary"
+              }
+            ]
+          },
+          "docs": "Retrieve an specific Entity from an NGSI-LD system. It's possible to specify the Entity attributes to be retrieved by using query parameters"
+        },
+        {
+          "info": {
+            "name": "removeEntityById",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/entities/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity Type"
+              }
+            ]
+          },
+          "docs": "Removes an specific Entity from an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "appendEntityAttrs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/entities/:entityId/attrs/",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Indicates that no attribute overwrite shall be performed"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Append new Entity attributes to an existing Entity within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "updateEntityAttrs",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/entities/:entityId/attrs/",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update existing Entity attributes within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "partialAttrUpdate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/entities/:entityId/attrs/:attrId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              },
+              {
+                "name": "attrId",
+                "value": "",
+                "type": "path",
+                "description": "Attribute Id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update existing Entity attributes within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "removeEntityAttr",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/entities/:entityId/attrs/:attrId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              },
+              {
+                "name": "attrId",
+                "value": "",
+                "type": "path",
+                "description": "Attribute Id"
+              }
+            ]
+          },
+          "docs": "Removes an existing Entity attribute within an NGSI-LD system"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Context Subscription",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "retrieveSubscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/subscriptions/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Pagination limit"
+              }
+            ]
+          },
+          "docs": "Retrieves the subscriptions available in an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "createSubscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/subscriptions/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Subscription within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "retrieveSubscriptionById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/subscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Subscription Id"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific Subscription from an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "updateSubscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/subscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Subscription Id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a specific Subscription within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "removeSubscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/subscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Subscription Id"
+              }
+            ]
+          },
+          "docs": "Removes a specific Subscription from an NGSI-LD system"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Context Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "queryCsources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/csourceRegistrations/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of URIs to be retrieved"
+              },
+              {
+                "name": "idPattern",
+                "value": "",
+                "type": "query",
+                "description": "Regular expression that must be matched by Entity ids"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of Entity type names to be retrieved"
+              },
+              {
+                "name": "attrs",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of attribute names (properties or relationships) to be retrieved"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Query"
+              },
+              {
+                "name": "georel",
+                "value": "",
+                "type": "query",
+                "description": "Geo-relationship"
+              },
+              {
+                "name": "geometry",
+                "value": "",
+                "type": "query",
+                "description": "Geometry"
+              },
+              {
+                "name": "coordinates",
+                "value": "",
+                "type": "query",
+                "description": "Coordinates serialized as a string"
+              },
+              {
+                "name": "geoproperty",
+                "value": "",
+                "type": "query",
+                "description": "The name of the property that contains the geo-spatial data that will be used to resolve the geoquery"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Pagination limit"
+              }
+            ]
+          },
+          "docs": "Retrieve a set of context sources which matches a specific query from an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "registerCsource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/csourceRegistrations/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers a new context source within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "retrieveCsource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/csourceRegistrations/:registrationId",
+            "params": [
+              {
+                "name": "registrationId",
+                "value": "",
+                "type": "path",
+                "description": "Registration Id"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific context source registration from an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "removeCsource",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/csourceRegistrations/:registrationId",
+            "params": [
+              {
+                "name": "registrationId",
+                "value": "",
+                "type": "path",
+                "description": "Registration Id"
+              }
+            ]
+          },
+          "docs": "Removes an specific context source registration within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "retrieveCSourceSubscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/csourceSubscriptions/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Pagination limit"
+              }
+            ]
+          },
+          "docs": "Retrieves the context source discovery subscriptions available in an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "createCSourceSubscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/csourceSubscriptions/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a context source discovery Subscription within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "retrieveCSourceSubscriptionsById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/csourceSubscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Subscription Id"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific Subscription from an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "updateCSourceSubscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/csourceSubscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Subscription Id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a specific context source discovery Subscription within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "removeCSourceSubscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/csourceSubscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Subscription Id"
+              }
+            ]
+          },
+          "docs": "Removes a specific Context Source Subscription from an NGSI-LD system"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Batch Operations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "batchEntityCreation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/entityOperations/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Batch Entity creation"
+        },
+        {
+          "info": {
+            "name": "batchEntityUpdate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/entityOperations/update",
+            "params": [
+              {
+                "name": "options",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Batch Entity update"
+        },
+        {
+          "info": {
+            "name": "batchEntityUpsert",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/entityOperations/upsert",
+            "params": [
+              {
+                "name": "options",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Batch Entity upsert"
+        },
+        {
+          "info": {
+            "name": "batchEntityDelete",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/entityOperations/delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Batch Entity delete"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Temporal Evolution",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "queryTemporalEntities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/temporal/entities/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of URIs to be retrieved"
+              },
+              {
+                "name": "idPattern",
+                "value": "",
+                "type": "query",
+                "description": "Regular expression that must be matched by Entity ids"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of Entity type names to be retrieved"
+              },
+              {
+                "name": "attrs",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of attribute names (properties or relationships) to be retrieved"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Query"
+              },
+              {
+                "name": "georel",
+                "value": "",
+                "type": "query",
+                "description": "Geo-relationship"
+              },
+              {
+                "name": "geometry",
+                "value": "",
+                "type": "query",
+                "description": "Geometry"
+              },
+              {
+                "name": "coordinates",
+                "value": "",
+                "type": "query",
+                "description": "Coordinates serialized as a string"
+              },
+              {
+                "name": "geoproperty",
+                "value": "",
+                "type": "query",
+                "description": "The name of the property that contains the geo-spatial data that will be used to resolve the geoquery"
+              },
+              {
+                "name": "timerel",
+                "value": "",
+                "type": "query",
+                "description": "Time relationship"
+              },
+              {
+                "name": "timeproperty",
+                "value": "",
+                "type": "query",
+                "description": "The name of the property that contains the temporal data that will be used to resolve the temporal query"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "start time for temporal query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "end time for temporal query"
+              },
+              {
+                "name": "csf",
+                "value": "",
+                "type": "query",
+                "description": "Context Source Filter"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Pagination limit"
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Options dictionary"
+              },
+              {
+                "name": "lastN",
+                "value": "",
+                "type": "query",
+                "description": "Only retrieve last N instances"
+              }
+            ]
+          },
+          "docs": "Query temporal evolution of Entities from an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "createUpdateEntityTemporal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/temporal/entities/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update temporal representation of an Entity within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "retrieveEntityTemporalById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/temporal/entities/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              },
+              {
+                "name": "attrs",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of attribute names (properties or relationships) to be retrieved"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity Type"
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Options dictionary"
+              },
+              {
+                "name": "timerel",
+                "value": "",
+                "type": "query",
+                "description": "Time relationship"
+              },
+              {
+                "name": "timeproperty",
+                "value": "",
+                "type": "query",
+                "description": "The name of the property that contains the temporal data that will be used to resolve the temporal query"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "start time for temporal query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "end time for temporal query"
+              },
+              {
+                "name": "lastN",
+                "value": "",
+                "type": "query",
+                "description": "Only retrieve last N instances"
+              }
+            ]
+          },
+          "docs": "Retrieve the temporal representation of an specific Entity from an NGSI-LD system. It's possible to specify the Entity attributes to be retrieved by using query parameters"
+        },
+        {
+          "info": {
+            "name": "removeEntityTemporalById",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/temporal/entities/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity Type"
+              }
+            ]
+          },
+          "docs": "Removes the temporal representation of an Entity from an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "addTemporalEntityAttrs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/temporal/entities/:entityId/attrs/",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add new attributes to an existing Temporal Entity within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "removeEntityTemporalAttr",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/temporal/entities/:entityId/attrs/:attrId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              },
+              {
+                "name": "attrId",
+                "value": "",
+                "type": "path",
+                "description": "Attribute Id"
+              }
+            ]
+          },
+          "docs": "Attribute from Temporal Representation of Entity deletion"
+        },
+        {
+          "info": {
+            "name": "modifyEntityTemporalAttrInstance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/temporal/entities/:entityId/attrs/:attrId/:instanceId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              },
+              {
+                "name": "attrId",
+                "value": "",
+                "type": "path",
+                "description": "Attribute Id"
+              },
+              {
+                "name": "instanceId",
+                "value": "",
+                "type": "path",
+                "description": "Instance Id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows modifying a specific Attribute (Property or Relationship) instance, identified by its instanceId, of a Temporal Representation of an Entity."
+        },
+        {
+          "info": {
+            "name": "removeEntityTemporalAttrInstance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/temporal/entities/:entityId/attrs/:attrId/:instanceId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              },
+              {
+                "name": "attrId",
+                "value": "",
+                "type": "path",
+                "description": "Attribute Id"
+              },
+              {
+                "name": "instanceId",
+                "value": "",
+                "type": "path",
+                "description": "Instance Id"
+              }
+            ]
+          },
+          "docs": "Attribute Instance deletion by instance id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
