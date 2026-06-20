@@ -6,7 +6,7 @@ description: >-
   consume, and subscribe to context information in smart cities, smart industry, smart agriculture, and smart energy
   scenarios.
 kind: standard
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2024-07-02'
 modified: '2026-05-19'
@@ -29,7 +29,7 @@ apis:
       applications to provide, consume, and subscribe to context information in multiple scenarios and involving
       multiple stakeholders. It is the linked-data evolution of the NGSI specification and forms the foundation of
       FIWARE-based smart solutions.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
     tags:
       - Context Information
@@ -49,7 +49,7 @@ apis:
       The NGSI v2 API is the previous generation context broker specification that established the patterns later
       evolved into NGSI-LD. It is widely implemented by Orion Context Broker and is still in use across many
       FIWARE-based deployments for managing entities, attributes, and subscriptions.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
     tags:
       - Context Information
