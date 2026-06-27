@@ -71,7 +71,7 @@ common:
     url: https://github.com/FIWARE
   - type: Documentation
     url: https://fiware-orion.readthedocs.io/
-  - type: Specifications
+  - type: Specification
     url: https://github.com/FIWARE/specifications
 maintainers:
   - FN: Kin Lane
