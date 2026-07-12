@@ -63,6 +63,8 @@ apis:
       - type: OpenAPI
         url: openapi/fiware-ngsiv2-openapi.yml
 common:
+  - type: DomainSecurity
+    url: security/fiware-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/fiware
   - type: Website
@@ -73,6 +75,8 @@ common:
     url: https://fiware-orion.readthedocs.io/
   - type: Specification
     url: https://github.com/FIWARE/specifications
+  - url: https://www.fiware.org/feed/
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
