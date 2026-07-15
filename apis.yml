@@ -63,6 +63,8 @@ apis:
       - type: OpenAPI
         url: openapi/fiware-ngsiv2-openapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/fiware-agentic-access.yml
   - type: DomainSecurity
     url: security/fiware-domain-security.yml
   - type: LinkedIn
