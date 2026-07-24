@@ -1,0 +1,111 @@
+openapi: 3.0.3
+info:
+  description: This OAS file describes the NGSI-LD API defined by the ETSI ISG CIM group. This Cross-domain Context Information Management API allows to provide, consume and subscribe to context information in multiple scenarios and involving multiple stakeholders
+  version: latest
+  title: ETSI ISG CIM / NGSI-LD API Entry Point API
+  contact:
+    email: NGSI-LD@etsi.org
+tags:
+- name: API Entry Point
+paths:
+  /v2:
+    get:
+      description: 'This resource does not have any attributes. Instead it offers the initial
+
+        API affordances in the form of the links in the JSON body.
+
+        It is recommended to follow the “url” link values,
+
+        [Link](https://tools.ietf.org/html/rfc5988) or Location headers where
+
+        applicable to retrieve resources. Instead of constructing your own URLs,
+
+        to keep your client decoupled from implementation details.'
+      summary: Retrieve API Resources
+      tags:
+      - API Entry Point
+      operationId: Retrieve API Resources
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RetrieveApiResourcesResponse'
+          examples:
+            application/json:
+              entities_url: /v2/entities
+              types_url: /v2/types
+              subscriptions_url: /v2/subscriptions
+              registrations_url: /v2/registrations
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /v2
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: RAW
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          headers:
+            Content-Type: application/json
+          body: '{  "entities_url": "/v2/entities",  "types_url": "/v2/types",  "subscriptions_url": "/v2/subscriptions",  "registrations_url": "/v2/registrations"}'
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Retrieve API Resources1
+        x-testDescription: 'This resource does not have any attributes. Instead it offers the initial
+
+          API affordances in the form of the links in the JSON body.
+
+          It is recommended to follow the “url” link values,
+
+          [Link](https://tools.ietf.org/html/rfc5988) or Location headers where
+
+          applicable to retrieve resources. Instead of constructing your own URLs,
+
+          to keep your client decoupled from implementation details.'
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+definitions:
+  RetrieveApiResourcesResponse:
+    title: Retrieve API Resources response
+    example:
+      entities_url: /v2/entities
+      types_url: /v2/types
+      subscriptions_url: /v2/subscriptions
+      registrations_url: /v2/registrations
+    type: object
+    properties:
+      entities_url:
+        description: URL which points to the entities resource
+        example: /v2/entities
+        type: string
+      types_url:
+        description: URL which points to the types resource
+        example: /v2/types
+        type: string
+      subscriptions_url:
+        description: 'URL which points to the
+
+          subscriptions resource'
+        example: /v2/subscriptions
+        type: string
+      registrations_url:
+        description: 'URL which points to the
+
+          registrations resource'
+        example: /v2/registrations
+        type: string
+    required:
+    - entities_url
+    - types_url
+    - subscriptions_url
+    - registrations_url
+externalDocs:
+  description: Find out more about the ETSI ISG Context Information Management
+  url: https://portal.etsi.org/tb.aspx?tbid=854&SubTB=854

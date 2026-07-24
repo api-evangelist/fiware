@@ -1,0 +1,820 @@
+openapi: 3.0.3
+info:
+  description: This OAS file describes the NGSI-LD API defined by the ETSI ISG CIM group. This Cross-domain Context Information Management API allows to provide, consume and subscribe to context information in multiple scenarios and involving multiple stakeholders
+  version: latest
+  title: ETSI ISG CIM / NGSI-LD API Entry Point Subscriptions API
+  contact:
+    email: NGSI-LD@etsi.org
+tags:
+- name: Subscriptions
+paths:
+  /subscriptions/:
+    get:
+      description: Retrieves the subscriptions available in an NGSI-LD system
+      operationId: retrieveSubscriptions
+      tags:
+      - Subscriptions
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionList'
+              examples:
+                simple:
+                  externalValue: https://forge.etsi.org/rep/NGSI-LD/NGSI-LD/raw/master/examples/SubscriptionList-example.json
+        '400':
+          description: Bad request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      description: Creates a new Subscription within an NGSI-LD system
+      operationId: createSubscription
+      tags:
+      - Subscriptions
+      requestBody:
+        required: true
+        content:
+          application/json;application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+      responses:
+        '201':
+          description: Created. Contains the resource URI of the created Subscription
+        '400':
+          description: Bad request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '409':
+          description: Already exists
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /subscriptions/{subscriptionId}:
+    get:
+      description: Retrieves a specific Subscription from an NGSI-LD system
+      operationId: retrieveSubscriptionById
+      tags:
+      - Subscriptions
+      parameters:
+      - $ref: '#/components/parameters/subscriptionId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+              examples:
+                simple:
+                  externalValue: https://forge.etsi.org/rep/NGSI-LD/NGSI-LD/raw/master/examples/Subscription-example_C.4.json
+        '400':
+          description: Bad request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    patch:
+      description: Updates a specific Subscription within an NGSI-LD system
+      operationId: updateSubscription
+      tags:
+      - Subscriptions
+      parameters:
+      - $ref: '#/components/parameters/subscriptionId'
+      requestBody:
+        required: true
+        content:
+          application/json;application/ld+json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionFragment'
+      responses:
+        '204':
+          description: No Content. The Subscription was updated successfully
+        '400':
+          description: Bad Request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      description: Removes a specific Subscription from an NGSI-LD system
+      operationId: removeSubscription
+      tags:
+      - Subscriptions
+      parameters:
+      - $ref: '#/components/parameters/subscriptionId'
+      responses:
+        '204':
+          description: No Content. The Subscription was removed successfully
+        '400':
+          description: Bad Request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /v2/subscriptions:
+    get:
+      description: "Returns a list of all the subscriptions present in the system.\nResponse:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      summary: List Subscriptions
+      tags:
+      - Subscriptions
+      operationId: List Subscriptions
+      produces:
+      - application/json
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        type: number
+        format: double
+        exclusiveMaximum: false
+        exclusiveMinimum: false
+        description: Limit the number of subscriptions to be retrieved
+      - name: offset
+        in: query
+        required: false
+        type: number
+        format: double
+        exclusiveMaximum: false
+        exclusiveMinimum: false
+        description: Skip a number of subscriptions
+      - name: options
+        in: query
+        required: false
+        enum:
+        - count
+        x-enum-elements:
+        - name: count
+          description: ''
+        type: string
+        description: Options dictionary
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ListSubscriptionsResponse'
+          examples:
+            application/json:
+            - id: abcdefg
+              description: One subscription to rule them all
+              subject:
+                entities:
+                - id: Bcn_Welt
+                  type: Room
+                condition:
+                  attrs:
+                  - 'temperature '
+                  expression:
+                    q: temperature>40
+              notification:
+                httpCustom:
+                  url: http://localhost:1234
+                  headers:
+                    X-MyHeader: foo
+                  qs:
+                    authToken: bar
+                attrsFormat: keyValues
+                attrs:
+                - temperature
+                - humidity
+                timesSent: 12
+                lastNotification: '2015-10-05T16:00:00Z'
+                lastFailure: '2015-10-06T16:00:00Z'
+              expires: '2016-04-05T14:00:00Z'
+              status: failed
+              throttling: 5
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /v2/subscriptions?limit=10&offset=20
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: RAW
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          headers: {}
+          body: '[  {    "id": "abcdefg",    "description": "One subscription to rule them all",    "subject": {                          "entities": [        {          "id": "Bcn_Welt",          "type": "Room"        }      ],      "condition": {         "attrs": [ "temperature " ],         "expression": {            "q": "temperature>40"         }      }    },    "notification": {      "httpCustom": {        "url": "http://localhost:1234",        "headers": {          "X-MyHeader": "foo"        },        "qs": {          "authToken": "bar"        }      },      "attrsFormat": "keyValues",      "attrs": ["temperature", "humidity"],      "timesSent": 12,      "lastNotification": "2015-10-05T16:00:00.00Z",      "lastFailure": "2015-10-06T16:00:00.00Z"    },    "expires": "2016-04-05T14:00:00.00Z",    "status": "failed",    "throttling": 5  }]'
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: List Subscriptions1
+        x-testDescription: "Returns a list of all the subscriptions present in the system.\nResponse:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      description: "Creates a new subscription.\nThe subscription is represented by a JSON object as described at the beginning of this section.\nResponse:\n* Successful operation uses 201 Created\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      summary: Create Subscription
+      tags:
+      - Subscriptions
+      operationId: Create Subscription
+      produces:
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/CreateSubscriptionRequest'
+      responses:
+        '201':
+          description: ''
+      x-unitTests:
+      - request:
+          method: POST
+          uri: /v2/subscriptions
+          headers:
+            Content-Type: application/json
+          body: '{  "description": "One subscription to rule them all",  "subject": {    "entities": [      {        "idPattern": ".*",        "type": "Room"      }    ],    "condition": {      "attrs": [ "temperature" ],      "expression": {        "q": "temperature>40"      }    }  },  "notification": {    "http": {      "url": "http://localhost:1234"    },    "attrs": ["temperature", "humidity"]  },              "expires": "2016-04-05T14:00:00.00Z",  "throttling": 5}'
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          headers:
+            Location: /v2/subscriptions/abcde98765
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Create Subscription1
+        x-testDescription: "Creates a new subscription.\nThe subscription is represented by a JSON object as described at the beginning of this section.\nResponse:\n* Successful operation uses 201 Created\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /v2/subscriptions/{subscriptionId}:
+    get:
+      description: "The response is the subscription represented by a JSON object as described at the beginning of this\nsection.\nResponse:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      summary: Retrieve Subscription
+      tags:
+      - Subscriptions
+      operationId: Retrieve Subscription
+      produces:
+      - application/json
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        type: string
+        description: subscription Id.
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: "Cancels subscription.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      summary: Delete subscription
+      tags:
+      - Subscriptions
+      operationId: Delete subscription
+      produces:
+      - application/json
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        type: string
+        description: subscription Id.
+      responses:
+        '204':
+          description: ''
+      x-unitTests:
+      - request:
+          method: DELETE
+          uri: /v2/subscriptions/abcdef
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Delete subscription1
+        x-testDescription: "Cancels subscription.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    patch:
+      description: "Only the fields included in the request are updated in the subscription.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      summary: Update Subscription
+      tags:
+      - Subscriptions
+      operationId: Update Subscription
+      produces:
+      - application/json
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        type: string
+        description: subscription Id.
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/UpdateSubscriptionRequest'
+      responses:
+        '204':
+          description: ''
+      x-unitTests:
+      - request:
+          method: PATCH
+          uri: /v2/subscriptions/abcdef
+          headers:
+            Content-Type: application/json
+          body: '{  "expires": "2016-04-05T14:00:00.00Z"}'
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Update Subscription1
+        x-testDescription: "Only the fields included in the request are updated in the subscription.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+components:
+  schemas:
+    positionArray:
+      description: An array of positions
+      type: array
+      items:
+        $ref: '#/components/schemas/position'
+    geometry:
+      type: string
+      enum:
+      - Point
+      - MultiPoint
+      - LineString
+      - MultiLineString
+      - Polygon
+      - MultiPolygon
+    Name:
+      type: string
+      pattern: ^((\d|[a-zA-Z]|_)+(:(\d|[a-zA-Z]|_)+)?(#\d+)?)$
+      minLength: 1
+      description: NGSI-LD Name
+    georel:
+      oneOf:
+      - type: string
+        enum:
+        - equals
+        - disjoint
+        - intersects
+        - within
+        - contains
+        - overlaps
+      - type: string
+        pattern: ^near;((maxDistance==\d+)|(minDistance==\d+))$
+    SubscriptionFragment:
+      type: object
+      properties:
+        '@context':
+          $ref: '#/components/schemas/LdContext'
+        entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntityInfo'
+          minItems: 1
+        name:
+          type: string
+          minLength: 1
+        description:
+          type: string
+          minLength: 1
+        watchedAttributes:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/Name'
+          uniqueItems: true
+        timeInterval:
+          type: number
+          minimum: 0
+        expires:
+          type: string
+          format: date-time
+        isActive:
+          type: boolean
+        throttling:
+          type: number
+          minimum: 1
+        q:
+          type: string
+        geoQ:
+          $ref: '#/components/schemas/GeoQuery'
+        csf:
+          type: string
+    modifiedAt:
+      type: string
+      format: date-time
+    position:
+      description: A single position
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        type: number
+      additionalProperties: false
+    GeoQuery:
+      type: object
+      required:
+      - geometry
+      - coordinates
+      - georel
+      properties:
+        georel:
+          $ref: '#/components/schemas/georel'
+        coordinates:
+          $ref: '#/components/schemas/coordinates'
+        geometry:
+          $ref: '#/components/schemas/geometry'
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        detail:
+          type: string
+      required:
+      - type
+    NotificationParams:
+      type: object
+      properties:
+        attributes:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            minLength: 1
+          uniqueItems: true
+        format:
+          type: string
+        endpoint:
+          $ref: '#/components/schemas/Endpoint'
+        status:
+          type: string
+          enum:
+          - ok
+          - failed
+        timesSent:
+          type: number
+          minimum: 1
+        lastNotification:
+          type: string
+          format: date-time
+        lastFailure:
+          type: string
+          format: date-time
+        lastSuccess:
+          type: string
+          format: date-time
+      required:
+      - endpoint
+    Subscription:
+      allOf:
+      - $ref: '#/components/schemas/SubscriptionFragment'
+      - type: object
+        properties:
+          id:
+            type: string
+            format: uri
+          type:
+            type: string
+            enum:
+            - Subscription
+          notification:
+            $ref: '#/components/schemas/NotificationParams'
+          status:
+            type: string
+            enum:
+            - active
+            - paused
+            - expired
+          createdAt:
+            $ref: '#/components/schemas/createdAt'
+          modifiedAt:
+            $ref: '#/components/schemas/modifiedAt'
+        allOf:
+        - required:
+          - id
+          - type
+          - notification
+        - anyOf:
+          - required:
+            - entities
+          - required:
+            - watchedAttributes
+    linearRing:
+      description: An array of four positions where the first equals the last
+      allOf:
+      - $ref: '#/components/schemas/positionArray'
+      - minItems: 4
+    coordinates:
+      oneOf:
+      - $ref: '#/components/schemas/position'
+      - $ref: '#/components/schemas/positionArray'
+      - $ref: '#/components/schemas/lineString'
+      - $ref: '#/components/schemas/polygon'
+    lineString:
+      description: An array of two or more positions
+      allOf:
+      - $ref: '#/components/schemas/positionArray'
+      - minItems: 2
+    polygon:
+      description: An array of linear rings
+      type: array
+      items:
+        $ref: '#/components/schemas/linearRing'
+    SubscriptionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Subscription'
+    Endpoint:
+      type: object
+      required:
+      - uri
+      properties:
+        uri:
+          type: string
+          format: uri
+        accept:
+          type: string
+          enum:
+          - application/json
+          - application/ld+json
+    LdContext:
+      oneOf:
+      - type: object
+      - type: string
+        format: uri
+      - type: array
+        minItems: 1
+        items:
+          oneOf:
+          - type: string
+            format: uri
+          - type: object
+    createdAt:
+      type: string
+      format: date-time
+    EntityInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uri
+        type:
+          $ref: '#/components/schemas/Name'
+        idPattern:
+          type: string
+          format: regex
+      required:
+      - type
+  parameters:
+    limit:
+      name: limit
+      description: Pagination limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+    subscriptionId:
+      name: subscriptionId
+      description: Subscription Id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uri
+definitions:
+  CreateSubscriptionRequest:
+    title: Create Subscription request
+    example:
+      description: One subscription to rule them all
+      subject:
+        entities:
+        - idPattern: .*
+          type: Room
+        condition:
+          attrs:
+          - temperature
+          expression:
+            q: temperature>40
+      notification:
+        http:
+          url: http://localhost:1234
+        attrs:
+        - temperature
+        - humidity
+      expires: '2016-04-05T14:00:00Z'
+      throttling: 5
+    type: object
+    properties:
+      description:
+        description: ''
+        example: One subscription to rule them all
+        type: string
+      subject:
+        description: ''
+        example:
+          entities:
+          - idPattern: .*
+            type: Room
+          condition:
+            attrs:
+            - temperature
+            expression:
+              q: temperature>40
+        type: object
+      notification:
+        description: ''
+        example:
+          http:
+            url: http://localhost:1234
+          attrs:
+          - temperature
+          - humidity
+        type: object
+      expires:
+        description: ''
+        example: 4/5/2016 2:00:00 PM
+        type: string
+      throttling:
+        description: ''
+        example: 5
+        type: integer
+        format: int32
+    required:
+    - subject
+    - notification
+  ListSubscriptionsResponse:
+    title: List Subscriptions response
+    example:
+      id: abcdefg
+      description: One subscription to rule them all
+      subject:
+        entities:
+        - id: Bcn_Welt
+          type: Room
+        condition:
+          attrs:
+          - 'temperature '
+          expression:
+            q: temperature>40
+      notification:
+        httpCustom:
+          url: http://localhost:1234
+          headers:
+            X-MyHeader: foo
+          qs:
+            authToken: bar
+        attrsFormat: keyValues
+        attrs:
+        - temperature
+        - humidity
+        timesSent: 12
+        lastNotification: '2015-10-05T16:00:00Z'
+        lastFailure: '2015-10-06T16:00:00Z'
+      expires: '2016-04-05T14:00:00Z'
+      status: failed
+      throttling: 5
+    type: object
+    properties:
+      id:
+        description: ''
+        example: abcdefg
+        type: string
+      description:
+        description: ''
+        example: One subscription to rule them all
+        type: string
+      subject:
+        description: ''
+        example:
+          entities:
+          - id: Bcn_Welt
+            type: Room
+          condition:
+            attrs:
+            - 'temperature '
+            expression:
+              q: temperature>40
+        type: object
+      notification:
+        description: ''
+        example:
+          httpCustom:
+            url: http://localhost:1234
+            headers:
+              X-MyHeader: foo
+            qs:
+              authToken: bar
+          attrsFormat: keyValues
+          attrs:
+          - temperature
+          - humidity
+          timesSent: 12
+          lastNotification: '2015-10-05T16:00:00Z'
+          lastFailure: '2015-10-06T16:00:00Z'
+        type: object
+      expires:
+        description: ''
+        example: 4/5/2016 2:00:00 PM
+        type: string
+      status:
+        description: ''
+        example: failed
+        type: string
+      throttling:
+        description: ''
+        example: 5
+        type: integer
+        format: int32
+    required:
+    - id
+    - description
+    - subject
+    - notification
+    - expires
+    - status
+    - throttling
+  UpdateSubscriptionRequest:
+    title: Update Subscription request
+    example:
+      expires: '2016-04-05T14:00:00Z'
+    type: object
+    properties:
+      expires:
+        description: ''
+        example: 4/5/2016 2:00:00 PM
+        type: string
+    required:
+    - expires
+externalDocs:
+  description: Find out more about the ETSI ISG Context Information Management
+  url: https://portal.etsi.org/tb.aspx?tbid=854&SubTB=854

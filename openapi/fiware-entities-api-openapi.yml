@@ -1,0 +1,1701 @@
+openapi: 3.0.3
+info:
+  description: This OAS file describes the NGSI-LD API defined by the ETSI ISG CIM group. This Cross-domain Context Information Management API allows to provide, consume and subscribe to context information in multiple scenarios and involving multiple stakeholders
+  version: latest
+  title: ETSI ISG CIM / NGSI-LD API Entry Point Entities API
+  contact:
+    email: NGSI-LD@etsi.org
+tags:
+- name: Entities
+paths:
+  /entities/:
+    get:
+      description: Retrieve a set of entities which matches a specific query from an NGSI-LD system
+      operationId: queryEntities
+      tags:
+      - Entities
+      parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/idPattern'
+      - $ref: '#/components/parameters/type'
+      - $ref: '#/components/parameters/attrs'
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/georel'
+      - $ref: '#/components/parameters/geometry'
+      - $ref: '#/components/parameters/coordinates'
+      - $ref: '#/components/parameters/geoproperty'
+      - $ref: '#/components/parameters/csf'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/options'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/EntityList'
+              examples:
+                simple:
+                  externalValue: https://forge.etsi.org/rep/NGSI-LD/NGSI-LD/raw/master/examples/EntityList-example.json
+        '400':
+          description: Bad request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      description: Create a new Entity within an NGSI-LD system
+      operationId: createEntity
+      tags:
+      - Entities
+      requestBody:
+        required: true
+        content:
+          application/json;application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Entity'
+      responses:
+        '201':
+          description: Created. Contains the resource URI of the created Entity
+        '400':
+          description: Bad request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '409':
+          description: Already exists
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /entities/{entityId}:
+    get:
+      description: Retrieve an specific Entity from an NGSI-LD system. It's possible to specify the Entity attributes to be retrieved by using query parameters
+      operationId: retrieveEntityById
+      tags:
+      - Entities
+      parameters:
+      - $ref: '#/components/parameters/entityId'
+      - $ref: '#/components/parameters/attrs'
+      - $ref: '#/components/parameters/parameters-type'
+      - $ref: '#/components/parameters/options'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Entity'
+              examples:
+                simple:
+                  externalValue: https://forge.etsi.org/rep/NGSI-LD/NGSI-LD/raw/master/examples/Entity-example.json
+        '400':
+          description: Bad request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      description: Removes an specific Entity from an NGSI-LD system
+      operationId: removeEntityById
+      tags:
+      - Entities
+      parameters:
+      - $ref: '#/components/parameters/entityId'
+      - $ref: '#/components/parameters/parameters-type'
+      responses:
+        '204':
+          description: No Content. The entity was removed successfully
+        '400':
+          description: Bad Request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /entities/{entityId}/attrs/:
+    post:
+      description: Append new Entity attributes to an existing Entity within an NGSI-LD system
+      operationId: appendEntityAttrs
+      tags:
+      - Entities
+      parameters:
+      - $ref: '#/components/parameters/entityId'
+      - $ref: '#/components/parameters/parameters-options'
+      requestBody:
+        required: true
+        content:
+          application/json;application/ld+json:
+            schema:
+              $ref: '#/components/schemas/EntityFragment'
+      responses:
+        '204':
+          description: No Content
+        '207':
+          description: Partial Success. Only the attributes included in the response payload were successfully appended
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/UpdateResult'
+        '400':
+          description: Bad request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    patch:
+      description: Update existing Entity attributes within an NGSI-LD system
+      operationId: updateEntityAttrs
+      tags:
+      - Entities
+      parameters:
+      - $ref: '#/components/parameters/entityId'
+      requestBody:
+        required: true
+        content:
+          application/json;application/ld+json:
+            schema:
+              $ref: '#/components/schemas/EntityFragment'
+      responses:
+        '204':
+          description: No Content.
+        '207':
+          description: Partial Success. Only the attributes included in the response payload were successfully updated
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/UpdateResult'
+        '400':
+          description: Bad Request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /entities/{entityId}/attrs/{attrId}:
+    patch:
+      description: Update existing Entity attributes within an NGSI-LD system
+      operationId: partialAttrUpdate
+      tags:
+      - Entities
+      parameters:
+      - $ref: '#/components/parameters/entityId'
+      - $ref: '#/components/parameters/attrId'
+      requestBody:
+        required: true
+        content:
+          application/json;application/ld+json:
+            schema:
+              $ref: '#/components/schemas/EntityFragment'
+      responses:
+        '204':
+          description: No Content.
+        '400':
+          description: Bad Request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      description: Removes an existing Entity attribute within an NGSI-LD system
+      operationId: removeEntityAttr
+      tags:
+      - Entities
+      parameters:
+      - $ref: '#/components/parameters/entityId'
+      - $ref: '#/components/parameters/attrId'
+      responses:
+        '204':
+          description: No Content.
+        '400':
+          description: Bad Request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /entityOperations/create:
+    post:
+      description: Batch Entity creation
+      operationId: batchEntityCreation
+      tags:
+      - Entities
+      requestBody:
+        required: true
+        content:
+          application/json;application/ld+json:
+            schema:
+              $ref: '#/components/schemas/EntityList'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/BatchOperationResult'
+        '400':
+          description: Bad request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /entityOperations/update:
+    post:
+      description: Batch Entity update
+      operationId: batchEntityUpdate
+      tags:
+      - Entities
+      parameters:
+      - name: options
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - noOverwrite
+      requestBody:
+        required: true
+        content:
+          application/json;application/ld+json:
+            schema:
+              $ref: '#/components/schemas/EntityList'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/BatchOperationResult'
+        '400':
+          description: Bad request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /entityOperations/upsert:
+    post:
+      description: Batch Entity upsert
+      operationId: batchEntityUpsert
+      tags:
+      - Entities
+      parameters:
+      - name: options
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - replace
+          - update
+      requestBody:
+        required: true
+        content:
+          application/json;application/ld+json:
+            schema:
+              $ref: '#/components/schemas/EntityList'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/BatchOperationResult'
+        '400':
+          description: Bad request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /entityOperations/delete:
+    post:
+      description: Batch Entity delete
+      operationId: batchEntityDelete
+      tags:
+      - Entities
+      requestBody:
+        required: true
+        content:
+          application/json;application/ld+json:
+            schema:
+              type: array
+              items:
+                type: string
+                format: uri
+              minItems: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/BatchOperationResult'
+        '400':
+          description: Bad request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /v2/entities:
+    get:
+      description: "Retrieves a list of entities that match different criteria by id, type, pattern matching (either id or type)\nand/or those which match a query or geographical query (see [Simple Query Language](#simple_query_language) and \n[Geographical Queries](#geographical_queries)). A given entity has to match all the criteria to be retrieved\n(i.e., the criteria is combined in a logical AND way). Note that pattern matching query parameters are incompatible\n(i.e. mutually exclusive) with their corresponding exact matching parameters, i.e. `idPattern` with `id` and\n`typePattern` with `type`.\nThe response payload is an array containing one object per matching entity. Each entity follows\nthe JSON entity representation format (described in \"JSON Entity Representation\" section).\nResponse code:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      summary: List Entities
+      tags:
+      - Entities
+      operationId: List Entities
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: query
+        required: false
+        type: string
+        description: 'A comma-separated list of elements.
+
+          Retrieve entities whose ID matches one of the elements in the list.
+
+          Incompatible with `idPattern`.'
+      - name: type
+        in: query
+        required: false
+        type: string
+        description: 'comma-separated list of elements.
+
+          Retrieve entities whose type matches one of the elements in the list.
+
+          Incompatible with `typePattern`.'
+      - name: idPattern
+        in: query
+        required: false
+        type: string
+        description: 'A correctly formated regular expression.
+
+          Retrieve entities whose ID matches the regular expression. Incompatible with `id`.'
+      - name: typePattern
+        in: query
+        required: false
+        type: string
+        description: 'A correctly formated regular expression.
+
+          Retrieve entities whose type matches the regular expression. Incompatible with `type`.'
+      - name: q
+        in: query
+        required: false
+        type: string
+        description: 'A query expression, composed of a list of statements
+
+          separated by `;`, i.e., q=statement1;statement2;statement3.
+
+          See [Simple Query Language specification](#simple_query_language).'
+      - name: mq
+        in: query
+        required: false
+        type: string
+        description: 'A query expression for attribute metadata,
+
+          composed of a list of statements separated by `;`, i.e., mq=statement1;statement2;statement3.
+
+          See [Simple Query Language specification](#simple_query_language).'
+      - name: georel
+        in: query
+        required: false
+        type: string
+        description: 'Spatial relationship between matching entities and a
+
+          reference shape. See [Geographical Queries](#geographical_queries).'
+      - name: geometry
+        in: query
+        required: false
+        type: string
+        description: 'Geografical area to which the query is restricted.
+
+          See [Geographical Queries](#geographical_queries).'
+      - name: coords
+        in: query
+        required: false
+        type: string
+        description: 'List of latitude-longitude
+
+          pairs of coordinates separated by '';''. See [Geographical Queries](#geographical_queries).'
+      - name: limit
+        in: query
+        required: false
+        type: number
+        format: double
+        exclusiveMaximum: false
+        exclusiveMinimum: false
+        description: Limits the number of entities to be retrieved
+      - name: offset
+        in: query
+        required: false
+        type: number
+        format: double
+        exclusiveMaximum: false
+        exclusiveMinimum: false
+        description: Establishes the offset from where entities are retrieved
+      - name: attrs
+        in: query
+        required: false
+        type: string
+        description: 'Comma-separated list of attribute names whose data
+
+          are to be included in the response.
+
+          The attributes are retrieved in the order specified by this parameter. If this parameter is
+
+          not included, the attributes are retrieved in arbitrary order.
+
+          See "Filtering out attributes and metadata" section for more detail.'
+      - name: metadata
+        in: query
+        required: false
+        type: string
+        description: 'A list of metadata names to include in the response.
+
+          See "Filtering out attributes and metadata" section for more detail.'
+      - name: orderBy
+        in: query
+        required: false
+        type: string
+        description: 'Criteria for ordering results.
+
+          See "Ordering Results" section for details.'
+      - name: options
+        in: query
+        required: false
+        enum:
+        - count
+        - keyValues
+        - values
+        - unique
+        x-enum-elements:
+        - name: count
+          description: ''
+        - name: keyValues
+          description: ''
+        - name: values
+          description: ''
+        - name: unique
+          description: ''
+        type: string
+        description: Options dictionary
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ListEntitiesResponse'
+          examples:
+            application/json:
+            - type: Room
+              id: DC_S1-D41
+              temperature:
+                value: 35.6
+                type: Number
+                metadata: {}
+            - type: Room
+              id: Boe-Idearium
+              temperature:
+                value: 22.5
+                type: Number
+                metadata: {}
+            - type: Car
+              id: P-9873-K
+              speed:
+                value: 100
+                type: number
+                metadata:
+                  accuracy:
+                    value: 2
+                    type: Number
+                  timestamp:
+                    value: '2015-06-04T07:20:27.378Z'
+                    type: DateTime
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /v2/entities?id=Boe_Idearium&type=Room&idPattern=Bode_.*&typePattern=Room_.*&q=temperature>40&mq=temperature.accuracy<0.9&georel=near&geometry=point&coords=41.390205,2.154007;48.8566,2.3522&limit=20&offset=20&attrs=seatNumber&metadata=accuracy&orderBy=temperature,!speed
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: RAW
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          headers:
+            Content-Type: application/json
+          body: '[ {   "type": "Room",   "id": "DC_S1-D41",   "temperature": {     "value": 35.6,     "type": "Number",     "metadata": {}   } }, {   "type": "Room",   "id": "Boe-Idearium",   "temperature": {     "value": 22.5,     "type": "Number",     "metadata": {}   } }, {   "type": "Car",   "id": "P-9873-K",   "speed": {     "value": 100,     "type": "number",     "metadata": {       "accuracy": {         "value": 2,         "type": "Number"       },       "timestamp": {         "value": "2015-06-04T07:20:27.378Z",         "type": "DateTime"       }     }   } }]'
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: List Entities1
+        x-testDescription: "Retrieves a list of entities that match different criteria by id, type, pattern matching (either id or type)\nand/or those which match a query or geographical query (see [Simple Query Language](#simple_query_language) and \n[Geographical Queries](#geographical_queries)). A given entity has to match all the criteria to be retrieved\n(i.e., the criteria is combined in a logical AND way). Note that pattern matching query parameters are incompatible\n(i.e. mutually exclusive) with their corresponding exact matching parameters, i.e. `idPattern` with `id` and\n`typePattern` with `type`.\nThe response payload is an array containing one object per matching entity. Each entity follows\nthe JSON entity representation format (described in \"JSON Entity Representation\" section).\nResponse code:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      description: "The payload is an object representing the entity to be created. The object follows\nthe JSON entity representation format (described in a \"JSON Entity Representation\" section).\nResponse:\n* Successful operation uses 201 Created (if upsert option is not used) or 204 No Content (if\n  upsert option is used). Response includes a `Location` header with the URL of the\n  created entity.\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      summary: Create Entity
+      tags:
+      - Entities
+      operationId: Create Entity
+      produces:
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/CreateEntityRequest'
+      - name: options
+        in: query
+        required: false
+        enum:
+        - keyValues
+        - upsert
+        x-enum-elements:
+        - name: keyValues
+          description: ''
+        - name: upsert
+          description: ''
+        type: string
+        description: Options dictionary
+      responses:
+        '204':
+          description: ''
+      x-unitTests:
+      - request:
+          method: POST
+          uri: /v2/entities
+          headers:
+            Content-Type: application/json
+          body: '{  "type": "Room",  "id": "Bcn-Welt",  "temperature": {    "value": 21.7  },  "humidity": {    "value": 60  },  "location": {    "value": "41.3763726, 2.1864475",    "type": "geo:point",    "metadata": {      "crs": {        "value": "WGS84"      }    }  }}'
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          headers:
+            Location: /v2/entities/Bcn-Welt?type=Room
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Create Entity1
+        x-testDescription: "The payload is an object representing the entity to be created. The object follows\nthe JSON entity representation format (described in a \"JSON Entity Representation\" section).\nResponse:\n* Successful operation uses 201 Created (if upsert option is not used) or 204 No Content (if\n  upsert option is used). Response includes a `Location` header with the URL of the\n  created entity.\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /v2/entities/{entityId}:
+    get:
+      description: 'The response is an object representing the entity identified by the ID. The object follows
+
+        the JSON entity representation format (described in "JSON Entity Representation" section).
+
+        This operation must return one entity element only, but there may be more than one entity with the
+
+        same ID (e.g. entities with same ID but different types).
+
+        In such case, an error message is returned, with the HTTP status code set to 409 Conflict.
+
+        Response:
+
+        * Successful operation uses 200 OK
+
+        * Errors use a non-2xx and (optionally) an error payload. See subsection on "Error Responses" for more details.'
+      summary: Retrieve Entity
+      tags:
+      - Entities
+      operationId: Retrieve Entity
+      produces:
+      - application/json
+      parameters:
+      - name: entityId
+        in: path
+        required: true
+        type: string
+        description: Id of the entity to be retrieved
+      - name: type
+        in: query
+        required: false
+        type: string
+        description: 'Entity type, to avoid ambiguity in case there are several
+
+          entities with the same entity id.'
+      - name: attrs
+        in: query
+        required: false
+        type: string
+        description: 'Comma-separated list of attribute names whose
+
+          data must be included in the response. The attributes are retrieved in the order specified by
+
+          this parameter. See "Filtering out attributes and metadata" section for more detail.
+
+          If this parameter is not included, the attributes are retrieved in arbitrary order, and all
+
+          the attributes of the entity are included in the response.'
+      - name: metadata
+        in: query
+        required: false
+        type: string
+        description: 'A list of metadata names to include in the response.
+
+          See "Filtering out attributes and metadata" section for more detail.'
+      - name: options
+        in: query
+        required: false
+        enum:
+        - keyValues
+        - values
+        - unique
+        x-enum-elements:
+        - name: keyValues
+          description: ''
+        - name: values
+          description: ''
+        - name: unique
+          description: ''
+        type: string
+        description: Options dictionary
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RetrieveEntityResponse'
+          examples:
+            application/json:
+              type: Room
+              id: Bcn_Welt
+              temperature:
+                value: 21.7
+                type: Number
+              humidity:
+                value: 60
+                type: Number
+              location:
+                value: 41.3763726, 2.1864475
+                type: geo:point
+                metadata:
+                  crs:
+                    value: WGS84
+                    type: Text
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: "Delete the entity.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      summary: Remove Entity
+      tags:
+      - Entities
+      operationId: Remove Entity
+      produces:
+      - application/json
+      parameters:
+      - name: entityId
+        in: path
+        required: true
+        type: string
+        description: Id of the entity to be deleted
+      - name: type
+        in: query
+        required: false
+        type: string
+        description: 'Entity type, to avoid ambiguity in case there are several
+
+          entities with the same entity id.'
+      responses:
+        '204':
+          description: ''
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /v2/entities/{entityId}/attrs:
+    get:
+      description: "This request is similar to retreiving the whole entity, however this one omits the `id` and `type`\nfields.\nJust like the general request of getting an entire entity, this operation must return only one\nentity element. If more than one entity with the same ID is found (e.g. entities with\nsame ID but different type), an error message is returned, with the HTTP status code set to\n409 Conflict.\nResponse:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      summary: Retrieve Entity Attributes
+      tags:
+      - Entities
+      operationId: Retrieve Entity Attributes
+      produces:
+      - application/json
+      parameters:
+      - name: entityId
+        in: path
+        required: true
+        type: string
+        description: Id of the entity to be retrieved
+      - name: type
+        in: query
+        required: false
+        type: string
+        description: 'Entity type, to avoid ambiguity in case there are several
+
+          entities with the same entity id.'
+      - name: attrs
+        in: query
+        required: false
+        type: string
+        description: 'Comma-separated list of attribute names whose
+
+          data are to be included in the response. The attributes are retrieved in the order specified
+
+          by this parameter.
+
+          If this parameter is not included, the attributes are retrieved in arbitrary order, and all
+
+          the attributes of the entity are included in the response.
+
+          See "Filtering out attributes and metadata" section for more detail.'
+      - name: metadata
+        in: query
+        required: false
+        type: string
+        description: 'A list of metadata names to include in the response.
+
+          See "Filtering out attributes and metadata" section for more detail.'
+      - name: options
+        in: query
+        required: false
+        enum:
+        - keyValues
+        - values
+        - unique
+        x-enum-elements:
+        - name: keyValues
+          description: ''
+        - name: values
+          description: ''
+        - name: unique
+          description: ''
+        type: string
+        description: Options dictionary
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RetrieveEntityAttributesResponse'
+          examples:
+            application/json:
+              temperature:
+                value: 21.7
+                type: Number
+              humidity:
+                value: 60
+                type: Number
+              location:
+                value: 41.3763726, 2.1864475
+                type: geo:point
+                metadata:
+                  crs:
+                    value: WGS84
+                    type: Text
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    put:
+      description: "The request payload is an object representing the new entity attributes. The object follows\nthe JSON entity representation format (described in a \"JSON Entity Representation\" above), except\nthat `id` and `type` are not allowed.\nThe attributes previously existing in the entity are removed and replaced by the ones in the\nrequest.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      summary: Replace all entity attributes
+      tags:
+      - Entities
+      operationId: Replace all entity attributes
+      produces:
+      - application/json
+      parameters:
+      - name: entityId
+        in: path
+        required: true
+        type: string
+        description: Id of the entity in question.
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/ReplaceAllEntityAttributesRequest'
+      - name: type
+        in: query
+        required: false
+        type: string
+        description: 'Entity type, to avoid ambiguity in case there are several
+
+          entities with the same entity id.'
+      - name: options
+        in: query
+        required: false
+        enum:
+        - keyValues
+        x-enum-elements:
+        - name: keyValues
+          description: ''
+        type: string
+        description: Operations options
+      responses:
+        '204':
+          description: ''
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      description: "The request payload is an object representing the attributes to append or update. The object follows\nthe JSON entity representation format (described in \"JSON Entity Representation\" section), except\nthat `id` and `type` are not allowed.\nThe entity attributes are updated with the ones in the payload, depending on\nwhether the `append` operation option is used or not.\n* If `append` is not used: the entity attributes are updated (if they previously exist) or appended\n  (if they don't previously exist) with the ones in the payload.\n* If `append` is used (i.e. strict append semantics): all the attributes in the payload not\n  previously existing in the entity are appended. In addition to that, in case some of the\n  attributes in the payload already exist in the entity, an error is returned.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      summary: Update or Append Entity Attributes
+      tags:
+      - Entities
+      operationId: Update or Append Entity Attributes
+      produces:
+      - application/json
+      parameters:
+      - name: entityId
+        in: path
+        required: true
+        type: string
+        description: Entity id to be updated
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/UpdateOrAppendEntityAttributesRequest'
+      - name: type
+        in: query
+        required: false
+        type: string
+        description: 'Entity type, to avoid ambiguity in case there are several
+
+          entities with the same entity id.'
+      - name: options
+        in: query
+        required: false
+        enum:
+        - append
+        - keyValues
+        x-enum-elements:
+        - name: append
+          description: ''
+        - name: keyValues
+          description: ''
+        type: string
+        description: Operations options
+      responses:
+        '204':
+          description: ''
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    patch:
+      description: "The request payload is an object representing the attributes to update. The object follows\nthe JSON entity representation format (described in \"JSON Entity Representation\" section), except\nthat `id` and `type` are not allowed.\nThe entity attributes are updated with the ones in the payload. In addition to that, if one or more\nattributes in the payload doesn't exist in the entity, an error is returned.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      summary: Update Existing Entity Attributes
+      tags:
+      - Entities
+      operationId: Update Existing Entity Attributes
+      produces:
+      - application/json
+      parameters:
+      - name: entityId
+        in: path
+        required: true
+        type: string
+        description: Id of the entity to be updated
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/UpdateExistingEntityAttributesRequest'
+      - name: type
+        in: query
+        required: false
+        type: string
+        description: 'Entity type, to avoid ambiguity in case there are several
+
+          entities with the same entity id.'
+      - name: options
+        in: query
+        required: false
+        enum:
+        - keyValues
+        x-enum-elements:
+        - name: keyValues
+          description: ''
+        type: string
+        description: Operations options
+      responses:
+        '204':
+          description: ''
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+components:
+  schemas:
+    Entity:
+      allOf:
+      - required:
+        - id
+        - type
+      - $ref: '#/components/schemas/EntityFragment'
+    positionArray:
+      description: An array of positions
+      type: array
+      items:
+        $ref: '#/components/schemas/position'
+    LineString:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - LineString
+        coordinates:
+          $ref: '#/components/schemas/lineString'
+    MultiLineString:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiLineString
+        coordinates:
+          type: array
+          items:
+            $ref: '#/components/schemas/lineString'
+    Geometry:
+      description: ' Avalid GeoJSON geometry object'
+      oneOf:
+      - $ref: '#/components/schemas/Point'
+      - $ref: '#/components/schemas/MultiPoint'
+      - $ref: '#/components/schemas/Polygon'
+      - $ref: '#/components/schemas/LineString'
+      - $ref: '#/components/schemas/MultiLineString'
+      - $ref: '#/components/schemas/MultiPolygon'
+    geometry:
+      type: string
+      enum:
+      - Point
+      - MultiPoint
+      - LineString
+      - MultiLineString
+      - Polygon
+      - MultiPolygon
+    Name:
+      type: string
+      pattern: ^((\d|[a-zA-Z]|_)+(:(\d|[a-zA-Z]|_)+)?(#\d+)?)$
+      minLength: 1
+      description: NGSI-LD Name
+    Point:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Point
+        coordinates:
+          $ref: '#/components/schemas/position'
+    Relationship:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Relationship
+        object:
+          type: string
+          format: uri
+        observedAt:
+          $ref: '#/components/schemas/observedAt'
+        createdAt:
+          $ref: '#/components/schemas/createdAt'
+        modifiedAt:
+          $ref: '#/components/schemas/modifiedAt'
+        datasetId:
+          $ref: '#/components/schemas/datasetId'
+        instanceId:
+          $ref: '#/components/schemas/instanceId'
+      required:
+      - type
+      - object
+      additionalProperties:
+        oneOf:
+        - $ref: '#/components/schemas/Property'
+        - $ref: '#/components/schemas/Relationship'
+    georel:
+      oneOf:
+      - type: string
+        enum:
+        - equals
+        - disjoint
+        - intersects
+        - within
+        - contains
+        - overlaps
+      - type: string
+        pattern: ^near;((maxDistance==\d+)|(minDistance==\d+))$
+    Property:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Property
+        value:
+          oneOf:
+          - string
+          - number
+          - boolean
+          - array
+          - object
+        observedAt:
+          $ref: '#/components/schemas/observedAt'
+        createdAt:
+          $ref: '#/components/schemas/createdAt'
+        modifiedAt:
+          $ref: '#/components/schemas/modifiedAt'
+        datasetId:
+          $ref: '#/components/schemas/datasetId'
+        instanceId:
+          $ref: '#/components/schemas/instanceId'
+      required:
+      - type
+      - value
+      additionalProperties:
+        oneOf:
+        - $ref: '#/components/schemas/Property'
+        - $ref: '#/components/schemas/Relationship'
+    NotUpdatedDetails:
+      type: object
+      properties:
+        attributeName:
+          type: string
+        reason:
+          type: string
+          minLength: 1
+    modifiedAt:
+      type: string
+      format: date-time
+    Polygon:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Polygon
+        coordinates:
+          $ref: '#/components/schemas/polygon'
+    EntityFragment:
+      type: object
+      properties:
+        '@context':
+          $ref: '#/components/schemas/LdContext'
+        location:
+          $ref: '#/components/schemas/GeoProperty'
+        observationSpace:
+          $ref: '#/components/schemas/GeoProperty'
+        operationSpace:
+          $ref: '#/components/schemas/GeoProperty'
+        id:
+          type: string
+          format: uri
+        type:
+          $ref: '#/components/schemas/Name'
+        createdAt:
+          $ref: '#/components/schemas/createdAt'
+        modifiedAt:
+          $ref: '#/components/schemas/modifiedAt'
+      additionalProperties:
+        oneOf:
+        - $ref: '#/components/schemas/Property'
+        - $ref: '#/components/schemas/Relationship'
+        - $ref: '#/components/schemas/GeoProperty'
+    position:
+      description: A single position
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        type: number
+      additionalProperties: false
+    BatchEntityError:
+      type: object
+      properties:
+        entityId:
+          type: string
+          format: uri
+        error:
+          $ref: '#/components/schemas/ProblemDetails'
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        detail:
+          type: string
+      required:
+      - type
+    linearRing:
+      description: An array of four positions where the first equals the last
+      allOf:
+      - $ref: '#/components/schemas/positionArray'
+      - minItems: 4
+    MultiPoint:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiPoint
+        coordinates:
+          $ref: '#/components/schemas/positionArray'
+    datasetId:
+      type: string
+      format: uri
+    coordinates:
+      oneOf:
+      - $ref: '#/components/schemas/position'
+      - $ref: '#/components/schemas/positionArray'
+      - $ref: '#/components/schemas/lineString'
+      - $ref: '#/components/schemas/polygon'
+    lineString:
+      description: An array of two or more positions
+      allOf:
+      - $ref: '#/components/schemas/positionArray'
+      - minItems: 2
+    EntityList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Entity'
+    polygon:
+      description: An array of linear rings
+      type: array
+      items:
+        $ref: '#/components/schemas/linearRing'
+    UpdateResult:
+      type: object
+      properties:
+        updated:
+          type: array
+          items:
+            type: string
+        notUpdated:
+          type: array
+          items:
+            $ref: '#/components/schemas/NotUpdatedDetails'
+    GeoProperty:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - GeoProperty
+        value:
+          $ref: '#/components/schemas/Geometry'
+        observedAt:
+          $ref: '#/components/schemas/observedAt'
+        createdAt:
+          $ref: '#/components/schemas/createdAt'
+        modifiedAt:
+          $ref: '#/components/schemas/modifiedAt'
+        datasetId:
+          $ref: '#/components/schemas/datasetId'
+        instanceId:
+          $ref: '#/components/schemas/instanceId'
+      required:
+      - type
+      - value
+      additionalProperties:
+        oneOf:
+        - $ref: '#/components/schemas/Property'
+        - $ref: '#/components/schemas/Relationship'
+    instanceId:
+      type: string
+      format: uri
+    observedAt:
+      type: string
+      format: date-time
+    MultiPolygon:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiPolygon
+        coordinates:
+          type: array
+          items:
+            $ref: '#/components/schemas/polygon'
+    LdContext:
+      oneOf:
+      - type: object
+      - type: string
+        format: uri
+      - type: array
+        minItems: 1
+        items:
+          oneOf:
+          - type: string
+            format: uri
+          - type: object
+    BatchOperationResult:
+      type: object
+      properties:
+        success:
+          type: array
+          items:
+            type: string
+            format: uri
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchEntityError'
+    createdAt:
+      type: string
+      format: date-time
+  parameters:
+    coordinates:
+      name: coordinates
+      description: Coordinates serialized as a string
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/coordinates'
+    entityId:
+      name: entityId
+      description: Entity Id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uri
+    geoproperty:
+      name: geoproperty
+      description: The name of the property that contains the geo-spatial data that will be used to resolve the geoquery
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+    type:
+      name: type
+      description: Comma separated list of Entity type names to be retrieved
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+    id:
+      name: id
+      description: Comma separated list of URIs to be retrieved
+      in: query
+      required: false
+      schema:
+        type: string
+        format: uri
+    options:
+      name: options
+      description: Options dictionary
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - keyValues
+        - sysAttrs
+    attrs:
+      name: attrs
+      description: Comma separated list of attribute names (properties or relationships) to be retrieved
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+    attrId:
+      name: attrId
+      description: Attribute Id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Name'
+    q:
+      name: q
+      description: Query
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+    idPattern:
+      name: idPattern
+      description: Regular expression that must be matched by Entity ids
+      in: query
+      required: false
+      schema:
+        type: string
+        format: regexp
+    geometry:
+      name: geometry
+      description: Geometry
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/geometry'
+    csf:
+      name: csf
+      description: Context Source Filter
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+    georel:
+      name: georel
+      description: Geo-relationship
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/georel'
+    parameters-type:
+      name: type
+      description: Entity Type
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/Name'
+    parameters-options:
+      name: options
+      description: Indicates that no attribute overwrite shall be performed
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - noOverwrite
+    limit:
+      name: limit
+      description: Pagination limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+definitions:
+  UpdateOrAppendEntityAttributesRequest:
+    title: Update or Append Entity Attributes request
+    type: object
+    properties:
+      ambientNoise:
+        description: ''
+        example:
+          value: 31.5
+        type: object
+    required:
+    - ambientNoise
+  ReplaceAllEntityAttributesRequest:
+    title: Replace all entity attributes request
+    type: object
+    properties:
+      temperature:
+        description: ''
+        example:
+          value: 25.5
+        type: object
+      seatNumber:
+        description: ''
+        example:
+          value: 6
+        type: object
+    required:
+    - temperature
+    - seatNumber
+  RetrieveEntityAttributesResponse:
+    title: Retrieve Entity Attributes response
+    example:
+      temperature:
+        value: 21.7
+        type: Number
+      humidity:
+        value: 60
+        type: Number
+      location:
+        value: 41.3763726, 2.1864475
+        type: geo:point
+        metadata:
+          crs:
+            value: WGS84
+            type: Text
+    type: object
+    properties:
+      temperature:
+        description: ''
+        example:
+          value: 21.7
+          type: Number
+        type: object
+      humidity:
+        description: ''
+        example:
+          value: 60
+          type: Number
+        type: object
+      location:
+        description: ''
+        example:
+          value: 41.3763726, 2.1864475
+          type: geo:point
+          metadata:
+            crs:
+              value: WGS84
+              type: Text
+        type: object
+    required:
+    - temperature
+    - humidity
+    - location
+  CreateEntityRequest:
+    title: Create Entity request
+    example:
+      type: Room
+      id: Bcn-Welt
+      temperature:
+        value: 21.7
+      humidity:
+        value: 60
+      location:
+        value: 41.3763726, 2.1864475
+        type: geo:point
+        metadata:
+          crs:
+            value: WGS84
+    type: object
+    properties:
+      type:
+        description: ''
+        example: Room
+        type: string
+      id:
+        description: ''
+        example: Bcn-Welt
+        type: string
+      temperature:
+        description: ''
+        example:
+          value: 21.7
+        type: object
+      humidity:
+        description: ''
+        example:
+          value: 60
+        type: object
+      location:
+        description: ''
+        example:
+          value: 41.3763726, 2.1864475
+          type: geo:point
+          metadata:
+            crs:
+              value: WGS84
+        type: object
+    required:
+    - type
+    - id
+    - temperature
+    - humidity
+    - location
+  RetrieveEntityResponse:
+    title: Retrieve Entity response
+    example:
+      type: Room
+      id: Bcn_Welt
+      temperature:
+        value: 21.7
+        type: Number
+      humidity:
+        value: 60
+        type: Number
+      location:
+        value: 41.3763726, 2.1864475
+        type: geo:point
+        metadata:
+          crs:
+            value: WGS84
+            type: Text
+    type: object
+    properties:
+      type:
+        description: ''
+        example: Room
+        type: string
+      id:
+        description: ''
+        example: Bcn_Welt
+        type: string
+      temperature:
+        description: ''
+        example:
+          value: 21.7
+          type: Number
+        type: object
+      humidity:
+        description: ''
+        example:
+          value: 60
+          type: Number
+        type: object
+      location:
+        description: ''
+        example:
+          value: 41.3763726, 2.1864475
+          type: geo:point
+          metadata:
+            crs:
+              value: WGS84
+              type: Text
+        type: object
+    required:
+    - type
+    - id
+    - temperature
+    - humidity
+    - location
+  UpdateExistingEntityAttributesRequest:
+    title: Update Existing Entity Attributes request
+    type: object
+    properties:
+      temperature:
+        description: ''
+        example:
+          value: 25.5
+        type: object
+      seatNumber:
+        description: ''
+        example:
+          value: 6
+        type: object
+    required:
+    - temperature
+    - seatNumber
+  ListEntitiesResponse:
+    title: List Entities response
+    example:
+      type: Room
+      id: DC_S1-D41
+      temperature:
+        value: 35.6
+        type: Number
+        metadata: {}
+    type: object
+    properties:
+      type:
+        description: ''
+        example: Room
+        type: string
+      id:
+        description: ''
+        example: DC_S1-D41
+        type: string
+      temperature:
+        description: ''
+        example:
+          value: 35.6
+          type: Number
+          metadata: {}
+        type: object
+      speed:
+        description: ''
+        example:
+          value: 100
+          type: number
+          metadata:
+            accuracy:
+              value: 2
+              type: Number
+            timestamp:
+              value: '2015-06-04T07:20:27.378Z'
+              type: DateTime
+        type: object
+    required:
+    - type
+    - id
+externalDocs:
+  description: Find out more about the ETSI ISG Context Information Management
+  url: https://portal.etsi.org/tb.aspx?tbid=854&SubTB=854

@@ -1,0 +1,401 @@
+openapi: 3.0.3
+info:
+  description: This OAS file describes the NGSI-LD API defined by the ETSI ISG CIM group. This Cross-domain Context Information Management API allows to provide, consume and subscribe to context information in multiple scenarios and involving multiple stakeholders
+  version: latest
+  title: ETSI ISG CIM / NGSI-LD API Entry Point Context Subscription API
+  contact:
+    email: NGSI-LD@etsi.org
+tags:
+- name: Context Subscription
+paths:
+  /subscriptions/:
+    get:
+      description: Retrieves the subscriptions available in an NGSI-LD system
+      operationId: retrieveSubscriptions
+      tags:
+      - Context Subscription
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionList'
+              examples:
+                simple:
+                  externalValue: https://forge.etsi.org/rep/NGSI-LD/NGSI-LD/raw/master/examples/SubscriptionList-example.json
+        '400':
+          description: Bad request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    post:
+      description: Creates a new Subscription within an NGSI-LD system
+      operationId: createSubscription
+      tags:
+      - Context Subscription
+      requestBody:
+        required: true
+        content:
+          application/json;application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+      responses:
+        '201':
+          description: Created. Contains the resource URI of the created Subscription
+        '400':
+          description: Bad request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '409':
+          description: Already exists
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /subscriptions/{subscriptionId}:
+    get:
+      description: Retrieves a specific Subscription from an NGSI-LD system
+      operationId: retrieveSubscriptionById
+      tags:
+      - Context Subscription
+      parameters:
+      - $ref: '#/components/parameters/subscriptionId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+              examples:
+                simple:
+                  externalValue: https://forge.etsi.org/rep/NGSI-LD/NGSI-LD/raw/master/examples/Subscription-example_C.4.json
+        '400':
+          description: Bad request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    patch:
+      description: Updates a specific Subscription within an NGSI-LD system
+      operationId: updateSubscription
+      tags:
+      - Context Subscription
+      parameters:
+      - $ref: '#/components/parameters/subscriptionId'
+      requestBody:
+        required: true
+        content:
+          application/json;application/ld+json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionFragment'
+      responses:
+        '204':
+          description: No Content. The Subscription was updated successfully
+        '400':
+          description: Bad Request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    delete:
+      description: Removes a specific Subscription from an NGSI-LD system
+      operationId: removeSubscription
+      tags:
+      - Context Subscription
+      parameters:
+      - $ref: '#/components/parameters/subscriptionId'
+      responses:
+        '204':
+          description: No Content. The Subscription was removed successfully
+        '400':
+          description: Bad Request
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json;application/ld+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+components:
+  schemas:
+    positionArray:
+      description: An array of positions
+      type: array
+      items:
+        $ref: '#/components/schemas/position'
+    geometry:
+      type: string
+      enum:
+      - Point
+      - MultiPoint
+      - LineString
+      - MultiLineString
+      - Polygon
+      - MultiPolygon
+    Name:
+      type: string
+      pattern: ^((\d|[a-zA-Z]|_)+(:(\d|[a-zA-Z]|_)+)?(#\d+)?)$
+      minLength: 1
+      description: NGSI-LD Name
+    georel:
+      oneOf:
+      - type: string
+        enum:
+        - equals
+        - disjoint
+        - intersects
+        - within
+        - contains
+        - overlaps
+      - type: string
+        pattern: ^near;((maxDistance==\d+)|(minDistance==\d+))$
+    SubscriptionFragment:
+      type: object
+      properties:
+        '@context':
+          $ref: '#/components/schemas/LdContext'
+        entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntityInfo'
+          minItems: 1
+        name:
+          type: string
+          minLength: 1
+        description:
+          type: string
+          minLength: 1
+        watchedAttributes:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/Name'
+          uniqueItems: true
+        timeInterval:
+          type: number
+          minimum: 0
+        expires:
+          type: string
+          format: date-time
+        isActive:
+          type: boolean
+        throttling:
+          type: number
+          minimum: 1
+        q:
+          type: string
+        geoQ:
+          $ref: '#/components/schemas/GeoQuery'
+        csf:
+          type: string
+    modifiedAt:
+      type: string
+      format: date-time
+    position:
+      description: A single position
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        type: number
+      additionalProperties: false
+    GeoQuery:
+      type: object
+      required:
+      - geometry
+      - coordinates
+      - georel
+      properties:
+        georel:
+          $ref: '#/components/schemas/georel'
+        coordinates:
+          $ref: '#/components/schemas/coordinates'
+        geometry:
+          $ref: '#/components/schemas/geometry'
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        detail:
+          type: string
+      required:
+      - type
+    NotificationParams:
+      type: object
+      properties:
+        attributes:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            minLength: 1
+          uniqueItems: true
+        format:
+          type: string
+        endpoint:
+          $ref: '#/components/schemas/Endpoint'
+        status:
+          type: string
+          enum:
+          - ok
+          - failed
+        timesSent:
+          type: number
+          minimum: 1
+        lastNotification:
+          type: string
+          format: date-time
+        lastFailure:
+          type: string
+          format: date-time
+        lastSuccess:
+          type: string
+          format: date-time
+      required:
+      - endpoint
+    Subscription:
+      allOf:
+      - $ref: '#/components/schemas/SubscriptionFragment'
+      - type: object
+        properties:
+          id:
+            type: string
+            format: uri
+          type:
+            type: string
+            enum:
+            - Subscription
+          notification:
+            $ref: '#/components/schemas/NotificationParams'
+          status:
+            type: string
+            enum:
+            - active
+            - paused
+            - expired
+          createdAt:
+            $ref: '#/components/schemas/createdAt'
+          modifiedAt:
+            $ref: '#/components/schemas/modifiedAt'
+        allOf:
+        - required:
+          - id
+          - type
+          - notification
+        - anyOf:
+          - required:
+            - entities
+          - required:
+            - watchedAttributes
+    linearRing:
+      description: An array of four positions where the first equals the last
+      allOf:
+      - $ref: '#/components/schemas/positionArray'
+      - minItems: 4
+    coordinates:
+      oneOf:
+      - $ref: '#/components/schemas/position'
+      - $ref: '#/components/schemas/positionArray'
+      - $ref: '#/components/schemas/lineString'
+      - $ref: '#/components/schemas/polygon'
+    lineString:
+      description: An array of two or more positions
+      allOf:
+      - $ref: '#/components/schemas/positionArray'
+      - minItems: 2
+    polygon:
+      description: An array of linear rings
+      type: array
+      items:
+        $ref: '#/components/schemas/linearRing'
+    SubscriptionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Subscription'
+    Endpoint:
+      type: object
+      required:
+      - uri
+      properties:
+        uri:
+          type: string
+          format: uri
+        accept:
+          type: string
+          enum:
+          - application/json
+          - application/ld+json
+    LdContext:
+      oneOf:
+      - type: object
+      - type: string
+        format: uri
+      - type: array
+        minItems: 1
+        items:
+          oneOf:
+          - type: string
+            format: uri
+          - type: object
+    createdAt:
+      type: string
+      format: date-time
+    EntityInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uri
+        type:
+          $ref: '#/components/schemas/Name'
+        idPattern:
+          type: string
+          format: regex
+      required:
+      - type
+  parameters:
+    limit:
+      name: limit
+      description: Pagination limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+    subscriptionId:
+      name: subscriptionId
+      description: Subscription Id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uri
+externalDocs:
+  description: Find out more about the ETSI ISG Context Information Management
+  url: https://portal.etsi.org/tb.aspx?tbid=854&SubTB=854

@@ -1,0 +1,491 @@
+openapi: 3.0.3
+info:
+  description: This OAS file describes the NGSI-LD API defined by the ETSI ISG CIM group. This Cross-domain Context Information Management API allows to provide, consume and subscribe to context information in multiple scenarios and involving multiple stakeholders
+  version: latest
+  title: ETSI ISG CIM / NGSI-LD API Entry Point Registrations API
+  contact:
+    email: NGSI-LD@etsi.org
+tags:
+- name: Registrations
+paths:
+  /v2/registrations:
+    get:
+      description: Lists all the context provider registrations present in the system.
+      summary: List Registrations
+      tags:
+      - Registrations
+      operationId: List Registrations
+      produces:
+      - application/json
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        type: number
+        format: double
+        exclusiveMaximum: false
+        exclusiveMinimum: false
+        description: Limit the number of registrations to be retrieved
+      - name: offset
+        in: query
+        required: false
+        type: number
+        format: double
+        exclusiveMaximum: false
+        exclusiveMinimum: false
+        description: Skip a number of registrations
+      - name: options
+        in: query
+        required: false
+        enum:
+        - count
+        x-enum-elements:
+        - name: count
+          description: ''
+        type: string
+        description: Options dictionary
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ListRegistrationsResponse'
+          examples:
+            application/json:
+            - id: abcdefg
+              description: Example Context Source
+              dataProvided:
+                entities:
+                - id: Bcn_Welt
+                  type: Room
+                attrs:
+                - temperature
+              provider:
+                http:
+                  url: http://contextsource.example.org
+                supportedForwardingMode: all
+              expires: '2017-10-31T12:00:00'
+              status: active
+              forwardingInformation:
+                timesSent: 12
+                lastForwarding: '2017-10-06T16:00:00Z'
+                lastSuccess: '2017-10-06T16:00:00Z'
+                lastFailure: '2017-10-05T16:00:00Z'
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /v2/registrations?limit=10&offset=20
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: RAW
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          headers: {}
+          body: '[  {    "id": "abcdefg",    "description": "Example Context Source",    "dataProvided": {      "entities": [        {          "id": "Bcn_Welt",          "type": "Room"        }      ],      "attrs": [        "temperature"      ]    },    "provider": {      "http": {        "url": "http://contextsource.example.org"      },      "supportedForwardingMode": "all"    },    "expires": "2017-10-31T12:00:00",    "status": "active",    "forwardingInformation": {      "timesSent": 12,      "lastForwarding": "2017-10-06T16:00:00.00Z",      "lastSuccess": "2017-10-06T16:00:00.00Z",      "lastFailure": "2017-10-05T16:00:00.00Z"    }  }]'
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: List Registrations1
+        x-testDescription: Lists all the context provider registrations present in the system.
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      description: "Creates a new context provider registration. This is typically used for binding context sources\nas providers of certain data.\nThe registration is represented by a JSON object as described at the beginning of this section.\nResponse:\n* Successful operation uses 201 Created\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      summary: Create Registration
+      tags:
+      - Registrations
+      operationId: Create Registration
+      produces:
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/CreateRegistrationRequest'
+      responses:
+        '201':
+          description: ''
+      x-unitTests:
+      - request:
+          method: POST
+          uri: /v2/registrations
+          headers:
+            Content-Type: application/json
+          body: '{  "description": "Relative Humidity Context Source",  "dataProvided": {    "entities": [      {        "id": "room2",        "type": "Room"      }    ],    "attrs": [      "relativeHumidity"    ]  },  "provider": {    "http":{       "url": "http://localhost:1234"    }  }}'
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          headers:
+            Location: /v2/registrations/abcde98765
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Create Registration1
+        x-testDescription: "Creates a new context provider registration. This is typically used for binding context sources\nas providers of certain data.\nThe registration is represented by a JSON object as described at the beginning of this section.\nResponse:\n* Successful operation uses 201 Created\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /v2/registrations/{registrationId}:
+    get:
+      description: "The response is the registration represented by a JSON object as described at the beginning of this\nsection.\nResponse:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      summary: Retrieve Registration
+      tags:
+      - Registrations
+      operationId: Retrieve Registration
+      produces:
+      - application/json
+      parameters:
+      - name: registrationId
+        in: path
+        required: true
+        type: string
+        description: registration Id.
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RetrieveRegistrationResponse'
+          examples:
+            application/json:
+              id: abcdefg
+              description: Example Context Source
+              dataProvided:
+                entities:
+                - id: Bcn_Welt
+                  type: Room
+                attrs:
+                - temperature
+              provider:
+                http:
+                  url: http://contextsource.example.org
+                supportedForwardingMode: all
+              expires: '2017-10-31T12:00:00'
+              status: failed
+              forwardingInformation:
+                timesSent: 12
+                lastForwarding: '2017-10-06T16:00:00Z'
+                lastFailure: '2017-10-06T16:00:00Z'
+                lastSuccess: '2017-10-05T18:25:00Z'
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /v2/registrations/abcdef
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: RAW
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          headers:
+            Content-Type: application/json
+          body: '  {        "id": "abcdefg",        "description": "Example Context Source",        "dataProvided": {          "entities": [            {              "id": "Bcn_Welt",              "type": "Room"            }          ],          "attrs": [            "temperature"          ]        },        "provider": {          "http": {            "url": "http://contextsource.example.org"          },          "supportedForwardingMode": "all"        },        "expires": "2017-10-31T12:00:00",        "status": "failed",        "forwardingInformation": {          "timesSent": 12,          "lastForwarding": "2017-10-06T16:00:00.00Z",          "lastFailure": "2017-10-06T16:00:00.00Z",          "lastSuccess": "2017-10-05T18:25:00.00Z",        }  }      '
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Retrieve Registration1
+        x-testDescription: "The response is the registration represented by a JSON object as described at the beginning of this\nsection.\nResponse:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    delete:
+      description: "Cancels a context provider registration.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      summary: Delete Registration
+      tags:
+      - Registrations
+      operationId: Delete Registration
+      produces:
+      - application/json
+      parameters:
+      - name: registrationId
+        in: path
+        required: true
+        type: string
+        description: registration Id.
+      responses:
+        '204':
+          description: ''
+      x-unitTests:
+      - request:
+          method: DELETE
+          uri: /v2/registrations/abcdef
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Delete Registration1
+        x-testDescription: "Cancels a context provider registration.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    patch:
+      description: "Only the fields included in the request are updated in the registration.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      summary: Update Registration
+      tags:
+      - Registrations
+      operationId: Update Registration
+      produces:
+      - application/json
+      parameters:
+      - name: registrationId
+        in: path
+        required: true
+        type: string
+        description: registration Id.
+      - name: Content-Type
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/UpdateRegistrationRequest'
+      responses:
+        '204':
+          description: ''
+      x-unitTests:
+      - request:
+          method: PATCH
+          uri: /v2/registrations/abcdef
+          headers:
+            Content-Type: application/json
+          body: '{    "expires": "2017-10-04T00:00:00"}'
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: NONE
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          headers: {}
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Update Registration1
+        x-testDescription: "Only the fields included in the request are updated in the registration.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+definitions:
+  UpdateRegistrationRequest:
+    title: Update Registration request
+    example:
+      expires: '2017-10-04T00:00:00'
+    type: object
+    properties:
+      expires:
+        description: ''
+        example: 10/4/2017 12:00:00 AM
+        type: string
+    required:
+    - expires
+  CreateRegistrationRequest:
+    title: Create Registration request
+    example:
+      description: Relative Humidity Context Source
+      dataProvided:
+        entities:
+        - id: room2
+          type: Room
+        attrs:
+        - relativeHumidity
+      provider:
+        http:
+          url: http://localhost:1234
+    type: object
+    properties:
+      description:
+        description: ''
+        example: Relative Humidity Context Source
+        type: string
+      dataProvided:
+        description: ''
+        example:
+          entities:
+          - id: room2
+            type: Room
+          attrs:
+          - relativeHumidity
+        type: object
+      provider:
+        description: ''
+        example:
+          http:
+            url: http://localhost:1234
+        type: object
+    required:
+    - description
+    - dataProvided
+    - provider
+  RetrieveRegistrationResponse:
+    title: Retrieve Registration response
+    example:
+      id: abcdefg
+      description: Example Context Source
+      dataProvided:
+        entities:
+        - id: Bcn_Welt
+          type: Room
+        attrs:
+        - temperature
+      provider:
+        http:
+          url: http://contextsource.example.org
+        supportedForwardingMode: all
+      expires: '2017-10-31T12:00:00'
+      status: failed
+      forwardingInformation:
+        timesSent: 12
+        lastForwarding: '2017-10-06T16:00:00Z'
+        lastFailure: '2017-10-06T16:00:00Z'
+        lastSuccess: '2017-10-05T18:25:00Z'
+    type: object
+    properties:
+      id:
+        description: ''
+        example: abcdefg
+        type: string
+      description:
+        description: ''
+        example: Example Context Source
+        type: string
+      dataProvided:
+        description: ''
+        example:
+          entities:
+          - id: Bcn_Welt
+            type: Room
+          attrs:
+          - temperature
+        type: object
+      provider:
+        description: ''
+        example:
+          http:
+            url: http://contextsource.example.org
+          supportedForwardingMode: all
+        type: object
+      expires:
+        description: ''
+        example: 10/31/2017 12:00:00 PM
+        type: string
+      status:
+        description: ''
+        example: failed
+        type: string
+      forwardingInformation:
+        description: ''
+        example:
+          timesSent: 12
+          lastForwarding: '2017-10-06T16:00:00Z'
+          lastFailure: '2017-10-06T16:00:00Z'
+          lastSuccess: '2017-10-05T18:25:00Z'
+        type: object
+    required:
+    - id
+    - description
+    - dataProvided
+    - provider
+    - expires
+    - status
+    - forwardingInformation
+  ListRegistrationsResponse:
+    title: List Registrations response
+    example:
+      id: abcdefg
+      description: Example Context Source
+      dataProvided:
+        entities:
+        - id: Bcn_Welt
+          type: Room
+        attrs:
+        - temperature
+      provider:
+        http:
+          url: http://contextsource.example.org
+        supportedForwardingMode: all
+      expires: '2017-10-31T12:00:00'
+      status: active
+      forwardingInformation:
+        timesSent: 12
+        lastForwarding: '2017-10-06T16:00:00Z'
+        lastSuccess: '2017-10-06T16:00:00Z'
+        lastFailure: '2017-10-05T16:00:00Z'
+    type: object
+    properties:
+      id:
+        description: ''
+        example: abcdefg
+        type: string
+      description:
+        description: ''
+        example: Example Context Source
+        type: string
+      dataProvided:
+        description: ''
+        example:
+          entities:
+          - id: Bcn_Welt
+            type: Room
+          attrs:
+          - temperature
+        type: object
+      provider:
+        description: ''
+        example:
+          http:
+            url: http://contextsource.example.org
+          supportedForwardingMode: all
+        type: object
+      expires:
+        description: ''
+        example: 10/31/2017 12:00:00 PM
+        type: string
+      status:
+        description: ''
+        example: active
+        type: string
+      forwardingInformation:
+        description: ''
+        example:
+          timesSent: 12
+          lastForwarding: '2017-10-06T16:00:00Z'
+          lastSuccess: '2017-10-06T16:00:00Z'
+          lastFailure: '2017-10-05T16:00:00Z'
+        type: object
+    required:
+    - id
+    - description
+    - dataProvided
+    - provider
+    - expires
+    - status
+    - forwardingInformation
+externalDocs:
+  description: Find out more about the ETSI ISG Context Information Management
+  url: https://portal.etsi.org/tb.aspx?tbid=854&SubTB=854

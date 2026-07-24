@@ -1,0 +1,246 @@
+openapi: 3.0.3
+info:
+  description: This OAS file describes the NGSI-LD API defined by the ETSI ISG CIM group. This Cross-domain Context Information Management API allows to provide, consume and subscribe to context information in multiple scenarios and involving multiple stakeholders
+  version: latest
+  title: ETSI ISG CIM / NGSI-LD API Entry Point Types API
+  contact:
+    email: NGSI-LD@etsi.org
+tags:
+- name: Types
+paths:
+  /v2/types/:
+    get:
+      description: "If the `values` option is not in use, this operation returns a JSON array with the entity types.\nEach element is a JSON object with information about the type:\n* `type` : the entity type name.\n* `attrs` : the set of attribute names along with all the entities of such type, represented in\n  a JSON object whose keys are the attribute names and whose values contain information of such\n  attributes (in particular a list of the types used by attributes with that name along with all the\n  entities).\n* `count` : the number of entities belonging to that type.\nIf the `values` option is used, the operation returns a JSON array with a list of entity type\nnames as strings.\nResults are ordered by entity `type` in alphabetical order.\nResponse code:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      summary: List Entity Types
+      tags:
+      - Types
+      operationId: List Entity Types
+      produces:
+      - application/json
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        type: number
+        format: double
+        exclusiveMaximum: false
+        exclusiveMinimum: false
+        description: Limit the number of types to be retrieved.
+      - name: offset
+        in: query
+        required: false
+        type: number
+        format: double
+        exclusiveMaximum: false
+        exclusiveMinimum: false
+        description: Skip a number of records.
+      - name: options
+        in: query
+        required: false
+        enum:
+        - count
+        - values
+        x-enum-elements:
+        - name: count
+          description: ''
+        - name: values
+          description: ''
+        type: string
+        description: Options dictionary.
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ListEntityTypesResponse'
+          examples:
+            application/json:
+            - type: Car
+              attrs:
+                speed:
+                  types:
+                  - Number
+                fuel:
+                  types:
+                  - gasoline
+                  - diesel
+                temperature:
+                  types:
+                  - urn:phenomenum:temperature
+              count: 12
+            - type: Room
+              attrs:
+                pressure:
+                  types:
+                  - Number
+                humidity:
+                  types:
+                  - percentage
+                temperature:
+                  types:
+                  - urn:phenomenum:temperature
+              count: 7
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /v2/types/?limit=10&offset=20
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: RAW
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          headers:
+            Content-Type: application/json
+          body: '[  {    "type": "Car",    "attrs": {      "speed": {        "types": [ "Number" ]      },      "fuel": {        "types": [ "gasoline", "diesel" ]      },      "temperature": {        "types": [ "urn:phenomenum:temperature" ]      }    },    "count": 12  },  {    "type": "Room",    "attrs": {      "pressure": {        "types": [ "Number" ]      },      "humidity": {        "types": [ "percentage" ]      },      "temperature": {        "types": [ "urn:phenomenum:temperature" ]      }    },    "count": 7  }]'
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: List Entity Types1
+        x-testDescription: "If the `values` option is not in use, this operation returns a JSON array with the entity types.\nEach element is a JSON object with information about the type:\n* `type` : the entity type name.\n* `attrs` : the set of attribute names along with all the entities of such type, represented in\n  a JSON object whose keys are the attribute names and whose values contain information of such\n  attributes (in particular a list of the types used by attributes with that name along with all the\n  entities).\n* `count` : the number of entities belonging to that type.\nIf the `values` option is used, the operation returns a JSON array with a list of entity type\nnames as strings.\nResults are ordered by entity `type` in alphabetical order.\nResponse code:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /v2/types/{entityType}:
+    get:
+      description: "This operation returns a JSON object with information about the type:\n* `attrs` : the set of attribute names along with all the entities of such type, represented in\n  a JSON object whose keys are the attribute names and whose values contain information of such\n  attributes (in particular a list of the types used by attributes with that name along with all the\n  entities).\n* `count` : the number of entities belonging to that type.\nResponse code:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      summary: Retrieve entity type
+      tags:
+      - Types
+      operationId: Retrieve entity type
+      produces:
+      - application/json
+      parameters:
+      - name: entityType
+        in: path
+        required: true
+        type: string
+        description: Entity Type
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RetrieveEntityTypeResponse'
+          examples:
+            application/json:
+              attrs:
+                pressure:
+                  types:
+                  - Number
+                humidity:
+                  types:
+                  - percentage
+                temperature:
+                  types:
+                  - urn:phenomenum:temperature
+              count: 7
+      x-unitTests:
+      - request:
+          method: GET
+          uri: /v2/types/Room
+        expectedResponse:
+          x-allowExtraHeaders: true
+          x-bodyMatchMode: RAW
+          x-arrayOrderedMatching: false
+          x-arrayCheckCount: false
+          x-matchResponseSchema: true
+          headers:
+            Content-Type: application/json
+          body: '  {    "attrs": {      "pressure": {        "types": [ "Number" ]      },      "humidity": {        "types": [ "percentage" ]      },      "temperature": {        "types": [ "urn:phenomenum:temperature" ]      }    },    "count": 7  }'
+        x-testShouldPass: true
+        x-testEnabled: true
+        x-testName: Retrieve entity type1
+        x-testDescription: "This operation returns a JSON object with information about the type:\n* `attrs` : the set of attribute names along with all the entities of such type, represented in\n  a JSON object whose keys are the attribute names and whose values contain information of such\n  attributes (in particular a list of the types used by attributes with that name along with all the\n  entities).\n* `count` : the number of entities belonging to that type.\nResponse code:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+definitions:
+  RetrieveEntityTypeResponse:
+    title: Retrieve entity type response
+    example:
+      attrs:
+        pressure:
+          types:
+          - Number
+        humidity:
+          types:
+          - percentage
+        temperature:
+          types:
+          - urn:phenomenum:temperature
+      count: 7
+    type: object
+    properties:
+      attrs:
+        description: ''
+        example:
+          pressure:
+            types:
+            - Number
+          humidity:
+            types:
+            - percentage
+          temperature:
+            types:
+            - urn:phenomenum:temperature
+        type: object
+      count:
+        description: ''
+        example: 7
+        type: integer
+        format: int32
+    required:
+    - attrs
+    - count
+  ListEntityTypesResponse:
+    title: List Entity Types response
+    example:
+      type: Car
+      attrs:
+        speed:
+          types:
+          - Number
+        fuel:
+          types:
+          - gasoline
+          - diesel
+        temperature:
+          types:
+          - urn:phenomenum:temperature
+      count: 12
+    type: object
+    properties:
+      type:
+        description: ''
+        example: Car
+        type: string
+      attrs:
+        description: ''
+        example:
+          speed:
+            types:
+            - Number
+          fuel:
+            types:
+            - gasoline
+            - diesel
+          temperature:
+            types:
+            - urn:phenomenum:temperature
+        type: object
+      count:
+        description: ''
+        example: 12
+        type: integer
+        format: int32
+    required:
+    - type
+    - attrs
+    - count
+externalDocs:
+  description: Find out more about the ETSI ISG Context Information Management
+  url: https://portal.etsi.org/tb.aspx?tbid=854&SubTB=854
