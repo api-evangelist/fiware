@@ -6,7 +6,19 @@ description: >-
   consume, and subscribe to context information in smart cities, smart industry, smart agriculture, and smart energy
   scenarios.
 kind: standard
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/fiware.png
 access: 3rd-Party
 created: '2024-07-02'
 modified: '2026-05-19'
@@ -22,46 +34,231 @@ tags:
 url: https://raw.githubusercontent.com/api-evangelist/fiware/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-  - aid: fiware:ngsi-ld
-    name: FIWARE NGSI-LD API
-    description: >-
-      The NGSI-LD API defined by ETSI ISG CIM is a Cross-domain Context Information Management API that allows
-      applications to provide, consume, and subscribe to context information in multiple scenarios and involving
-      multiple stakeholders. It is the linked-data evolution of the NGSI specification and forms the foundation of
-      FIWARE-based smart solutions.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
-    tags:
-      - Context Information
-      - Linked Data
-      - NGSI-LD
-      - Standards
-    properties:
-      - type: Documentation
-        url: https://fiware-orion.readthedocs.io/
-      - type: Specification
-        url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
-      - type: OpenAPI
-        url: openapi/fiware-ngsi-ld-openapi.yml
-  - aid: fiware:ngsi-v2
-    name: FIWARE NGSI v2 API
-    description: >-
-      The NGSI v2 API is the previous generation context broker specification that established the patterns later
-      evolved into NGSI-LD. It is widely implemented by Orion Context Broker and is still in use across many
-      FIWARE-based deployments for managing entities, attributes, and subscriptions.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
-    tags:
-      - Context Information
-      - NGSI
-      - Standards
-    properties:
-      - type: Documentation
-        url: https://fiware-orion.readthedocs.io/
-      - type: Specification
-        url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
-      - type: OpenAPI
-        url: openapi/fiware-ngsiv2-openapi.yml
+- aid: fiware:fiware-api-entry-point-api
+  name: FIWARE API Entry Point API
+  description: The API Entry Point API from FIWARE — 1 operation(s) for api entry point.
+  humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  tags:
+  - API Entry Point
+  properties:
+  - type: OpenAPI
+    url: openapi/fiware-api-entry-point-api-openapi.yml
+  - type: Documentation
+    url: https://fiware-orion.readthedocs.io/
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
+- aid: fiware:fiware-attribute-value-api
+  name: FIWARE Attribute Value API
+  description: The Attribute Value API from FIWARE — 1 operation(s) for attribute value.
+  humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  tags:
+  - Attribute Value
+  properties:
+  - type: OpenAPI
+    url: openapi/fiware-attribute-value-api-openapi.yml
+  - type: Documentation
+    url: https://fiware-orion.readthedocs.io/
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
+- aid: fiware:fiware-attributes-api
+  name: FIWARE Attributes API
+  description: The Attributes API from FIWARE — 1 operation(s) for attributes.
+  humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  tags:
+  - Attributes
+  properties:
+  - type: OpenAPI
+    url: openapi/fiware-attributes-api-openapi.yml
+  - type: Documentation
+    url: https://fiware-orion.readthedocs.io/
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
+- aid: fiware:fiware-batch-operations-api
+  name: FIWARE Batch Operations API
+  description: The Batch Operations API from FIWARE — 7 operation(s) for batch operations.
+  humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  tags:
+  - Batch Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/fiware-batch-operations-api-openapi.yml
+  - type: Documentation
+    url: https://fiware-orion.readthedocs.io/
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
+- aid: fiware:fiware-context-information-api
+  name: FIWARE Context Information API
+  description: The Context Information API from FIWARE — 4 operation(s) for context information.
+  humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  tags:
+  - Context Information
+  properties:
+  - type: OpenAPI
+    url: openapi/fiware-context-information-api-openapi.yml
+  - type: Documentation
+    url: https://fiware-orion.readthedocs.io/
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
+- aid: fiware:fiware-context-sources-api
+  name: FIWARE Context Sources API
+  description: The Context Sources API from FIWARE — 4 operation(s) for context sources.
+  humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  tags:
+  - Context Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/fiware-context-sources-api-openapi.yml
+  - type: Documentation
+    url: https://fiware-orion.readthedocs.io/
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
+- aid: fiware:fiware-context-subscription-api
+  name: FIWARE Context Subscription API
+  description: The Context Subscription API from FIWARE — 2 operation(s) for context subscription.
+  humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  tags:
+  - Context Subscription
+  properties:
+  - type: OpenAPI
+    url: openapi/fiware-context-subscription-api-openapi.yml
+  - type: Documentation
+    url: https://fiware-orion.readthedocs.io/
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
+- aid: fiware:fiware-csourceregistrations-api
+  name: FIWARE CSourceRegistrations API
+  description: The CSourceRegistrations API from FIWARE — 2 operation(s) for csourceregistrations.
+  humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  tags:
+  - CSourceRegistrations
+  properties:
+  - type: OpenAPI
+    url: openapi/fiware-csourceregistrations-api-openapi.yml
+  - type: Documentation
+    url: https://fiware-orion.readthedocs.io/
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
+- aid: fiware:fiware-csourcesubscriptions-api
+  name: FIWARE CSourceSubscriptions API
+  description: The CSourceSubscriptions API from FIWARE — 2 operation(s) for csourcesubscriptions.
+  humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  tags:
+  - CSourceSubscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/fiware-csourcesubscriptions-api-openapi.yml
+  - type: Documentation
+    url: https://fiware-orion.readthedocs.io/
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
+- aid: fiware:fiware-entities-api
+  name: FIWARE Entities API
+  description: The Entities API from FIWARE — 11 operation(s) for entities.
+  humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  tags:
+  - Entities
+  properties:
+  - type: OpenAPI
+    url: openapi/fiware-entities-api-openapi.yml
+  - type: Documentation
+    url: https://fiware-orion.readthedocs.io/
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
+- aid: fiware:fiware-registrations-api
+  name: FIWARE Registrations API
+  description: The Registrations API from FIWARE — 2 operation(s) for registrations.
+  humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  tags:
+  - Registrations
+  properties:
+  - type: OpenAPI
+    url: openapi/fiware-registrations-api-openapi.yml
+  - type: Documentation
+    url: https://fiware-orion.readthedocs.io/
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
+- aid: fiware:fiware-subscriptions-api
+  name: FIWARE Subscriptions API
+  description: The Subscriptions API from FIWARE — 4 operation(s) for subscriptions.
+  humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  tags:
+  - Subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/fiware-subscriptions-api-openapi.yml
+  - type: Documentation
+    url: https://fiware-orion.readthedocs.io/
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
+- aid: fiware:fiware-temporal-api
+  name: FIWARE Temporal API
+  description: The Temporal API from FIWARE — 5 operation(s) for temporal.
+  humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  tags:
+  - Temporal
+  properties:
+  - type: OpenAPI
+    url: openapi/fiware-temporal-api-openapi.yml
+  - type: Documentation
+    url: https://fiware-orion.readthedocs.io/
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
+- aid: fiware:fiware-temporal-evolution-api
+  name: FIWARE Temporal Evolution API
+  description: The Temporal Evolution API from FIWARE — 5 operation(s) for temporal evolution.
+  humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  tags:
+  - Temporal Evolution
+  properties:
+  - type: OpenAPI
+    url: openapi/fiware-temporal-evolution-api-openapi.yml
+  - type: Documentation
+    url: https://fiware-orion.readthedocs.io/
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
+- aid: fiware:fiware-types-api
+  name: FIWARE Types API
+  description: The Types API from FIWARE — 2 operation(s) for types.
+  humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  tags:
+  - Types
+  properties:
+  - type: OpenAPI
+    url: openapi/fiware-types-api-openapi.yml
+  - type: Documentation
+    url: https://fiware-orion.readthedocs.io/
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
+  - type: Specification
+    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
 common:
   - type: AgenticAccess
     url: agentic-access/fiware-agentic-access.yml
