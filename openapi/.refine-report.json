@@ -1,0 +1,42 @@
+{
+  "provider": "fiware",
+  "sources": [
+    "fiware-api-entry-point-api-openapi.yml",
+    "fiware-attribute-value-api-openapi.yml",
+    "fiware-attributes-api-openapi.yml",
+    "fiware-batch-operations-api-openapi.yml",
+    "fiware-context-information-api-openapi.yml",
+    "fiware-context-sources-api-openapi.yml",
+    "fiware-context-subscription-api-openapi.yml",
+    "fiware-csourceregistrations-api-openapi.yml",
+    "fiware-csourcesubscriptions-api-openapi.yml",
+    "fiware-entities-api-openapi.yml",
+    "fiware-registrations-api-openapi.yml",
+    "fiware-subscriptions-api-openapi.yml",
+    "fiware-temporal-api-openapi.yml",
+    "fiware-temporal-evolution-api-openapi.yml",
+    "fiware-types-api-openapi.yml"
+  ],
+  "outputs": [
+    "fiware-api-entry-point-api-openapi.yml",
+    "fiware-attribute-value-api-openapi.yml",
+    "fiware-attributes-api-openapi.yml",
+    "fiware-batch-operations-api-openapi.yml",
+    "fiware-context-information-api-openapi.yml",
+    "fiware-context-sources-api-openapi.yml",
+    "fiware-context-subscription-api-openapi.yml",
+    "fiware-csourceregistrations-api-openapi.yml",
+    "fiware-csourcesubscriptions-api-openapi.yml",
+    "fiware-entities-api-openapi.yml",
+    "fiware-registrations-api-openapi.yml",
+    "fiware-subscriptions-api-openapi.yml",
+    "fiware-temporal-api-openapi.yml",
+    "fiware-temporal-evolution-api-openapi.yml",
+    "fiware-types-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
