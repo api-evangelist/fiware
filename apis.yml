@@ -32,7 +32,7 @@ tags:
   - Smart Cities
   - Standards
 url: https://raw.githubusercontent.com/api-evangelist/fiware/refs/heads/main/apis.yml
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: fiware:fiware-api-entry-point-api
   name: FIWARE API Entry Point API
