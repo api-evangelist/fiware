@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ETSI ISG CIM / NGSI-LD API Entry Point Attribute Value API",
+    "version": "latest"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Attribute Value",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Attribute Value",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/entities/:entityId/attrs/:attrName/value",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the entity in question"
+              },
+              {
+                "name": "attrName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the attribute to be retrieved."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+              }
+            ]
+          },
+          "docs": "This operation returns the `value` property with the value of the attribute.\n* If attribute value is JSON Array or Object:\n  * If `Accept` header can be expanded to `application/json` or `text/plain` return the value as a JSON with a\n    response type of application/json or text/plain (whichever is the first in `Accept` header or\n    `application/json` in case of `Accept: */*`).\n  * Else return a HTTP error \"406 Not Acceptable: accepted MIME types: application/json, text/plain\"\n* If attribute va"
+        },
+        {
+          "info": {
+            "name": "Update Attribute Value",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v2/entities/:entityId/attrs/:attrName/value",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the entity to be updated."
+              },
+              {
+                "name": "attrName",
+                "value": "",
+                "type": "path",
+                "description": "Attribute name."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id."
+              }
+            ]
+          },
+          "docs": "The request payload is the new attribute value.\n* If the request payload MIME type is `application/json`, then the value of the attribute is set to\n  the JSON object or array coded in the payload (if the payload is not a valid JSON document,\n  then an error is returned).\n* If the request payload MIME type is `text/plain`, then the following algorithm is applied to the\n  payload:\n  * If the payload starts and ends with citation-marks (`\"`), the value is taken as a string\n    (the citation marks t"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

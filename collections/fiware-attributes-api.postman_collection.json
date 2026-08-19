@@ -1,0 +1,379 @@
+{
+  "item": [
+    {
+      "id": "884a88a0-5754-403a-8a7a-6970bec56408",
+      "name": "Attributes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6f56b7fa-863f-4ca2-a96d-58b88fd1f2fc",
+          "name": "Get attribute data",
+          "request": {
+            "name": "Get attribute data",
+            "description": {
+              "content": "Returns a JSON object with the attribute data of the attribute. The object follows the JSON\nrepresentation for attributes (described in \"JSON Attribute Representation\" section).\nResponse:\n* Successful operation uses 200 OK.\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "entities",
+                ":entityId",
+                "attrs",
+                ":attrName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id.",
+                    "type": "text/plain"
+                  },
+                  "key": "type",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "A list of metadata names to include in the response.\nSee \"Filtering out attributes and metadata\" section for more detail.",
+                    "type": "text/plain"
+                  },
+                  "key": "metadata",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "entityId",
+                  "description": "(Required) Id of the entity"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "attrName",
+                  "description": "(Required) Name of the attribute to be retrieved."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d2998948-41d0-4888-8975-2f2824b14208",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ":attrName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": ""
+                    },
+                    {
+                      "key": "metadata",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "entityId",
+                      "description": "(Required) Id of the entity"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "attrName",
+                      "description": "(Required) Name of the attribute to be retrieved."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3eb9d258-2d72-4127-8dd0-d0db7f93fcd6",
+          "name": "Update Attribute Data",
+          "request": {
+            "name": "Update Attribute Data",
+            "description": {
+              "content": "The request payload is an object representing the new attribute data. Previous attribute data\nis replaced by the one in the request. The object follows the JSON representation for attributes\n(described in \"JSON Attribute Representation\" section).\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "entities",
+                ":entityId",
+                "attrs",
+                ":attrName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id.",
+                    "type": "text/plain"
+                  },
+                  "key": "type",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "entityId",
+                  "description": "(Required) Id of the entity to update"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "attrName",
+                  "description": "(Required) Attribute name"
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "468fe37f-876e-4539-9e54-758dd3cc57b4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ":attrName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "entityId",
+                      "description": "(Required) Id of the entity to update"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "attrName",
+                      "description": "(Required) Attribute name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": ""
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5547af1f-f233-4d17-b87e-8771a6326618",
+          "name": "Remove a Single Attribute",
+          "request": {
+            "name": "Remove a Single Attribute",
+            "description": {
+              "content": "Removes an entity attribute.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "entities",
+                ":entityId",
+                "attrs",
+                ":attrName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Entity type, to avoid ambiguity in case there are several\nentities with the same entity id.",
+                    "type": "text/plain"
+                  },
+                  "key": "type",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "entityId",
+                  "description": "(Required) Id of the entity."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "attrName",
+                  "description": "(Required) Attribute name."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8d733871-faee-4607-b5d7-f8102abc6ba1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ":attrName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "entityId",
+                      "description": "(Required) Id of the entity."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "attrName",
+                      "description": "(Required) Attribute name."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "59bf4f8a-4fda-47ca-b174-4d2ba7383f6b",
+    "name": "ETSI ISG CIM / NGSI-LD API Entry Point Attributes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This OAS file describes the NGSI-LD API defined by the ETSI ISG CIM group. This Cross-domain Context Information Management API allows to provide, consume and subscribe to context information in multiple scenarios and involving multiple stakeholders\n\nContact Support:\n Email: NGSI-LD@etsi.org",
+      "type": "text/plain"
+    }
+  }
+}

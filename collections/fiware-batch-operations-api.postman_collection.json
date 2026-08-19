@@ -1,0 +1,897 @@
+{
+  "item": [
+    {
+      "id": "788a37c9-1991-449a-86da-cda152a3a0a9",
+      "name": "Batch Operations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8df903bc-a7b0-47da-bd51-0b63ce4247f6",
+          "name": "batch Entity Creation",
+          "request": {
+            "name": "batch Entity Creation",
+            "description": {
+              "content": "Batch Entity creation",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entityOperations",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json;application/ld+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;application/ld+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<uri>\",\n    \"type\": \"<string>\",\n    \"@context\": \"<object>\",\n    \"location\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"observationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"operationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<uri>\",\n    \"type\": \"<string>\",\n    \"@context\": \"<object>\",\n    \"location\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"observationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"operationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "093f2466-c239-4143-8964-2dee644ec995",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityOperations",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"<uri>\",\n    \"type\": \"<string>\",\n    \"@context\": \"<object>\",\n    \"location\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"observationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"operationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<uri>\",\n    \"type\": \"<string>\",\n    \"@context\": \"<object>\",\n    \"location\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"observationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"operationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"success\": [\n    \"http://pWNnejTJVWpdEVeVhgGkh.giugktoqfkHu.AE3p.qRnwrnuSUfct1kVDE8SCEXX3SvUTZyFEdmQoqQ4beFXjcUx5An\",\n    \"http://wbfMngObConSuXRQLOHcucSltdgy.qybdDQ2JnrwarvZI1ysw0\"\n  ],\n  \"error\": [\n    {\n      \"entityId\": \"https://OsYaOIdpmmiiDRiLVccgEr.mlY3PlNhKpGzanRbB+hWez,8KAfoJeRHu3kxzET6S4,,F2s\",\n      \"error\": {\n        \"type\": \"http://QoHeAW.epeebTUDaQeS8.+RNeNlU,yHamiLU,U0HZAgElbCUCblmCpVw8yo,2\",\n        \"title\": \"string\",\n        \"detail\": \"string\"\n      }\n    },\n    {\n      \"entityId\": \"http://usiRQsQmPJFubreTmanHePP.atdZPrjnwEa+E\",\n      \"error\": {\n        \"type\": \"http://SIgCPHxrwfIdYzPqjMLHHpWDVMm.ctkmjOmm5V2nKH-CKkwVlf\",\n        \"title\": \"string\",\n        \"detail\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68ba0b15-3c6f-483b-9b5c-fa5b91370942",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityOperations",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"<uri>\",\n    \"type\": \"<string>\",\n    \"@context\": \"<object>\",\n    \"location\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"observationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"operationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<uri>\",\n    \"type\": \"<string>\",\n    \"@context\": \"<object>\",\n    \"location\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"observationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"operationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://cHnTvfz.jcemJ4rXwDoPpsqun\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2170a10-1751-4af7-a170-dcd3f32e808a",
+          "name": "batch Entity Update",
+          "request": {
+            "name": "batch Entity Update",
+            "description": {
+              "content": "Batch Entity update",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entityOperations",
+                "update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json;application/ld+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;application/ld+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<uri>\",\n    \"type\": \"<string>\",\n    \"@context\": \"<object>\",\n    \"location\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"observationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"operationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<uri>\",\n    \"type\": \"<string>\",\n    \"@context\": \"<object>\",\n    \"location\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"observationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"operationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "29331418-cb08-4f7a-b6cc-a0fdfacf63ab",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityOperations",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"<uri>\",\n    \"type\": \"<string>\",\n    \"@context\": \"<object>\",\n    \"location\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"observationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"operationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<uri>\",\n    \"type\": \"<string>\",\n    \"@context\": \"<object>\",\n    \"location\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"observationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"operationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"success\": [\n    \"http://MjChviJeyJQMXbze.cccgOmKNpObH2QewXR-uJuuE-6cuWFhq627lspPoDldLFwxzjad+\",\n    \"https://unGDhynJPuHGmHcVBRSDNe.wblRxwWB.MaqOfliMKLgNasFuS6\"\n  ],\n  \"error\": [\n    {\n      \"entityId\": \"http://bdtZdCsetBZoCoLsdmMS.ccxOgEGY,LSFqgMF2ABbw9PShCt6NljIaPBdfDpXLT\",\n      \"error\": {\n        \"type\": \"http://Z.roiF.EPw1YavIW+N9,Uy,81,Yntnp\",\n        \"title\": \"string\",\n        \"detail\": \"string\"\n      }\n    },\n    {\n      \"entityId\": \"https://HaUB.wyeFnrfKP58uZ84iZoO3r0pR3LUVemme9TPoJeCLKIvywtlXWjnZmP-Xab55d.YdIQFOaaFgxfqaqZ7kINE\",\n      \"error\": {\n        \"type\": \"https://wbzOYAYgygKOglJl.pemeUmKb.wrl6sT48Kc2MSltP9fCgiSHN2MgA4GgsWphUqv1Z+FS\",\n        \"title\": \"string\",\n        \"detail\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92d47b8b-bc72-40f8-9d1e-273db985415e",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityOperations",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"<uri>\",\n    \"type\": \"<string>\",\n    \"@context\": \"<object>\",\n    \"location\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"observationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"operationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<uri>\",\n    \"type\": \"<string>\",\n    \"@context\": \"<object>\",\n    \"location\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"observationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"operationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://cHnTvfz.jcemJ4rXwDoPpsqun\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6fa6bf2f-0369-4f8a-bd65-92e9f9790492",
+          "name": "batch Entity Upsert",
+          "request": {
+            "name": "batch Entity Upsert",
+            "description": {
+              "content": "Batch Entity upsert",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entityOperations",
+                "upsert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json;application/ld+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;application/ld+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<uri>\",\n    \"type\": \"<string>\",\n    \"@context\": \"<object>\",\n    \"location\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"observationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"operationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<uri>\",\n    \"type\": \"<string>\",\n    \"@context\": \"<object>\",\n    \"location\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"observationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"operationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9e351a62-5c99-413a-86ab-87a195f59a99",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityOperations",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"<uri>\",\n    \"type\": \"<string>\",\n    \"@context\": \"<object>\",\n    \"location\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"observationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"operationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<uri>\",\n    \"type\": \"<string>\",\n    \"@context\": \"<object>\",\n    \"location\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"observationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"operationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"success\": [\n    \"http://MjChviJeyJQMXbze.cccgOmKNpObH2QewXR-uJuuE-6cuWFhq627lspPoDldLFwxzjad+\",\n    \"https://unGDhynJPuHGmHcVBRSDNe.wblRxwWB.MaqOfliMKLgNasFuS6\"\n  ],\n  \"error\": [\n    {\n      \"entityId\": \"http://bdtZdCsetBZoCoLsdmMS.ccxOgEGY,LSFqgMF2ABbw9PShCt6NljIaPBdfDpXLT\",\n      \"error\": {\n        \"type\": \"http://Z.roiF.EPw1YavIW+N9,Uy,81,Yntnp\",\n        \"title\": \"string\",\n        \"detail\": \"string\"\n      }\n    },\n    {\n      \"entityId\": \"https://HaUB.wyeFnrfKP58uZ84iZoO3r0pR3LUVemme9TPoJeCLKIvywtlXWjnZmP-Xab55d.YdIQFOaaFgxfqaqZ7kINE\",\n      \"error\": {\n        \"type\": \"https://wbzOYAYgygKOglJl.pemeUmKb.wrl6sT48Kc2MSltP9fCgiSHN2MgA4GgsWphUqv1Z+FS\",\n        \"title\": \"string\",\n        \"detail\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ac18df7-fabf-4ad2-970a-0576a73df813",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityOperations",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"<uri>\",\n    \"type\": \"<string>\",\n    \"@context\": \"<object>\",\n    \"location\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"observationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"operationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<uri>\",\n    \"type\": \"<string>\",\n    \"@context\": \"<object>\",\n    \"location\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"observationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"operationSpace\": {\n      \"type\": \"<string>\",\n      \"value\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"observedAt\": \"<dateTime>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"datasetId\": \"<uri>\",\n      \"instanceId\": \"<uri>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://cHnTvfz.jcemJ4rXwDoPpsqun\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "356bbbb7-6479-4bed-95cd-540052fba169",
+          "name": "batch Entity Delete",
+          "request": {
+            "name": "batch Entity Delete",
+            "description": {
+              "content": "Batch Entity delete",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entityOperations",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json;application/ld+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;application/ld+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  \"<uri>\"\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b1aaff6d-c3f9-4841-a7ec-7919427a3317",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityOperations",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"<uri>\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"success\": [\n    \"http://MjChviJeyJQMXbze.cccgOmKNpObH2QewXR-uJuuE-6cuWFhq627lspPoDldLFwxzjad+\",\n    \"https://unGDhynJPuHGmHcVBRSDNe.wblRxwWB.MaqOfliMKLgNasFuS6\"\n  ],\n  \"error\": [\n    {\n      \"entityId\": \"http://bdtZdCsetBZoCoLsdmMS.ccxOgEGY,LSFqgMF2ABbw9PShCt6NljIaPBdfDpXLT\",\n      \"error\": {\n        \"type\": \"http://Z.roiF.EPw1YavIW+N9,Uy,81,Yntnp\",\n        \"title\": \"string\",\n        \"detail\": \"string\"\n      }\n    },\n    {\n      \"entityId\": \"https://HaUB.wyeFnrfKP58uZ84iZoO3r0pR3LUVemme9TPoJeCLKIvywtlXWjnZmP-Xab55d.YdIQFOaaFgxfqaqZ7kINE\",\n      \"error\": {\n        \"type\": \"https://wbzOYAYgygKOglJl.pemeUmKb.wrl6sT48Kc2MSltP9fCgiSHN2MgA4GgsWphUqv1Z+FS\",\n        \"title\": \"string\",\n        \"detail\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "526dd93b-8212-40dd-b086-438046418fa7",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entityOperations",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"<uri>\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://cHnTvfz.jcemJ4rXwDoPpsqun\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d1e8a05-0359-4992-b590-2374dc1d9e7b",
+          "name": "Update",
+          "request": {
+            "name": "Update",
+            "description": {
+              "content": "This operation allows to create, update and/or delete several entities in a single batch operation.\nThe payload is an object with two properties:\n+ `actionType`, to specify the kind of update action to do: either `append`, `appendStrict`, `update`,\n  `delete`, or `replace`.\n+ `entities`, an array of entities, each entity specified using the JSON entity representation format\n  (described in the section \"JSON Entity Representation\").\nThis operation is split in as many individual operations as entities in the `entities` vector, so\nthe `actionType` is executed for each one of them. Depending on the `actionType`, a mapping with\nregular non-batch operations can be done:\n* `append`: maps to `POST /v2/entities` (if the entity does not already exist) or `POST /v2/entities/<id>/attrs`\n  (if the entity already exists).\n* `appendStrict`: maps to `POST /v2/entities` (if the entity does not already exist) or\n  `POST /v2/entities/<id>/attrs?options=append` (if the entity already exists).\n* `update`: maps to `PATCH /v2/entities/<id>/attrs`.\n* `delete`: maps to `DELETE /v2/entities/<id>/attrs/<attrName>` on every attribute included in the entity or\n  to `DELETE /v2/entities/<id>` if no attribute were included in the entity.\n* `replace`: maps to `PUT /v2/entities/<id>/attrs`.\nResponse:\n* Successful operation uses 204 No Content.\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "op",
+                "update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Options dictionary (This can only be one of keyValues)",
+                    "type": "text/plain"
+                  },
+                  "key": "options",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "62add115-0e2b-436f-984e-a35b0af94e6f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "op",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "options",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": ""
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3766b86a-89a2-4eef-a3ff-2477b49459c9",
+          "name": "Query",
+          "request": {
+            "name": "Query",
+            "description": {
+              "content": "The response payload is an Array containing one object per matching entity, or an empty array `[]` if \nno entities are found. The entities follow the JSON entity representation format\n(described in the section \"JSON Entity Representation\").\nThe payload may contain the following elements (all of them optional):\n+ `entities`: a list of entites to search for. Each element is represented by a JSON object with the\n  following elements:\n    + `id` or `idPattern`: Id or pattern of the affected entities. Both cannot be used at the same\n      time, but one of them must be present.\n    + `type` or `typePattern`: Type or type pattern of the entities to search for. Both cannot be used at\n      the same time. If omitted, it means \"any entity type\".\n+ `attrs`: List of attributes to be provided (if not specified, all attributes).\n+ `expression`: an expression composed of `q`, `mq`, `georel`, `geometry` and `coords` (see \"List\n   entities\" operation above about this field).\n+ `metadata`: a list of metadata names to include in the response.\n   See \"Filtering out attributes and metadata\" section for more detail.\nResponse code:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "op",
+                "query"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Limit the number of entities to be retrieved.",
+                    "type": "text/plain"
+                  },
+                  "key": "limit",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Skip a number of records.",
+                    "type": "text/plain"
+                  },
+                  "key": "offset",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Criteria for ordering results.\nSee \"Ordering Results\" section for details.",
+                    "type": "text/plain"
+                  },
+                  "key": "orderBy",
+                  "value": ""
+                },
+                {
+                  "description": {
+                    "content": "Options dictionary (This can only be one of count,keyValues,values,unique)",
+                    "type": "text/plain"
+                  },
+                  "key": "options",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f6074bcf-b332-406c-ada1-64fcb3c74e1f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "op",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": ""
+                    },
+                    {
+                      "key": "offset",
+                      "value": ""
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": ""
+                    },
+                    {
+                      "key": "options",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": ""
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94edbb17-d111-4ccb-8f7f-29d7ec81f839",
+          "name": "Notify",
+          "request": {
+            "name": "Notify",
+            "description": {
+              "content": "This operation is intended to consume a notification payload so that all the entity data included by such notification is persisted, overwriting if necessary.\nThis operation is useful when one NGSIv2 endpoint is subscribed to another NGSIv2 endpoint (federation scenarios). \nThe request payload must be an NGSIv2 notification payload. \nThe behaviour must be exactly the same as `POST /v2/op/update` with `actionType` equal to `append`.\nResponse code:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "op",
+                "notify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "Options dictionary (This can only be one of keyValues)",
+                    "type": "text/plain"
+                  },
+                  "key": "options",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d60c6812-8b9a-4e23-aedc-50a66aedf731",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "op",
+                    "notify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "options",
+                      "value": ""
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": ""
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "106304c7-fbf5-413c-b673-368f949ed4b3",
+    "name": "ETSI ISG CIM / NGSI-LD API Entry Point Batch Operations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This OAS file describes the NGSI-LD API defined by the ETSI ISG CIM group. This Cross-domain Context Information Management API allows to provide, consume and subscribe to context information in multiple scenarios and involving multiple stakeholders\n\nContact Support:\n Email: NGSI-LD@etsi.org",
+      "type": "text/plain"
+    }
+  }
+}

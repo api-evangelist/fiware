@@ -1,0 +1,354 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ETSI ISG CIM / NGSI-LD API Entry Point Temporal API",
+    "version": "latest"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Temporal",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "queryTemporalEntities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/temporal/entities/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of URIs to be retrieved"
+              },
+              {
+                "name": "idPattern",
+                "value": "",
+                "type": "query",
+                "description": "Regular expression that must be matched by Entity ids"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of Entity type names to be retrieved"
+              },
+              {
+                "name": "attrs",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of attribute names (properties or relationships) to be retrieved"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Query"
+              },
+              {
+                "name": "georel",
+                "value": "",
+                "type": "query",
+                "description": "Geo-relationship"
+              },
+              {
+                "name": "geometry",
+                "value": "",
+                "type": "query",
+                "description": "Geometry"
+              },
+              {
+                "name": "coordinates",
+                "value": "",
+                "type": "query",
+                "description": "Coordinates serialized as a string"
+              },
+              {
+                "name": "geoproperty",
+                "value": "",
+                "type": "query",
+                "description": "The name of the property that contains the geo-spatial data that will be used to resolve the geoquery"
+              },
+              {
+                "name": "timerel",
+                "value": "",
+                "type": "query",
+                "description": "Time relationship"
+              },
+              {
+                "name": "timeproperty",
+                "value": "",
+                "type": "query",
+                "description": "The name of the property that contains the temporal data that will be used to resolve the temporal query"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "start time for temporal query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "end time for temporal query"
+              },
+              {
+                "name": "csf",
+                "value": "",
+                "type": "query",
+                "description": "Context Source Filter"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Pagination limit"
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Options dictionary"
+              },
+              {
+                "name": "lastN",
+                "value": "",
+                "type": "query",
+                "description": "Only retrieve last N instances"
+              }
+            ]
+          },
+          "docs": "Query temporal evolution of Entities from an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "createUpdateEntityTemporal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/temporal/entities/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update temporal representation of an Entity within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "retrieveEntityTemporalById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/temporal/entities/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              },
+              {
+                "name": "attrs",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of attribute names (properties or relationships) to be retrieved"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity Type"
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Options dictionary"
+              },
+              {
+                "name": "timerel",
+                "value": "",
+                "type": "query",
+                "description": "Time relationship"
+              },
+              {
+                "name": "timeproperty",
+                "value": "",
+                "type": "query",
+                "description": "The name of the property that contains the temporal data that will be used to resolve the temporal query"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "start time for temporal query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "end time for temporal query"
+              },
+              {
+                "name": "lastN",
+                "value": "",
+                "type": "query",
+                "description": "Only retrieve last N instances"
+              }
+            ]
+          },
+          "docs": "Retrieve the temporal representation of an specific Entity from an NGSI-LD system. It's possible to specify the Entity attributes to be retrieved by using query parameters"
+        },
+        {
+          "info": {
+            "name": "removeEntityTemporalById",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/temporal/entities/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity Type"
+              }
+            ]
+          },
+          "docs": "Removes the temporal representation of an Entity from an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "addTemporalEntityAttrs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/temporal/entities/:entityId/attrs/",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add new attributes to an existing Temporal Entity within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "removeEntityTemporalAttr",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/temporal/entities/:entityId/attrs/:attrId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              },
+              {
+                "name": "attrId",
+                "value": "",
+                "type": "path",
+                "description": "Attribute Id"
+              }
+            ]
+          },
+          "docs": "Attribute from Temporal Representation of Entity deletion"
+        },
+        {
+          "info": {
+            "name": "modifyEntityTemporalAttrInstance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/temporal/entities/:entityId/attrs/:attrId/:instanceId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              },
+              {
+                "name": "attrId",
+                "value": "",
+                "type": "path",
+                "description": "Attribute Id"
+              },
+              {
+                "name": "instanceId",
+                "value": "",
+                "type": "path",
+                "description": "Instance Id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows modifying a specific Attribute (Property or Relationship) instance, identified by its instanceId, of a Temporal Representation of an Entity."
+        },
+        {
+          "info": {
+            "name": "removeEntityTemporalAttrInstance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/temporal/entities/:entityId/attrs/:attrId/:instanceId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              },
+              {
+                "name": "attrId",
+                "value": "",
+                "type": "path",
+                "description": "Attribute Id"
+              },
+              {
+                "name": "instanceId",
+                "value": "",
+                "type": "path",
+                "description": "Instance Id"
+              }
+            ]
+          },
+          "docs": "Attribute Instance deletion by instance id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

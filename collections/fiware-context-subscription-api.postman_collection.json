@@ -1,0 +1,885 @@
+{
+  "item": [
+    {
+      "id": "0c734fad-698a-4c42-8ca1-b91067163cef",
+      "name": "Context Subscription",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9bd08c89-35df-4dda-9c5c-68073ccecf1e",
+          "name": "retrieve Subscriptions",
+          "request": {
+            "name": "retrieve Subscriptions",
+            "description": {
+              "content": "Retrieves the subscriptions available in an NGSI-LD system",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Pagination limit"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;application/ld+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e99c4b85-ae90-4953-98c7-ba922555e5df",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"externalValue\": \"https://forge.etsi.org/rep/NGSI-LD/NGSI-LD/raw/master/examples/SubscriptionList-example.json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a54e719c-d754-4c81-8dba-32f816cbc2ee",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://UmAFlICxNfjXGWUWyolSdaSTGwaZgrRg.jbZnlSdmhuB-vRhWjaF\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca901145-d3c2-4d1d-8d60-5dce899640c8",
+          "name": "create Subscription",
+          "request": {
+            "name": "create Subscription",
+            "description": {
+              "content": "Creates a new Subscription within an NGSI-LD system",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json;application/ld+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;application/ld+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"notification\": {\n    \"endpoint\": {\n      \"uri\": \"<uri>\",\n      \"accept\": \"<string>\"\n    },\n    \"attributes\": [\n      \"<string>\"\n    ],\n    \"format\": \"<string>\",\n    \"status\": \"<string>\",\n    \"timesSent\": \"<number>\",\n    \"lastNotification\": \"<dateTime>\",\n    \"lastFailure\": \"<dateTime>\",\n    \"lastSuccess\": \"<dateTime>\"\n  },\n  \"@context\": \"<object>\",\n  \"entities\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<uri>\",\n      \"idPattern\": \"<regex>\"\n    }\n  ],\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"watchedAttributes\": [\n    \"<string>\"\n  ],\n  \"timeInterval\": \"<number>\",\n  \"expires\": \"<dateTime>\",\n  \"isActive\": \"<boolean>\",\n  \"throttling\": \"<number>\",\n  \"q\": \"<string>\",\n  \"geoQ\": {\n    \"geometry\": \"<string>\",\n    \"coordinates\": [\n      \"<number>\",\n      \"<number>\"\n    ],\n    \"georel\": \"<string>\"\n  },\n  \"csf\": \"<string>\",\n  \"status\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "082c5441-a2bd-4659-a40c-93762bbd4c3c",
+              "name": "Created. Contains the resource URI of the created Subscription",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"notification\": {\n    \"endpoint\": {\n      \"uri\": \"<uri>\",\n      \"accept\": \"<string>\"\n    },\n    \"attributes\": [\n      \"<string>\"\n    ],\n    \"format\": \"<string>\",\n    \"status\": \"<string>\",\n    \"timesSent\": \"<number>\",\n    \"lastNotification\": \"<dateTime>\",\n    \"lastFailure\": \"<dateTime>\",\n    \"lastSuccess\": \"<dateTime>\"\n  },\n  \"@context\": \"<object>\",\n  \"entities\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<uri>\",\n      \"idPattern\": \"<regex>\"\n    }\n  ],\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"watchedAttributes\": [\n    \"<string>\"\n  ],\n  \"timeInterval\": \"<number>\",\n  \"expires\": \"<dateTime>\",\n  \"isActive\": \"<boolean>\",\n  \"throttling\": \"<number>\",\n  \"q\": \"<string>\",\n  \"geoQ\": {\n    \"geometry\": \"<string>\",\n    \"coordinates\": [\n      \"<number>\",\n      \"<number>\"\n    ],\n    \"georel\": \"<string>\"\n  },\n  \"csf\": \"<string>\",\n  \"status\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e41b3740-bb6a-463e-902c-757f5c15a600",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"notification\": {\n    \"endpoint\": {\n      \"uri\": \"<uri>\",\n      \"accept\": \"<string>\"\n    },\n    \"attributes\": [\n      \"<string>\"\n    ],\n    \"format\": \"<string>\",\n    \"status\": \"<string>\",\n    \"timesSent\": \"<number>\",\n    \"lastNotification\": \"<dateTime>\",\n    \"lastFailure\": \"<dateTime>\",\n    \"lastSuccess\": \"<dateTime>\"\n  },\n  \"@context\": \"<object>\",\n  \"entities\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<uri>\",\n      \"idPattern\": \"<regex>\"\n    }\n  ],\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"watchedAttributes\": [\n    \"<string>\"\n  ],\n  \"timeInterval\": \"<number>\",\n  \"expires\": \"<dateTime>\",\n  \"isActive\": \"<boolean>\",\n  \"throttling\": \"<number>\",\n  \"q\": \"<string>\",\n  \"geoQ\": {\n    \"geometry\": \"<string>\",\n    \"coordinates\": [\n      \"<number>\",\n      \"<number>\"\n    ],\n    \"georel\": \"<string>\"\n  },\n  \"csf\": \"<string>\",\n  \"status\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://UmAFlICxNfjXGWUWyolSdaSTGwaZgrRg.jbZnlSdmhuB-vRhWjaF\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f3e6e0c-3ddc-436b-98ea-76e76b7080e8",
+              "name": "Already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"notification\": {\n    \"endpoint\": {\n      \"uri\": \"<uri>\",\n      \"accept\": \"<string>\"\n    },\n    \"attributes\": [\n      \"<string>\"\n    ],\n    \"format\": \"<string>\",\n    \"status\": \"<string>\",\n    \"timesSent\": \"<number>\",\n    \"lastNotification\": \"<dateTime>\",\n    \"lastFailure\": \"<dateTime>\",\n    \"lastSuccess\": \"<dateTime>\"\n  },\n  \"@context\": \"<object>\",\n  \"entities\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<uri>\",\n      \"idPattern\": \"<regex>\"\n    }\n  ],\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"watchedAttributes\": [\n    \"<string>\"\n  ],\n  \"timeInterval\": \"<number>\",\n  \"expires\": \"<dateTime>\",\n  \"isActive\": \"<boolean>\",\n  \"throttling\": \"<number>\",\n  \"q\": \"<string>\",\n  \"geoQ\": {\n    \"geometry\": \"<string>\",\n    \"coordinates\": [\n      \"<number>\",\n      \"<number>\"\n    ],\n    \"georel\": \"<string>\"\n  },\n  \"csf\": \"<string>\",\n  \"status\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://UmAFlICxNfjXGWUWyolSdaSTGwaZgrRg.jbZnlSdmhuB-vRhWjaF\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07ea1ced-1d20-458c-a0c1-eacd94e2ff96",
+          "name": "retrieve Subscription By Id",
+          "request": {
+            "name": "retrieve Subscription By Id",
+            "description": {
+              "content": "Retrieves a specific Subscription from an NGSI-LD system",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                ":subscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uri>",
+                  "key": "subscriptionId",
+                  "description": "(Required) Subscription Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;application/ld+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fe54972f-daf8-481b-95ee-133fb8044725",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Subscription Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"externalValue\": \"https://forge.etsi.org/rep/NGSI-LD/NGSI-LD/raw/master/examples/Subscription-example_C.4.json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4adf1fe6-d470-4740-9962-c37b6a4fb3a3",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Subscription Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://UmAFlICxNfjXGWUWyolSdaSTGwaZgrRg.jbZnlSdmhuB-vRhWjaF\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9c773bf-fa2a-4cfc-828e-0bd1184163ff",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Subscription Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://UmAFlICxNfjXGWUWyolSdaSTGwaZgrRg.jbZnlSdmhuB-vRhWjaF\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e03b9c33-3979-465f-bd24-121a341909d9",
+          "name": "update Subscription",
+          "request": {
+            "name": "update Subscription",
+            "description": {
+              "content": "Updates a specific Subscription within an NGSI-LD system",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                ":subscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uri>",
+                  "key": "subscriptionId",
+                  "description": "(Required) Subscription Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json;application/ld+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;application/ld+json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": \"<object>\",\n  \"entities\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<uri>\",\n      \"idPattern\": \"<regex>\"\n    }\n  ],\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"watchedAttributes\": [\n    \"<string>\"\n  ],\n  \"timeInterval\": \"<number>\",\n  \"expires\": \"<dateTime>\",\n  \"isActive\": \"<boolean>\",\n  \"throttling\": \"<number>\",\n  \"q\": \"<string>\",\n  \"geoQ\": {\n    \"geometry\": \"<string>\",\n    \"coordinates\": [\n      \"<number>\",\n      \"<number>\"\n    ],\n    \"georel\": \"<string>\"\n  },\n  \"csf\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0905f02a-50fa-4b37-b8e6-a7a6a67ca6ed",
+              "name": "No Content. The Subscription was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Subscription Id"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"@context\": \"<object>\",\n  \"entities\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<uri>\",\n      \"idPattern\": \"<regex>\"\n    }\n  ],\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"watchedAttributes\": [\n    \"<string>\"\n  ],\n  \"timeInterval\": \"<number>\",\n  \"expires\": \"<dateTime>\",\n  \"isActive\": \"<boolean>\",\n  \"throttling\": \"<number>\",\n  \"q\": \"<string>\",\n  \"geoQ\": {\n    \"geometry\": \"<string>\",\n    \"coordinates\": [\n      \"<number>\",\n      \"<number>\"\n    ],\n    \"georel\": \"<string>\"\n  },\n  \"csf\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7f4d4f15-aa62-42c4-b475-1ea871c79e06",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Subscription Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"@context\": \"<object>\",\n  \"entities\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<uri>\",\n      \"idPattern\": \"<regex>\"\n    }\n  ],\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"watchedAttributes\": [\n    \"<string>\"\n  ],\n  \"timeInterval\": \"<number>\",\n  \"expires\": \"<dateTime>\",\n  \"isActive\": \"<boolean>\",\n  \"throttling\": \"<number>\",\n  \"q\": \"<string>\",\n  \"geoQ\": {\n    \"geometry\": \"<string>\",\n    \"coordinates\": [\n      \"<number>\",\n      \"<number>\"\n    ],\n    \"georel\": \"<string>\"\n  },\n  \"csf\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://UmAFlICxNfjXGWUWyolSdaSTGwaZgrRg.jbZnlSdmhuB-vRhWjaF\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90b160e0-c682-4c2a-9f66-221c6d544610",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Subscription Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"@context\": \"<object>\",\n  \"entities\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<uri>\",\n      \"idPattern\": \"<regex>\"\n    }\n  ],\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"watchedAttributes\": [\n    \"<string>\"\n  ],\n  \"timeInterval\": \"<number>\",\n  \"expires\": \"<dateTime>\",\n  \"isActive\": \"<boolean>\",\n  \"throttling\": \"<number>\",\n  \"q\": \"<string>\",\n  \"geoQ\": {\n    \"geometry\": \"<string>\",\n    \"coordinates\": [\n      \"<number>\",\n      \"<number>\"\n    ],\n    \"georel\": \"<string>\"\n  },\n  \"csf\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://UmAFlICxNfjXGWUWyolSdaSTGwaZgrRg.jbZnlSdmhuB-vRhWjaF\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e27f948d-8d80-4a92-96c1-49f5d99db3fb",
+          "name": "remove Subscription",
+          "request": {
+            "name": "remove Subscription",
+            "description": {
+              "content": "Removes a specific Subscription from an NGSI-LD system",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                ":subscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uri>",
+                  "key": "subscriptionId",
+                  "description": "(Required) Subscription Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;application/ld+json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1f1d022c-c78a-4f7a-8e1b-ebd293dcf186",
+              "name": "No Content. The Subscription was removed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Subscription Id"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "420b8e64-25e7-4612-b429-1836faefb498",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Subscription Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://UmAFlICxNfjXGWUWyolSdaSTGwaZgrRg.jbZnlSdmhuB-vRhWjaF\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73b777f0-cc14-4ffb-8aea-5694a8be84c8",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Subscription Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://UmAFlICxNfjXGWUWyolSdaSTGwaZgrRg.jbZnlSdmhuB-vRhWjaF\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1613dbd0-27f9-430f-9508-8e1b7e097d8f",
+    "name": "ETSI ISG CIM / NGSI-LD API Entry Point Context Subscription API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This OAS file describes the NGSI-LD API defined by the ETSI ISG CIM group. This Cross-domain Context Information Management API allows to provide, consume and subscribe to context information in multiple scenarios and involving multiple stakeholders\n\nContact Support:\n Email: NGSI-LD@etsi.org",
+      "type": "text/plain"
+    }
+  }
+}

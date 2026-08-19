@@ -1,0 +1,239 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ETSI ISG CIM / NGSI-LD API Entry Point Context Sources API",
+    "version": "latest"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Context Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "queryCsources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/csourceRegistrations/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of URIs to be retrieved"
+              },
+              {
+                "name": "idPattern",
+                "value": "",
+                "type": "query",
+                "description": "Regular expression that must be matched by Entity ids"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of Entity type names to be retrieved"
+              },
+              {
+                "name": "attrs",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of attribute names (properties or relationships) to be retrieved"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Query"
+              },
+              {
+                "name": "georel",
+                "value": "",
+                "type": "query",
+                "description": "Geo-relationship"
+              },
+              {
+                "name": "geometry",
+                "value": "",
+                "type": "query",
+                "description": "Geometry"
+              },
+              {
+                "name": "coordinates",
+                "value": "",
+                "type": "query",
+                "description": "Coordinates serialized as a string"
+              },
+              {
+                "name": "geoproperty",
+                "value": "",
+                "type": "query",
+                "description": "The name of the property that contains the geo-spatial data that will be used to resolve the geoquery"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Pagination limit"
+              }
+            ]
+          },
+          "docs": "Retrieve a set of context sources which matches a specific query from an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "registerCsource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/csourceRegistrations/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers a new context source within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "retrieveCsource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/csourceRegistrations/:registrationId",
+            "params": [
+              {
+                "name": "registrationId",
+                "value": "",
+                "type": "path",
+                "description": "Registration Id"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific context source registration from an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "removeCsource",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/csourceRegistrations/:registrationId",
+            "params": [
+              {
+                "name": "registrationId",
+                "value": "",
+                "type": "path",
+                "description": "Registration Id"
+              }
+            ]
+          },
+          "docs": "Removes an specific context source registration within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "retrieveCSourceSubscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/csourceSubscriptions/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Pagination limit"
+              }
+            ]
+          },
+          "docs": "Retrieves the context source discovery subscriptions available in an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "createCSourceSubscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/csourceSubscriptions/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a context source discovery Subscription within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "retrieveCSourceSubscriptionsById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/csourceSubscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Subscription Id"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific Subscription from an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "updateCSourceSubscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/csourceSubscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Subscription Id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a specific context source discovery Subscription within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "removeCSourceSubscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/csourceSubscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Subscription Id"
+              }
+            ]
+          },
+          "docs": "Removes a specific Context Source Subscription from an NGSI-LD system"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

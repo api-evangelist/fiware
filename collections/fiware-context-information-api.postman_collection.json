@@ -1,0 +1,1984 @@
+{
+  "item": [
+    {
+      "id": "3c6c3259-bf79-4a8f-8768-f7fc20c29a96",
+      "name": "Context Information",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e8398431-cbff-4b94-b51d-dba25c25a032",
+          "name": "query Entities",
+          "request": {
+            "name": "query Entities",
+            "description": {
+              "content": "Retrieve a set of entities which matches a specific query from an NGSI-LD system",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entities",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uri>",
+                  "description": "Comma separated list of URIs to be retrieved"
+                },
+                {
+                  "disabled": false,
+                  "key": "idPattern",
+                  "value": "<regexp>",
+                  "description": "Regular expression that must be matched by Entity ids"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Comma separated list of Entity type names to be retrieved"
+                },
+                {
+                  "disabled": false,
+                  "key": "attrs",
+                  "value": "<string>",
+                  "description": "Comma separated list of attribute names (properties or relationships) to be retrieved"
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Query"
+                },
+                {
+                  "disabled": false,
+                  "key": "georel",
+                  "value": "<string>",
+                  "description": "Geo-relationship"
+                },
+                {
+                  "disabled": false,
+                  "key": "geometry",
+                  "value": "<string>",
+                  "description": "Geometry"
+                },
+                {
+                  "disabled": false,
+                  "key": "coordinates",
+                  "value": "<number>",
+                  "description": "Coordinates serialized as a string"
+                },
+                {
+                  "disabled": false,
+                  "key": "coordinates",
+                  "value": "<number>",
+                  "description": "Coordinates serialized as a string"
+                },
+                {
+                  "disabled": false,
+                  "key": "geoproperty",
+                  "value": "<string>",
+                  "description": "The name of the property that contains the geo-spatial data that will be used to resolve the geoquery"
+                },
+                {
+                  "disabled": false,
+                  "key": "csf",
+                  "value": "<string>",
+                  "description": "Context Source Filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Pagination limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "<string>",
+                  "description": "Options dictionary"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;application/ld+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12e2868d-e881-42b0-ad1d-7a65f5997044",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "idPattern",
+                      "value": "<regexp>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attrs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "georel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "geometry",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coordinates",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "coordinates",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "geoproperty",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "csf",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"externalValue\": \"https://forge.etsi.org/rep/NGSI-LD/NGSI-LD/raw/master/examples/EntityList-example.json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90d34dd2-061b-46ee-bc1a-e4c642bbf5e3",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "idPattern",
+                      "value": "<regexp>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attrs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "georel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "geometry",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coordinates",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "coordinates",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "geoproperty",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "csf",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://VKplaPBjauyyLNokdEfaVxbviih.thQT10S8sGGCZ9YX8\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd846706-2837-49d5-b5c3-38ba62d71ce3",
+          "name": "create Entity",
+          "request": {
+            "name": "create Entity",
+            "description": {
+              "content": "Create a new Entity within an NGSI-LD system",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entities",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json;application/ld+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;application/ld+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"@context\": \"<object>\",\n  \"location\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"observationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"operationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c51b5cf9-fdd2-4165-adff-a8f0e0bf5fb0",
+              "name": "Created. Contains the resource URI of the created Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"@context\": \"<object>\",\n  \"location\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"observationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"operationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f5127260-3088-4ad3-9142-07f3ec677b36",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"@context\": \"<object>\",\n  \"location\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"observationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"operationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://VKplaPBjauyyLNokdEfaVxbviih.thQT10S8sGGCZ9YX8\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9dd3a774-eb56-43d4-bb1e-be927f274250",
+              "name": "Already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"@context\": \"<object>\",\n  \"location\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"observationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"operationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://VKplaPBjauyyLNokdEfaVxbviih.thQT10S8sGGCZ9YX8\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e105aca2-b8f7-426b-a94b-4b1741dcae00",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"@context\": \"<object>\",\n  \"location\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"observationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"operationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://VKplaPBjauyyLNokdEfaVxbviih.thQT10S8sGGCZ9YX8\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f691296c-ddc3-4e74-9133-371e237771a9",
+          "name": "retrieve Entity By Id",
+          "request": {
+            "name": "retrieve Entity By Id",
+            "description": {
+              "content": "Retrieve an specific Entity from an NGSI-LD system. It's possible to specify the Entity attributes to be retrieved by using query parameters",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entities",
+                ":entityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "attrs",
+                  "value": "<string>",
+                  "description": "Comma separated list of attribute names (properties or relationships) to be retrieved"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Entity Type"
+                },
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "<string>",
+                  "description": "Options dictionary"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uri>",
+                  "key": "entityId",
+                  "description": "(Required) Entity Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;application/ld+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8b4dffa0-da1a-41cc-8e62-e4b12956982d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attrs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "entityId",
+                      "description": "(Required) Entity Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"externalValue\": \"https://forge.etsi.org/rep/NGSI-LD/NGSI-LD/raw/master/examples/Entity-example.json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7809c7dd-7e5e-48d6-af02-57da5aaa3517",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attrs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "entityId",
+                      "description": "(Required) Entity Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://VKplaPBjauyyLNokdEfaVxbviih.thQT10S8sGGCZ9YX8\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e87fd9b2-0ef2-448e-abf4-12ed3140922e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attrs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "entityId",
+                      "description": "(Required) Entity Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://VKplaPBjauyyLNokdEfaVxbviih.thQT10S8sGGCZ9YX8\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "76a2d932-146a-4cda-942b-cf446efcfeb9",
+          "name": "remove Entity By Id",
+          "request": {
+            "name": "remove Entity By Id",
+            "description": {
+              "content": "Removes an specific Entity from an NGSI-LD system",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entities",
+                ":entityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Entity Type"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uri>",
+                  "key": "entityId",
+                  "description": "(Required) Entity Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;application/ld+json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b427463a-6872-4472-be56-222717d79224",
+              "name": "No Content. The entity was removed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "entityId",
+                      "description": "(Required) Entity Id"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7b5a71c5-22a1-48a6-be5d-5cde936da9c4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "entityId",
+                      "description": "(Required) Entity Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://VKplaPBjauyyLNokdEfaVxbviih.thQT10S8sGGCZ9YX8\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f94bf01-ad28-4a6a-89b8-e498a0fd6c39",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "entityId",
+                      "description": "(Required) Entity Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://VKplaPBjauyyLNokdEfaVxbviih.thQT10S8sGGCZ9YX8\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79d3f24c-9150-400e-a169-92942c4b0c0f",
+          "name": "append Entity Attrs",
+          "request": {
+            "name": "append Entity Attrs",
+            "description": {
+              "content": "Append new Entity attributes to an existing Entity within an NGSI-LD system",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entities",
+                ":entityId",
+                "attrs",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "options",
+                  "value": "<string>",
+                  "description": "Indicates that no attribute overwrite shall be performed"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uri>",
+                  "key": "entityId",
+                  "description": "(Required) Entity Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json;application/ld+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;application/ld+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": \"<object>\",\n  \"location\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"observationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"operationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f2cdb593-99dc-4f17-9af0-b92cb7250004",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "entityId",
+                      "description": "(Required) Entity Id"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"@context\": \"<object>\",\n  \"location\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"observationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"operationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c38dd4fb-863d-40cc-be72-ae07eb5cf235",
+              "name": "Partial Success. Only the attributes included in the response payload were successfully appended",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "entityId",
+                      "description": "(Required) Entity Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"@context\": \"<object>\",\n  \"location\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"observationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"operationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Multi-Status (WebDAV) (RFC 4918)",
+              "code": 207,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"updated\": [\n    \"string\",\n    \"string\"\n  ],\n  \"notUpdated\": [\n    {\n      \"attributeName\": \"string\",\n      \"reason\": \"string\"\n    },\n    {\n      \"attributeName\": \"string\",\n      \"reason\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dcd6d007-df9f-46a2-9628-8feaee02f65c",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "entityId",
+                      "description": "(Required) Entity Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"@context\": \"<object>\",\n  \"location\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"observationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"operationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://VKplaPBjauyyLNokdEfaVxbviih.thQT10S8sGGCZ9YX8\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8cac5dc7-6c63-42e7-bd5c-939912d95362",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "options",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "entityId",
+                      "description": "(Required) Entity Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"@context\": \"<object>\",\n  \"location\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"observationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"operationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://VKplaPBjauyyLNokdEfaVxbviih.thQT10S8sGGCZ9YX8\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c210152b-d9b8-4986-983e-8c5c8c5646d2",
+          "name": "update Entity Attrs",
+          "request": {
+            "name": "update Entity Attrs",
+            "description": {
+              "content": "Update existing Entity attributes within an NGSI-LD system",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entities",
+                ":entityId",
+                "attrs",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uri>",
+                  "key": "entityId",
+                  "description": "(Required) Entity Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json;application/ld+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;application/ld+json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": \"<object>\",\n  \"location\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"observationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"operationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "492abcad-087e-4a83-a7fc-230f804e1efd",
+              "name": "No Content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "entityId",
+                      "description": "(Required) Entity Id"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"@context\": \"<object>\",\n  \"location\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"observationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"operationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a2938c85-9918-4a44-aee5-d30b6f42ba85",
+              "name": "Partial Success. Only the attributes included in the response payload were successfully updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "entityId",
+                      "description": "(Required) Entity Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"@context\": \"<object>\",\n  \"location\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"observationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"operationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Multi-Status (WebDAV) (RFC 4918)",
+              "code": 207,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"updated\": [\n    \"string\",\n    \"string\"\n  ],\n  \"notUpdated\": [\n    {\n      \"attributeName\": \"string\",\n      \"reason\": \"string\"\n    },\n    {\n      \"attributeName\": \"string\",\n      \"reason\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9bcfb857-ea12-4f4a-af93-2381ba449107",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "entityId",
+                      "description": "(Required) Entity Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"@context\": \"<object>\",\n  \"location\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"observationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"operationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://VKplaPBjauyyLNokdEfaVxbviih.thQT10S8sGGCZ9YX8\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ea4940b-bc82-4217-9f86-cd33dc3abdae",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "entityId",
+                      "description": "(Required) Entity Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"@context\": \"<object>\",\n  \"location\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"observationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"operationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://VKplaPBjauyyLNokdEfaVxbviih.thQT10S8sGGCZ9YX8\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e0707d57-1fee-4563-a7ca-b332f393dd3c",
+          "name": "partial Attr Update",
+          "request": {
+            "name": "partial Attr Update",
+            "description": {
+              "content": "Update existing Entity attributes within an NGSI-LD system",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entities",
+                ":entityId",
+                "attrs",
+                ":attrId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uri>",
+                  "key": "entityId",
+                  "description": "(Required) Entity Id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attrId",
+                  "description": "(Required) Attribute Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json;application/ld+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json;application/ld+json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": \"<object>\",\n  \"location\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"observationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"operationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0d40c015-58a2-46d7-b03a-3fe3608aac61",
+              "name": "No Content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ":attrId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "entityId",
+                      "description": "(Required) Entity Id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attrId",
+                      "description": "(Required) Attribute Id"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"@context\": \"<object>\",\n  \"location\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"observationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"operationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c1db7b7a-1c05-46cd-b4db-edd1f0d4668d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ":attrId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "entityId",
+                      "description": "(Required) Entity Id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attrId",
+                      "description": "(Required) Attribute Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"@context\": \"<object>\",\n  \"location\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"observationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"operationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://VKplaPBjauyyLNokdEfaVxbviih.thQT10S8sGGCZ9YX8\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b87b6465-7cc6-4412-a0d1-8506ee15d4fe",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ":attrId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "entityId",
+                      "description": "(Required) Entity Id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attrId",
+                      "description": "(Required) Attribute Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"@context\": \"<object>\",\n  \"location\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"observationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"operationSpace\": {\n    \"type\": \"<string>\",\n    \"value\": {\n      \"type\": \"<string>\",\n      \"coordinates\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"observedAt\": \"<dateTime>\",\n    \"createdAt\": \"<dateTime>\",\n    \"modifiedAt\": \"<dateTime>\",\n    \"datasetId\": \"<uri>\",\n    \"instanceId\": \"<uri>\"\n  },\n  \"id\": \"<uri>\",\n  \"type\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://VKplaPBjauyyLNokdEfaVxbviih.thQT10S8sGGCZ9YX8\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78745f57-187d-4012-8eee-2c4f52af5b08",
+          "name": "remove Entity Attr",
+          "request": {
+            "name": "remove Entity Attr",
+            "description": {
+              "content": "Removes an existing Entity attribute within an NGSI-LD system",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entities",
+                ":entityId",
+                "attrs",
+                ":attrId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uri>",
+                  "key": "entityId",
+                  "description": "(Required) Entity Id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attrId",
+                  "description": "(Required) Attribute Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json;application/ld+json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e7d248b-325d-488d-90ba-b3e6a5504c0b",
+              "name": "No Content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ":attrId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "entityId",
+                      "description": "(Required) Entity Id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attrId",
+                      "description": "(Required) Attribute Id"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5881e6d8-8471-4079-8bca-7c9c7fed72f0",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ":attrId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "entityId",
+                      "description": "(Required) Entity Id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attrId",
+                      "description": "(Required) Attribute Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://VKplaPBjauyyLNokdEfaVxbviih.thQT10S8sGGCZ9YX8\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dca31e08-f929-41e5-babb-9dd67bfeba05",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId",
+                    "attrs",
+                    ":attrId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uri>",
+                      "key": "entityId",
+                      "description": "(Required) Entity Id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attrId",
+                      "description": "(Required) Attribute Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json;application/ld+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json;application/ld+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://VKplaPBjauyyLNokdEfaVxbviih.thQT10S8sGGCZ9YX8\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "27413a2b-42e6-4e22-aed1-d91fd5b4b139",
+    "name": "ETSI ISG CIM / NGSI-LD API Entry Point Context Information API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This OAS file describes the NGSI-LD API defined by the ETSI ISG CIM group. This Cross-domain Context Information Management API allows to provide, consume and subscribe to context information in multiple scenarios and involving multiple stakeholders\n\nContact Support:\n Email: NGSI-LD@etsi.org",
+      "type": "text/plain"
+    }
+  }
+}

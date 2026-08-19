@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ETSI ISG CIM / NGSI-LD API Entry Point Types API",
+    "version": "latest"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Entity Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/types/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of types to be retrieved."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Skip a number of records."
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Options dictionary."
+              }
+            ]
+          },
+          "docs": "If the `values` option is not in use, this operation returns a JSON array with the entity types.\nEach element is a JSON object with information about the type:\n* `type` : the entity type name.\n* `attrs` : the set of attribute names along with all the entities of such type, represented in\n  a JSON object whose keys are the attribute names and whose values contain information of such\n  attributes (in particular a list of the types used by attributes with that name along with all the\n  entities).\n*"
+        },
+        {
+          "info": {
+            "name": "Retrieve entity type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/types/:entityType",
+            "params": [
+              {
+                "name": "entityType",
+                "value": "",
+                "type": "path",
+                "description": "Entity Type"
+              }
+            ]
+          },
+          "docs": "This operation returns a JSON object with information about the type:\n* `attrs` : the set of attribute names along with all the entities of such type, represented in\n  a JSON object whose keys are the attribute names and whose values contain information of such\n  attributes (in particular a list of the types used by attributes with that name along with all the\n  entities).\n* `count` : the number of entities belonging to that type.\nResponse code:\n* Successful operation uses 200 OK\n* Errors use a "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

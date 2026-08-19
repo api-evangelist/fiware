@@ -1,0 +1,286 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ETSI ISG CIM / NGSI-LD API Entry Point Context Information API",
+    "version": "latest"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Context Information",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "queryEntities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/entities/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of URIs to be retrieved"
+              },
+              {
+                "name": "idPattern",
+                "value": "",
+                "type": "query",
+                "description": "Regular expression that must be matched by Entity ids"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of Entity type names to be retrieved"
+              },
+              {
+                "name": "attrs",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of attribute names (properties or relationships) to be retrieved"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Query"
+              },
+              {
+                "name": "georel",
+                "value": "",
+                "type": "query",
+                "description": "Geo-relationship"
+              },
+              {
+                "name": "geometry",
+                "value": "",
+                "type": "query",
+                "description": "Geometry"
+              },
+              {
+                "name": "coordinates",
+                "value": "",
+                "type": "query",
+                "description": "Coordinates serialized as a string"
+              },
+              {
+                "name": "geoproperty",
+                "value": "",
+                "type": "query",
+                "description": "The name of the property that contains the geo-spatial data that will be used to resolve the geoquery"
+              },
+              {
+                "name": "csf",
+                "value": "",
+                "type": "query",
+                "description": "Context Source Filter"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Pagination limit"
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Options dictionary"
+              }
+            ]
+          },
+          "docs": "Retrieve a set of entities which matches a specific query from an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "createEntity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/entities/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Entity within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "retrieveEntityById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/entities/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              },
+              {
+                "name": "attrs",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of attribute names (properties or relationships) to be retrieved"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity Type"
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Options dictionary"
+              }
+            ]
+          },
+          "docs": "Retrieve an specific Entity from an NGSI-LD system. It's possible to specify the Entity attributes to be retrieved by using query parameters"
+        },
+        {
+          "info": {
+            "name": "removeEntityById",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/entities/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Entity Type"
+              }
+            ]
+          },
+          "docs": "Removes an specific Entity from an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "appendEntityAttrs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/entities/:entityId/attrs/",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query",
+                "description": "Indicates that no attribute overwrite shall be performed"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Append new Entity attributes to an existing Entity within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "updateEntityAttrs",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/entities/:entityId/attrs/",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update existing Entity attributes within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "partialAttrUpdate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/entities/:entityId/attrs/:attrId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              },
+              {
+                "name": "attrId",
+                "value": "",
+                "type": "path",
+                "description": "Attribute Id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update existing Entity attributes within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "removeEntityAttr",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/entities/:entityId/attrs/:attrId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity Id"
+              },
+              {
+                "name": "attrId",
+                "value": "",
+                "type": "path",
+                "description": "Attribute Id"
+              }
+            ]
+          },
+          "docs": "Removes an existing Entity attribute within an NGSI-LD system"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

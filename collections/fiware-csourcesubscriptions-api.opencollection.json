@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ETSI ISG CIM / NGSI-LD API Entry Point CSourceSubscriptions API",
+    "version": "latest"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CSourceSubscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "retrieveCSourceSubscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/csourceSubscriptions/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Pagination limit"
+              }
+            ]
+          },
+          "docs": "Retrieves the context source discovery subscriptions available in an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "createCSourceSubscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/csourceSubscriptions/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a context source discovery Subscription within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "retrieveCSourceSubscriptionsById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/csourceSubscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Subscription Id"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific Subscription from an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "updateCSourceSubscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/csourceSubscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Subscription Id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a specific context source discovery Subscription within an NGSI-LD system"
+        },
+        {
+          "info": {
+            "name": "removeCSourceSubscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/csourceSubscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Subscription Id"
+              }
+            ]
+          },
+          "docs": "Removes a specific Context Source Subscription from an NGSI-LD system"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
