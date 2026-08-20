@@ -83,7 +83,8 @@ apis:
   name: FIWARE Batch Operations API
   description: The Batch Operations API from FIWARE — 7 operation(s) for batch operations.
   humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
-  tags:
+  tags: []
+  tags_raw:
   - Batch Operations
   properties:
   - type: OpenAPI
@@ -204,6 +205,8 @@ apis:
   description: The Subscriptions API from FIWARE — 4 operation(s) for subscriptions.
   humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
   tags:
+  - Subscription
+  tags_raw:
   - Subscriptions
   properties:
   - type: OpenAPI
