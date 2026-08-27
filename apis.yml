@@ -140,36 +140,6 @@ apis:
     url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
   - type: Specification
     url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
-- aid: fiware:fiware-csourceregistrations-api
-  name: FIWARE CSourceRegistrations API
-  description: The CSourceRegistrations API from FIWARE — 2 operation(s) for csourceregistrations.
-  humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
-  tags:
-  - CSourceRegistrations
-  properties:
-  - type: OpenAPI
-    url: openapi/fiware-csourceregistrations-api-openapi.yml
-  - type: Documentation
-    url: https://fiware-orion.readthedocs.io/
-  - type: Specification
-    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
-  - type: Specification
-    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
-- aid: fiware:fiware-csourcesubscriptions-api
-  name: FIWARE CSourceSubscriptions API
-  description: The CSourceSubscriptions API from FIWARE — 2 operation(s) for csourcesubscriptions.
-  humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
-  tags:
-  - CSourceSubscriptions
-  properties:
-  - type: OpenAPI
-    url: openapi/fiware-csourcesubscriptions-api-openapi.yml
-  - type: Documentation
-    url: https://fiware-orion.readthedocs.io/
-  - type: Specification
-    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
-  - type: Specification
-    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
 - aid: fiware:fiware-entities-api
   name: FIWARE Entities API
   description: The Entities API from FIWARE — 11 operation(s) for entities.
@@ -211,21 +181,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/fiware-subscriptions-api-openapi.yml
-  - type: Documentation
-    url: https://fiware-orion.readthedocs.io/
-  - type: Specification
-    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
-  - type: Specification
-    url: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2
-- aid: fiware:fiware-temporal-api
-  name: FIWARE Temporal API
-  description: The Temporal API from FIWARE — 5 operation(s) for temporal.
-  humanURL: https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld
-  tags:
-  - Temporal
-  properties:
-  - type: OpenAPI
-    url: openapi/fiware-temporal-api-openapi.yml
   - type: Documentation
     url: https://fiware-orion.readthedocs.io/
   - type: Specification
