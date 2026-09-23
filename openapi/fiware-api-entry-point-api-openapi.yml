@@ -1,10 +1,10 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  description: This OAS file describes the NGSI-LD API defined by the ETSI ISG CIM group. This Cross-domain Context Information Management API allows to provide, consume and subscribe to context information in multiple scenarios and involving multiple stakeholders
-  version: latest
-  title: ETSI ISG CIM / NGSI-LD API Entry Point API
-  contact:
-    email: NGSI-LD@etsi.org
+  version: '1.0'
+  title: FIWARE-NGSI v2 Specification API Entry Point API
+  description: 'TODO: Add a description'
+servers:
+- url: http://orion.lab.fiware.org/
 tags:
 - name: API Entry Point
 paths:
@@ -16,7 +16,7 @@ paths:
 
         It is recommended to follow the “url” link values,
 
-        [Link](https://tools.ietf.org/html/rfc5988) or Location headers where
+        Link or Location headers where
 
         applicable to retrieve resources. Instead of constructing your own URLs,
 
@@ -25,20 +25,18 @@ paths:
       tags:
       - API Entry Point
       operationId: Retrieve API Resources
-      produces:
-      - application/json
-      parameters: []
       responses:
         '200':
           description: ''
-          schema:
-            $ref: '#/definitions/RetrieveApiResourcesResponse'
-          examples:
+          content:
             application/json:
-              entities_url: /v2/entities
-              types_url: /v2/types
-              subscriptions_url: /v2/subscriptions
-              registrations_url: /v2/registrations
+              schema:
+                $ref: '#/components/schemas/RetrieveApiResourcesResponse'
+              example:
+                entities_url: /v2/entities
+                types_url: /v2/types
+                subscriptions_url: /v2/subscriptions
+                registrations_url: /v2/registrations
       x-unitTests:
       - request:
           method: GET
@@ -71,41 +69,39 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
-definitions:
-  RetrieveApiResourcesResponse:
-    title: Retrieve API Resources response
-    example:
-      entities_url: /v2/entities
-      types_url: /v2/types
-      subscriptions_url: /v2/subscriptions
-      registrations_url: /v2/registrations
-    type: object
-    properties:
-      entities_url:
-        description: URL which points to the entities resource
-        example: /v2/entities
-        type: string
-      types_url:
-        description: URL which points to the types resource
-        example: /v2/types
-        type: string
-      subscriptions_url:
-        description: 'URL which points to the
+components:
+  schemas:
+    RetrieveApiResourcesResponse:
+      title: Retrieve API Resources response
+      example:
+        entities_url: /v2/entities
+        types_url: /v2/types
+        subscriptions_url: /v2/subscriptions
+        registrations_url: /v2/registrations
+      type: object
+      properties:
+        entities_url:
+          description: URL which points to the entities resource
+          example: /v2/entities
+          type: string
+        types_url:
+          description: URL which points to the types resource
+          example: /v2/types
+          type: string
+        subscriptions_url:
+          description: 'URL which points to the
 
-          subscriptions resource'
-        example: /v2/subscriptions
-        type: string
-      registrations_url:
-        description: 'URL which points to the
+            subscriptions resource'
+          example: /v2/subscriptions
+          type: string
+        registrations_url:
+          description: 'URL which points to the
 
-          registrations resource'
-        example: /v2/registrations
-        type: string
-    required:
-    - entities_url
-    - types_url
-    - subscriptions_url
-    - registrations_url
-externalDocs:
-  description: Find out more about the ETSI ISG Context Information Management
-  url: https://portal.etsi.org/tb.aspx?tbid=854&SubTB=854
+            registrations resource'
+          example: /v2/registrations
+          type: string
+      required:
+      - entities_url
+      - types_url
+      - subscriptions_url
+      - registrations_url

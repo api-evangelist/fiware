@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   description: This OAS file describes the NGSI-LD API defined by the ETSI ISG CIM group. This Cross-domain Context Information Management API allows to provide, consume and subscribe to context information in multiple scenarios and involving multiple stakeholders
   version: latest
-  title: ETSI ISG CIM / NGSI-LD API Entry Point Context Information API
+  title: ETSI ISG CIM / NGSI-LD Context Information API
   contact:
     email: NGSI-LD@etsi.org
 tags:
@@ -43,6 +43,8 @@ paths:
             application/json;application/ld+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+      summary: Query entities
+      x-summary-source: derived
     post:
       description: Create a new Entity within an NGSI-LD system
       operationId: createEntity
@@ -75,6 +77,8 @@ paths:
             application/json;application/ld+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+      summary: Create entity
+      x-summary-source: derived
   /entities/{entityId}:
     get:
       description: Retrieve an specific Entity from an NGSI-LD system. It's possible to specify the Entity attributes to be retrieved by using query parameters
@@ -108,6 +112,8 @@ paths:
             application/json;application/ld+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+      summary: Retrieve entity by id
+      x-summary-source: derived
     delete:
       description: Removes an specific Entity from an NGSI-LD system
       operationId: removeEntityById
@@ -131,6 +137,8 @@ paths:
             application/json;application/ld+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+      summary: Remove entity by id
+      x-summary-source: derived
   /entities/{entityId}/attrs/:
     post:
       description: Append new Entity attributes to an existing Entity within an NGSI-LD system
@@ -167,6 +175,8 @@ paths:
             application/json;application/ld+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+      summary: Append entity attrs
+      x-summary-source: derived
     patch:
       description: Update existing Entity attributes within an NGSI-LD system
       operationId: updateEntityAttrs
@@ -201,6 +211,8 @@ paths:
             application/json;application/ld+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+      summary: Update entity attrs
+      x-summary-source: derived
   /entities/{entityId}/attrs/{attrId}:
     patch:
       description: Update existing Entity attributes within an NGSI-LD system
@@ -231,6 +243,8 @@ paths:
             application/json;application/ld+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+      summary: Partial attr update
+      x-summary-source: derived
     delete:
       description: Removes an existing Entity attribute within an NGSI-LD system
       operationId: removeEntityAttr
@@ -254,39 +268,10 @@ paths:
             application/json;application/ld+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+      summary: Remove entity attr
+      x-summary-source: derived
 components:
   schemas:
-    Entity:
-      allOf:
-      - required:
-        - id
-        - type
-      - $ref: '#/components/schemas/EntityFragment'
-    positionArray:
-      description: An array of positions
-      type: array
-      items:
-        $ref: '#/components/schemas/position'
-    LineString:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - LineString
-        coordinates:
-          $ref: '#/components/schemas/lineString'
-    MultiLineString:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - MultiLineString
-        coordinates:
-          type: array
-          items:
-            $ref: '#/components/schemas/lineString'
     geometry:
       type: string
       enum:
@@ -296,30 +281,38 @@ components:
       - MultiLineString
       - Polygon
       - MultiPolygon
-    Name:
-      type: string
-      pattern: ^((\d|[a-zA-Z]|_)+(:(\d|[a-zA-Z]|_)+)?(#\d+)?)$
-      minLength: 1
-      description: NGSI-LD Name
-    Point:
+    Entity:
+      allOf:
+      - required:
+        - id
+        - type
+      - $ref: '#/components/schemas/EntityFragment'
+    polygon:
+      description: An array of linear rings
+      type: array
+      items:
+        $ref: '#/components/schemas/linearRing'
+    EntityList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Entity'
+    position:
+      description: A single position
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        type: number
+      additionalProperties: false
+    GeoProperty:
       type: object
       properties:
         type:
           type: string
           enum:
-          - Point
-        coordinates:
-          $ref: '#/components/schemas/position'
-    Relationship:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - Relationship
-        object:
-          type: string
-          format: uri
+          - GeoProperty
+        value:
+          $ref: '#/components/schemas/Geometry'
         observedAt:
           $ref: '#/components/schemas/observedAt'
         createdAt:
@@ -332,23 +325,23 @@ components:
           $ref: '#/components/schemas/instanceId'
       required:
       - type
-      - object
+      - value
       additionalProperties:
         oneOf:
         - $ref: '#/components/schemas/Property'
         - $ref: '#/components/schemas/Relationship'
-    georel:
+    createdAt:
+      type: string
+      format: date-time
+    datasetId:
+      type: string
+      format: uri
+    coordinates:
       oneOf:
-      - type: string
-        enum:
-        - equals
-        - disjoint
-        - intersects
-        - within
-        - contains
-        - overlaps
-      - type: string
-        pattern: ^near;((maxDistance==\d+)|(minDistance==\d+))$
+      - $ref: '#/components/schemas/position'
+      - $ref: '#/components/schemas/positionArray'
+      - $ref: '#/components/schemas/lineString'
+      - $ref: '#/components/schemas/polygon'
     Property:
       type: object
       properties:
@@ -380,6 +373,31 @@ components:
         oneOf:
         - $ref: '#/components/schemas/Property'
         - $ref: '#/components/schemas/Relationship'
+    lineString:
+      description: An array of two or more positions
+      allOf:
+      - $ref: '#/components/schemas/positionArray'
+      - minItems: 2
+    MultiLineString:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiLineString
+        coordinates:
+          type: array
+          items:
+            $ref: '#/components/schemas/lineString'
+    Geometry:
+      description: ' Avalid GeoJSON geometry object'
+      oneOf:
+      - $ref: '#/components/schemas/Point'
+      - $ref: '#/components/schemas/MultiPoint'
+      - $ref: '#/components/schemas/Polygon'
+      - $ref: '#/components/schemas/LineString'
+      - $ref: '#/components/schemas/MultiLineString'
+      - $ref: '#/components/schemas/MultiPolygon'
     NotUpdatedDetails:
       type: object
       properties:
@@ -388,18 +406,26 @@ components:
         reason:
           type: string
           minLength: 1
-    modifiedAt:
+    georel:
+      oneOf:
+      - type: string
+        enum:
+        - equals
+        - disjoint
+        - intersects
+        - within
+        - contains
+        - overlaps
+      - type: string
+        pattern: ^near;((maxDistance==\d+)|(minDistance==\d+))$
+    instanceId:
       type: string
-      format: date-time
-    Polygon:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - Polygon
-        coordinates:
-          $ref: '#/components/schemas/polygon'
+      format: uri
+    positionArray:
+      description: An array of positions
+      type: array
+      items:
+        $ref: '#/components/schemas/position'
     EntityFragment:
       type: object
       properties:
@@ -425,14 +451,30 @@ components:
         - $ref: '#/components/schemas/Property'
         - $ref: '#/components/schemas/Relationship'
         - $ref: '#/components/schemas/GeoProperty'
-    position:
-      description: A single position
-      type: array
-      minItems: 2
-      maxItems: 2
-      items:
-        type: number
-      additionalProperties: false
+    Point:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Point
+        coordinates:
+          $ref: '#/components/schemas/position'
+    Polygon:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Polygon
+        coordinates:
+          $ref: '#/components/schemas/polygon'
+    observedAt:
+      type: string
+      format: date-time
+    modifiedAt:
+      type: string
+      format: date-time
     ProblemDetails:
       type: object
       properties:
@@ -445,63 +487,36 @@ components:
           type: string
       required:
       - type
-    linearRing:
-      description: An array of four positions where the first equals the last
-      allOf:
-      - $ref: '#/components/schemas/positionArray'
-      - minItems: 4
-    MultiPoint:
+    LineString:
       type: object
       properties:
         type:
           type: string
           enum:
-          - MultiPoint
+          - LineString
         coordinates:
-          $ref: '#/components/schemas/positionArray'
-    datasetId:
-      type: string
-      format: uri
-    coordinates:
-      oneOf:
-      - $ref: '#/components/schemas/position'
-      - $ref: '#/components/schemas/positionArray'
-      - $ref: '#/components/schemas/lineString'
-      - $ref: '#/components/schemas/polygon'
-    lineString:
-      description: An array of two or more positions
-      allOf:
-      - $ref: '#/components/schemas/positionArray'
-      - minItems: 2
-    EntityList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Entity'
-    polygon:
-      description: An array of linear rings
-      type: array
-      items:
-        $ref: '#/components/schemas/linearRing'
-    UpdateResult:
-      type: object
-      properties:
-        updated:
-          type: array
-          items:
-            type: string
-        notUpdated:
-          type: array
-          items:
-            $ref: '#/components/schemas/NotUpdatedDetails'
-    GeoProperty:
+          $ref: '#/components/schemas/lineString'
+    MultiPolygon:
       type: object
       properties:
         type:
           type: string
           enum:
-          - GeoProperty
-        value:
-          $ref: '#/components/schemas/Geometry'
+          - MultiPolygon
+        coordinates:
+          type: array
+          items:
+            $ref: '#/components/schemas/polygon'
+    Relationship:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Relationship
+        object:
+          type: string
+          format: uri
         observedAt:
           $ref: '#/components/schemas/observedAt'
         createdAt:
@@ -514,28 +529,32 @@ components:
           $ref: '#/components/schemas/instanceId'
       required:
       - type
-      - value
+      - object
       additionalProperties:
         oneOf:
         - $ref: '#/components/schemas/Property'
         - $ref: '#/components/schemas/Relationship'
-    instanceId:
-      type: string
-      format: uri
-    observedAt:
-      type: string
-      format: date-time
-    MultiPolygon:
+    UpdateResult:
       type: object
       properties:
-        type:
-          type: string
-          enum:
-          - MultiPolygon
-        coordinates:
+        updated:
           type: array
           items:
-            $ref: '#/components/schemas/polygon'
+            type: string
+        notUpdated:
+          type: array
+          items:
+            $ref: '#/components/schemas/NotUpdatedDetails'
+    linearRing:
+      description: An array of four positions where the first equals the last
+      allOf:
+      - $ref: '#/components/schemas/positionArray'
+      - minItems: 4
+    Name:
+      type: string
+      pattern: ^((\d|[a-zA-Z]|_)+(:(\d|[a-zA-Z]|_)+)?(#\d+)?)$
+      minLength: 1
+      description: NGSI-LD Name
     LdContext:
       oneOf:
       - type: object
@@ -548,58 +567,25 @@ components:
           - type: string
             format: uri
           - type: object
-    Geometry:
-      description: ' Avalid GeoJSON geometry object'
-      oneOf:
-      - $ref: '#/components/schemas/Point'
-      - $ref: '#/components/schemas/MultiPoint'
-      - $ref: '#/components/schemas/Polygon'
-      - $ref: '#/components/schemas/LineString'
-      - $ref: '#/components/schemas/MultiLineString'
-      - $ref: '#/components/schemas/MultiPolygon'
-    createdAt:
-      type: string
-      format: date-time
+    MultiPoint:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiPoint
+        coordinates:
+          $ref: '#/components/schemas/positionArray'
   parameters:
-    coordinates:
-      name: coordinates
-      description: Coordinates serialized as a string
-      in: query
-      required: false
-      schema:
-        $ref: '#/components/schemas/coordinates'
-    entityId:
-      name: entityId
-      description: Entity Id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uri
-    geoproperty:
-      name: geoproperty
-      description: The name of the property that contains the geo-spatial data that will be used to resolve the geoquery
+    parameters-options:
+      name: options
+      description: Indicates that no attribute overwrite shall be performed
       in: query
       required: false
       schema:
         type: string
-        minLength: 1
-    type:
-      name: type
-      description: Comma separated list of Entity type names to be retrieved
-      in: query
-      required: false
-      schema:
-        type: string
-        minLength: 1
-    id:
-      name: id
-      description: Comma separated list of URIs to be retrieved
-      in: query
-      required: false
-      schema:
-        type: string
-        format: uri
+        enum:
+        - noOverwrite
     options:
       name: options
       description: Options dictionary
@@ -610,6 +596,14 @@ components:
         enum:
         - keyValues
         - sysAttrs
+    csf:
+      name: csf
+      description: Context Source Filter
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
     attrs:
       name: attrs
       description: Comma separated list of attribute names (properties or relationships) to be retrieved
@@ -618,39 +612,24 @@ components:
       schema:
         type: string
         minLength: 1
-    attrId:
-      name: attrId
-      description: Attribute Id
+    entityId:
+      name: entityId
+      description: Entity Id
       in: path
       required: true
       schema:
+        type: string
+        format: uri
+    parameters-type:
+      name: type
+      description: Entity Type
+      in: query
+      required: false
+      schema:
         $ref: '#/components/schemas/Name'
-    q:
-      name: q
-      description: Query
-      in: query
-      required: false
-      schema:
-        type: string
-        minLength: 1
-    idPattern:
-      name: idPattern
-      description: Regular expression that must be matched by Entity ids
-      in: query
-      required: false
-      schema:
-        type: string
-        format: regexp
-    geometry:
-      name: geometry
-      description: Geometry
-      in: query
-      required: false
-      schema:
-        $ref: '#/components/schemas/geometry'
-    csf:
-      name: csf
-      description: Context Source Filter
+    type:
+      name: type
+      description: Comma separated list of Entity type names to be retrieved
       in: query
       required: false
       schema:
@@ -663,22 +642,51 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/georel'
-    parameters-type:
-      name: type
-      description: Entity Type
-      in: query
-      required: false
-      schema:
-        $ref: '#/components/schemas/Name'
-    parameters-options:
-      name: options
-      description: Indicates that no attribute overwrite shall be performed
+    geoproperty:
+      name: geoproperty
+      description: The name of the property that contains the geo-spatial data that will be used to resolve the geoquery
       in: query
       required: false
       schema:
         type: string
-        enum:
-        - noOverwrite
+        minLength: 1
+    geometry:
+      name: geometry
+      description: Geometry
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/geometry'
+    q:
+      name: q
+      description: Query
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+    attrId:
+      name: attrId
+      description: Attribute Id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Name'
+    coordinates:
+      name: coordinates
+      description: Coordinates serialized as a string
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/coordinates'
+    idPattern:
+      name: idPattern
+      description: Regular expression that must be matched by Entity ids
+      in: query
+      required: false
+      schema:
+        type: string
+        format: regexp
     limit:
       name: limit
       description: Pagination limit
@@ -687,6 +695,14 @@ components:
       schema:
         type: integer
         minimum: 1
+    id:
+      name: id
+      description: Comma separated list of URIs to be retrieved
+      in: query
+      required: false
+      schema:
+        type: string
+        format: uri
 externalDocs:
   description: Find out more about the ETSI ISG Context Information Management
   url: https://portal.etsi.org/tb.aspx?tbid=854&SubTB=854

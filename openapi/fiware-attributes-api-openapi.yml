@@ -1,57 +1,70 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  description: This OAS file describes the NGSI-LD API defined by the ETSI ISG CIM group. This Cross-domain Context Information Management API allows to provide, consume and subscribe to context information in multiple scenarios and involving multiple stakeholders
-  version: latest
-  title: ETSI ISG CIM / NGSI-LD API Entry Point Attributes API
-  contact:
-    email: NGSI-LD@etsi.org
+  version: '1.0'
+  title: FIWARE-NGSI v2 Specification Attributes API
+  description: 'TODO: Add a description'
+servers:
+- url: http://orion.lab.fiware.org/
 tags:
 - name: Attributes
 paths:
   /v2/entities/{entityId}/attrs/{attrName}:
     get:
-      description: "Returns a JSON object with the attribute data of the attribute. The object follows the JSON\nrepresentation for attributes (described in \"JSON Attribute Representation\" section).\nResponse:\n* Successful operation uses 200 OK.\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      description: 'Returns a JSON object with the attribute data of the attribute. The object follows the JSON
+
+        representation for attributes (described in "JSON Attribute Representation" section).
+
+        Response:
+
+        * Successful operation uses 200 OK.
+
+        * Errors use a non-2xx and (optionally) an error payload. See subsection on "Error Responses" for
+
+        more details.'
       summary: Get attribute data
       tags:
       - Attributes
       operationId: Get attribute data
-      produces:
-      - application/json
       parameters:
       - name: entityId
         in: path
         required: true
-        type: string
         description: Id of the entity
+        schema:
+          type: string
       - name: attrName
         in: path
         required: true
-        type: string
         description: Name of the attribute to be retrieved.
+        schema:
+          type: string
       - name: type
         in: query
         required: false
-        type: string
         description: 'Entity type, to avoid ambiguity in case there are several
 
           entities with the same entity id.'
+        schema:
+          type: string
       - name: metadata
         in: query
         required: false
-        type: string
         description: 'A list of metadata names to include in the response.
 
           See "Filtering out attributes and metadata" section for more detail.'
+        schema:
+          type: string
       responses:
         '200':
           description: ''
-          schema:
-            $ref: '#/definitions/GetAttributeDataResponse'
-          examples:
+          content:
             application/json:
-              value: 21.7
-              type: Number
-              metadata: {}
+              schema:
+                $ref: '#/components/schemas/GetAttributeDataResponse'
+              example:
+                value: 21.7
+                type: Number
+                metadata: {}
       x-unitTests:
       - request:
           method: GET
@@ -75,42 +88,50 @@ paths:
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
     put:
-      description: "The request payload is an object representing the new attribute data. Previous attribute data\nis replaced by the one in the request. The object follows the JSON representation for attributes\n(described in \"JSON Attribute Representation\" section).\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      description: 'The request payload is an object representing the new attribute data. Previous attribute data
+
+        is replaced by the one in the request. The object follows the JSON representation for attributes
+
+        (described in "JSON Attribute Representation" section).
+
+        Response:
+
+        * Successful operation uses 204 No Content
+
+        * Errors use a non-2xx and (optionally) an error payload. See subsection on "Error Responses" for
+
+        more details.'
       summary: Update Attribute Data
       tags:
       - Attributes
       operationId: Update Attribute Data
-      produces:
-      - application/json
       parameters:
       - name: entityId
         in: path
         required: true
-        type: string
         description: Id of the entity to update
+        schema:
+          type: string
       - name: attrName
         in: path
         required: true
-        type: string
         description: Attribute name
+        schema:
+          type: string
       - name: Content-Type
         in: header
         required: true
-        type: string
-        description: ''
-      - name: body
-        in: body
-        required: true
         description: ''
         schema:
-          $ref: '#/definitions/UpdateAttributeDataRequest'
+          type: string
       - name: type
         in: query
         required: false
-        type: string
         description: 'Entity type, to avoid ambiguity in case there are several
 
           entities with the same entity id.'
+        schema:
+          type: string
       responses:
         '200':
           description: ''
@@ -137,32 +158,47 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAttributeDataRequest'
+        required: true
     delete:
-      description: "Removes an entity attribute.\nResponse:\n* Successful operation uses 204 No Content\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      description: 'Removes an entity attribute.
+
+        Response:
+
+        * Successful operation uses 204 No Content
+
+        * Errors use a non-2xx and (optionally) an error payload. See subsection on "Error Responses" for
+
+        more details.'
       summary: Remove a Single Attribute
       tags:
       - Attributes
       operationId: Remove a Single Attribute
-      produces:
-      - application/json
       parameters:
       - name: entityId
         in: path
         required: true
-        type: string
         description: Id of the entity.
+        schema:
+          type: string
       - name: attrName
         in: path
         required: true
-        type: string
         description: Attribute name.
+        schema:
+          type: string
       - name: type
         in: query
         required: false
-        type: string
         description: 'Entity type, to avoid ambiguity in case there are several
 
           entities with the same entity id.'
+        schema:
+          type: string
       responses:
         '204':
           description: ''
@@ -186,55 +222,53 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
-definitions:
-  UpdateAttributeDataRequest:
-    title: Update Attribute Data request
-    example:
-      value: 25.0
-      metadata:
-        unitCode:
-          value: CEL
-    type: object
-    properties:
-      value:
-        description: ''
-        example: 25
-        type: number
-        format: double
-      metadata:
-        description: ''
-        example:
+components:
+  schemas:
+    GetAttributeDataResponse:
+      title: Get attribute data response
+      example:
+        value: 21.7
+        type: Number
+        metadata: {}
+      type: object
+      properties:
+        value:
+          description: ''
+          example: 21.7
+          type: number
+          format: double
+        type:
+          description: ''
+          example: Number
+          type: string
+        metadata:
+          description: ''
+          example: {}
+          type: object
+      required:
+      - value
+      - type
+      - metadata
+    UpdateAttributeDataRequest:
+      title: Update Attribute Data request
+      example:
+        value: 25.0
+        metadata:
           unitCode:
             value: CEL
-        type: object
-    required:
-    - value
-    - metadata
-  GetAttributeDataResponse:
-    title: Get attribute data response
-    example:
-      value: 21.7
-      type: Number
-      metadata: {}
-    type: object
-    properties:
-      value:
-        description: ''
-        example: 21.7
-        type: number
-        format: double
-      type:
-        description: ''
-        example: Number
-        type: string
-      metadata:
-        description: ''
-        example: {}
-        type: object
-    required:
-    - value
-    - type
-    - metadata
-externalDocs:
-  description: Find out more about the ETSI ISG Context Information Management
-  url: https://portal.etsi.org/tb.aspx?tbid=854&SubTB=854
+      type: object
+      properties:
+        value:
+          description: ''
+          example: 25
+          type: number
+          format: double
+        metadata:
+          description: ''
+          example:
+            unitCode:
+              value: CEL
+          type: object
+      required:
+      - value
+      - metadata

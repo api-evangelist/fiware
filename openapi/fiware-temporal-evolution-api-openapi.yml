@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   description: This OAS file describes the NGSI-LD API defined by the ETSI ISG CIM group. This Cross-domain Context Information Management API allows to provide, consume and subscribe to context information in multiple scenarios and involving multiple stakeholders
   version: latest
-  title: ETSI ISG CIM / NGSI-LD API Entry Point Temporal Evolution API
+  title: ETSI ISG CIM / NGSI-LD Temporal Evolution API
   contact:
     email: NGSI-LD@etsi.org
 tags:
@@ -48,6 +48,8 @@ paths:
             application/json;application/ld+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+      summary: Query temporal entities
+      x-summary-source: derived
     post:
       description: Create or update temporal representation of an Entity within an NGSI-LD system
       operationId: createUpdateEntityTemporal
@@ -85,6 +87,8 @@ paths:
             application/json;application/ld+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+      summary: Create update entity temporal
+      x-summary-source: derived
   /temporal/entities/{entityId}:
     get:
       description: Retrieve the temporal representation of an specific Entity from an NGSI-LD system. It's possible to specify the Entity attributes to be retrieved by using query parameters
@@ -123,6 +127,8 @@ paths:
             application/json;application/ld+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+      summary: Retrieve entity temporal by id
+      x-summary-source: derived
     delete:
       description: Removes the temporal representation of an Entity from an NGSI-LD system
       operationId: removeEntityTemporalById
@@ -146,6 +152,8 @@ paths:
             application/json;application/ld+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+      summary: Remove entity temporal by id
+      x-summary-source: derived
   /temporal/entities/{entityId}/attrs/:
     post:
       description: Add new attributes to an existing Temporal Entity within an NGSI-LD system
@@ -175,6 +183,8 @@ paths:
             application/json;application/ld+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+      summary: Add temporal entity attrs
+      x-summary-source: derived
   /temporal/entities/{entityId}/attrs/{attrId}:
     delete:
       description: Attribute from Temporal Representation of Entity deletion
@@ -199,6 +209,8 @@ paths:
             application/json;application/ld+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+      summary: Remove entity temporal attr
+      x-summary-source: derived
   /temporal/entities/{entityId}/attrs/{attrId}/{instanceId}:
     patch:
       description: Allows modifying a specific Attribute (Property or Relationship) instance, identified by its instanceId, of a Temporal Representation of an Entity.
@@ -230,6 +242,8 @@ paths:
             application/json;application/ld+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+      summary: Modify entity temporal attr instance
+      x-summary-source: derived
     delete:
       description: Attribute Instance deletion by instance id.
       operationId: removeEntityTemporalAttrInstance
@@ -254,197 +268,10 @@ paths:
             application/json;application/ld+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+      summary: Remove entity temporal attr instance
+      x-summary-source: derived
 components:
-  parameters:
-    coordinates:
-      name: coordinates
-      description: Coordinates serialized as a string
-      in: query
-      required: false
-      schema:
-        $ref: '#/components/schemas/coordinates'
-    entityId:
-      name: entityId
-      description: Entity Id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uri
-    geoproperty:
-      name: geoproperty
-      description: The name of the property that contains the geo-spatial data that will be used to resolve the geoquery
-      in: query
-      required: false
-      schema:
-        type: string
-        minLength: 1
-    time:
-      name: time
-      description: start time for temporal query
-      in: query
-      required: false
-      schema:
-        type: string
-        format: date-time
-    type:
-      name: type
-      description: Comma separated list of Entity type names to be retrieved
-      in: query
-      required: false
-      schema:
-        type: string
-        minLength: 1
-    lastN:
-      name: lastN
-      description: Only retrieve last N instances
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-    components-parameters-options:
-      name: options
-      description: Options dictionary
-      in: query
-      required: false
-      schema:
-        type: string
-        enum:
-        - temporalValues
-        - sysAttrs
-    id:
-      name: id
-      description: Comma separated list of URIs to be retrieved
-      in: query
-      required: false
-      schema:
-        type: string
-        format: uri
-    attrs:
-      name: attrs
-      description: Comma separated list of attribute names (properties or relationships) to be retrieved
-      in: query
-      required: false
-      schema:
-        type: string
-        minLength: 1
-    instanceId:
-      name: instanceId
-      description: Instance Id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uri
-    attrId:
-      name: attrId
-      description: Attribute Id
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/Name'
-    q:
-      name: q
-      description: Query
-      in: query
-      required: false
-      schema:
-        type: string
-        minLength: 1
-    timerel:
-      name: timerel
-      description: Time relationship
-      in: query
-      required: false
-      schema:
-        $ref: '#/components/schemas/timerel'
-    endTime:
-      name: endTime
-      description: end time for temporal query
-      in: query
-      required: false
-      schema:
-        type: string
-        format: date-time
-    idPattern:
-      name: idPattern
-      description: Regular expression that must be matched by Entity ids
-      in: query
-      required: false
-      schema:
-        type: string
-        format: regexp
-    timeproperty:
-      name: timeproperty
-      description: The name of the property that contains the temporal data that will be used to resolve the temporal query
-      in: query
-      required: false
-      schema:
-        $ref: '#/components/schemas/Name'
-    geometry:
-      name: geometry
-      description: Geometry
-      in: query
-      required: false
-      schema:
-        $ref: '#/components/schemas/geometry'
-    csf:
-      name: csf
-      description: Context Source Filter
-      in: query
-      required: false
-      schema:
-        type: string
-        minLength: 1
-    georel:
-      name: georel
-      description: Geo-relationship
-      in: query
-      required: false
-      schema:
-        $ref: '#/components/schemas/georel'
-    parameters-type:
-      name: type
-      description: Entity Type
-      in: query
-      required: false
-      schema:
-        $ref: '#/components/schemas/Name'
-    limit:
-      name: limit
-      description: Pagination limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 1
   schemas:
-    positionArray:
-      description: An array of positions
-      type: array
-      items:
-        $ref: '#/components/schemas/position'
-    LineString:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - LineString
-        coordinates:
-          $ref: '#/components/schemas/lineString'
-    MultiLineString:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - MultiLineString
-        coordinates:
-          type: array
-          items:
-            $ref: '#/components/schemas/lineString'
     geometry:
       type: string
       enum:
@@ -454,30 +281,28 @@ components:
       - MultiLineString
       - Polygon
       - MultiPolygon
-    Point:
+    polygon:
+      description: An array of linear rings
+      type: array
+      items:
+        $ref: '#/components/schemas/linearRing'
+    position:
+      description: A single position
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        type: number
+      additionalProperties: false
+    GeoProperty:
       type: object
       properties:
         type:
           type: string
           enum:
-          - Point
-        coordinates:
-          $ref: '#/components/schemas/position'
-    Name:
-      type: string
-      pattern: ^((\d|[a-zA-Z]|_)+(:(\d|[a-zA-Z]|_)+)?(#\d+)?)$
-      minLength: 1
-      description: NGSI-LD Name
-    Relationship:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - Relationship
-        object:
-          type: string
-          format: uri
+          - GeoProperty
+        value:
+          $ref: '#/components/schemas/Geometry'
         observedAt:
           $ref: '#/components/schemas/observedAt'
         createdAt:
@@ -490,23 +315,17 @@ components:
           $ref: '#/components/schemas/instanceId'
       required:
       - type
-      - object
+      - value
       additionalProperties:
         oneOf:
         - $ref: '#/components/schemas/Property'
         - $ref: '#/components/schemas/Relationship'
-    georel:
-      oneOf:
-      - type: string
-        enum:
-        - equals
-        - disjoint
-        - intersects
-        - within
-        - contains
-        - overlaps
-      - type: string
-        pattern: ^near;((maxDistance==\d+)|(minDistance==\d+))$
+    createdAt:
+      type: string
+      format: date-time
+    datasetId:
+      type: string
+      format: uri
     Property:
       type: object
       properties:
@@ -538,51 +357,49 @@ components:
         oneOf:
         - $ref: '#/components/schemas/Property'
         - $ref: '#/components/schemas/Relationship'
-    modifiedAt:
-      type: string
-      format: date-time
-    Polygon:
+    coordinates:
+      oneOf:
+      - $ref: '#/components/schemas/position'
+      - $ref: '#/components/schemas/positionArray'
+      - $ref: '#/components/schemas/lineString'
+      - $ref: '#/components/schemas/polygon'
+    lineString:
+      description: An array of two or more positions
+      allOf:
+      - $ref: '#/components/schemas/positionArray'
+      - minItems: 2
+    MultiLineString:
       type: object
       properties:
         type:
           type: string
           enum:
-          - Polygon
+          - MultiLineString
         coordinates:
-          $ref: '#/components/schemas/polygon'
-    EntityTemporal:
-      allOf:
-      - $ref: '#/components/schemas/EntityTemporalFragment'
-      - type: object
-        required:
-        - type
-        - id
-    position:
-      description: A single position
-      type: array
-      minItems: 2
-      maxItems: 2
-      items:
-        type: number
-      additionalProperties: false
-    timerel:
-      type: string
-      enum:
-      - before
-      - after
-      - between
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type: string
-          format: uri
-        title:
-          type: string
-        detail:
-          type: string
-      required:
-      - type
+          type: array
+          items:
+            $ref: '#/components/schemas/lineString'
+    Geometry:
+      description: ' Avalid GeoJSON geometry object'
+      oneOf:
+      - $ref: '#/components/schemas/Point'
+      - $ref: '#/components/schemas/MultiPoint'
+      - $ref: '#/components/schemas/Polygon'
+      - $ref: '#/components/schemas/LineString'
+      - $ref: '#/components/schemas/MultiLineString'
+      - $ref: '#/components/schemas/MultiPolygon'
+    georel:
+      oneOf:
+      - type: string
+        enum:
+        - equals
+        - disjoint
+        - intersects
+        - within
+        - contains
+        - overlaps
+      - type: string
+        pattern: ^near;((maxDistance==\d+)|(minDistance==\d+))$
     EntityTemporalFragment:
       type: object
       properties:
@@ -626,48 +443,90 @@ components:
           items:
             $ref: '#/components/schemas/GeoProperty'
           minItems: 1
-    linearRing:
-      description: An array of four positions where the first equals the last
-      allOf:
-      - $ref: '#/components/schemas/positionArray'
-      - minItems: 4
-    MultiPoint:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - MultiPoint
-        coordinates:
-          $ref: '#/components/schemas/positionArray'
-    datasetId:
+    instanceId:
       type: string
       format: uri
-    coordinates:
-      oneOf:
-      - $ref: '#/components/schemas/position'
-      - $ref: '#/components/schemas/positionArray'
-      - $ref: '#/components/schemas/lineString'
-      - $ref: '#/components/schemas/polygon'
-    lineString:
-      description: An array of two or more positions
-      allOf:
-      - $ref: '#/components/schemas/positionArray'
-      - minItems: 2
-    polygon:
-      description: An array of linear rings
+    positionArray:
+      description: An array of positions
       type: array
       items:
-        $ref: '#/components/schemas/linearRing'
-    GeoProperty:
+        $ref: '#/components/schemas/position'
+    Point:
       type: object
       properties:
         type:
           type: string
           enum:
-          - GeoProperty
-        value:
-          $ref: '#/components/schemas/Geometry'
+          - Point
+        coordinates:
+          $ref: '#/components/schemas/position'
+    Polygon:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Polygon
+        coordinates:
+          $ref: '#/components/schemas/polygon'
+    observedAt:
+      type: string
+      format: date-time
+    modifiedAt:
+      type: string
+      format: date-time
+    timerel:
+      type: string
+      enum:
+      - before
+      - after
+      - between
+    LineString:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - LineString
+        coordinates:
+          $ref: '#/components/schemas/lineString'
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        detail:
+          type: string
+      required:
+      - type
+    EntityTemporalList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EntityTemporal'
+    MultiPolygon:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiPolygon
+        coordinates:
+          type: array
+          items:
+            $ref: '#/components/schemas/polygon'
+    Relationship:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Relationship
+        object:
+          type: string
+          format: uri
         observedAt:
           $ref: '#/components/schemas/observedAt'
         createdAt:
@@ -680,32 +539,21 @@ components:
           $ref: '#/components/schemas/instanceId'
       required:
       - type
-      - value
+      - object
       additionalProperties:
         oneOf:
         - $ref: '#/components/schemas/Property'
         - $ref: '#/components/schemas/Relationship'
-    instanceId:
+    linearRing:
+      description: An array of four positions where the first equals the last
+      allOf:
+      - $ref: '#/components/schemas/positionArray'
+      - minItems: 4
+    Name:
       type: string
-      format: uri
-    EntityTemporalList:
-      type: array
-      items:
-        $ref: '#/components/schemas/EntityTemporal'
-    observedAt:
-      type: string
-      format: date-time
-    MultiPolygon:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - MultiPolygon
-        coordinates:
-          type: array
-          items:
-            $ref: '#/components/schemas/polygon'
+      pattern: ^((\d|[a-zA-Z]|_)+(:(\d|[a-zA-Z]|_)+)?(#\d+)?)$
+      minLength: 1
+      description: NGSI-LD Name
     LdContext:
       oneOf:
       - type: object
@@ -718,18 +566,186 @@ components:
           - type: string
             format: uri
           - type: object
-    Geometry:
-      description: ' Avalid GeoJSON geometry object'
-      oneOf:
-      - $ref: '#/components/schemas/Point'
-      - $ref: '#/components/schemas/MultiPoint'
-      - $ref: '#/components/schemas/Polygon'
-      - $ref: '#/components/schemas/LineString'
-      - $ref: '#/components/schemas/MultiLineString'
-      - $ref: '#/components/schemas/MultiPolygon'
-    createdAt:
-      type: string
-      format: date-time
+    EntityTemporal:
+      allOf:
+      - $ref: '#/components/schemas/EntityTemporalFragment'
+      - type: object
+        required:
+        - type
+        - id
+    MultiPoint:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiPoint
+        coordinates:
+          $ref: '#/components/schemas/positionArray'
+  parameters:
+    timeproperty:
+      name: timeproperty
+      description: The name of the property that contains the temporal data that will be used to resolve the temporal query
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/Name'
+    instanceId:
+      name: instanceId
+      description: Instance Id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uri
+    csf:
+      name: csf
+      description: Context Source Filter
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+    attrs:
+      name: attrs
+      description: Comma separated list of attribute names (properties or relationships) to be retrieved
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+    entityId:
+      name: entityId
+      description: Entity Id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uri
+    parameters-type:
+      name: type
+      description: Entity Type
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/Name'
+    time:
+      name: time
+      description: start time for temporal query
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+    type:
+      name: type
+      description: Comma separated list of Entity type names to be retrieved
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+    geometry:
+      name: geometry
+      description: Geometry
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/geometry'
+    georel:
+      name: georel
+      description: Geo-relationship
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/georel'
+    geoproperty:
+      name: geoproperty
+      description: The name of the property that contains the geo-spatial data that will be used to resolve the geoquery
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+    q:
+      name: q
+      description: Query
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+    endTime:
+      name: endTime
+      description: end time for temporal query
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+    attrId:
+      name: attrId
+      description: Attribute Id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Name'
+    coordinates:
+      name: coordinates
+      description: Coordinates serialized as a string
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/coordinates'
+    idPattern:
+      name: idPattern
+      description: Regular expression that must be matched by Entity ids
+      in: query
+      required: false
+      schema:
+        type: string
+        format: regexp
+    limit:
+      name: limit
+      description: Pagination limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+    timerel:
+      name: timerel
+      description: Time relationship
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/timerel'
+    lastN:
+      name: lastN
+      description: Only retrieve last N instances
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+    id:
+      name: id
+      description: Comma separated list of URIs to be retrieved
+      in: query
+      required: false
+      schema:
+        type: string
+        format: uri
+    components-parameters-options:
+      name: options
+      description: Options dictionary
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - temporalValues
+        - sysAttrs
 externalDocs:
   description: Find out more about the ETSI ISG Context Information Management
   url: https://portal.etsi.org/tb.aspx?tbid=854&SubTB=854

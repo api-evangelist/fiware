@@ -1,10 +1,10 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  description: This OAS file describes the NGSI-LD API defined by the ETSI ISG CIM group. This Cross-domain Context Information Management API allows to provide, consume and subscribe to context information in multiple scenarios and involving multiple stakeholders
-  version: latest
-  title: ETSI ISG CIM / NGSI-LD API Entry Point Batch Operations API
-  contact:
-    email: NGSI-LD@etsi.org
+  title: Fiware Batch Operations API
+  version: '1.0'
+  description: 'Operations tagged Batch Operations across 2 of this provider''s published API definitions: fiware-ngsi-ld-openapi.yml, fiware-ngsiv2-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: http://orion.lab.fiware.org/
 tags:
 - name: Batch Operations
 paths:
@@ -33,6 +33,8 @@ paths:
             application/json;application/ld+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+      summary: Batch entity creation
+      x-summary-source: derived
   /entityOperations/update:
     post:
       description: Batch Entity update
@@ -66,6 +68,8 @@ paths:
             application/json;application/ld+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+      summary: Batch entity update
+      x-summary-source: derived
   /entityOperations/upsert:
     post:
       description: Batch Entity upsert
@@ -100,6 +104,8 @@ paths:
             application/json;application/ld+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+      summary: Batch entity upsert
+      x-summary-source: derived
   /entityOperations/delete:
     post:
       description: Batch Entity delete
@@ -129,37 +135,73 @@ paths:
             application/json;application/ld+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+      summary: Batch entity delete
+      x-summary-source: derived
   /v2/op/update:
     post:
-      description: "This operation allows to create, update and/or delete several entities in a single batch operation.\nThe payload is an object with two properties:\n+ `actionType`, to specify the kind of update action to do: either `append`, `appendStrict`, `update`,\n  `delete`, or `replace`.\n+ `entities`, an array of entities, each entity specified using the JSON entity representation format\n  (described in the section \"JSON Entity Representation\").\nThis operation is split in as many individual operations as entities in the `entities` vector, so\nthe `actionType` is executed for each one of them. Depending on the `actionType`, a mapping with\nregular non-batch operations can be done:\n* `append`: maps to `POST /v2/entities` (if the entity does not already exist) or `POST /v2/entities/<id>/attrs`\n  (if the entity already exists).\n* `appendStrict`: maps to `POST /v2/entities` (if the entity does not already exist) or\n  `POST /v2/entities/<id>/attrs?options=append` (if the entity already exists).\n* `update`: maps to `PATCH /v2/entities/<id>/attrs`.\n* `delete`: maps to `DELETE /v2/entities/<id>/attrs/<attrName>` on every attribute included in the entity or\n  to `DELETE /v2/entities/<id>` if no attribute were included in the entity.\n* `replace`: maps to `PUT /v2/entities/<id>/attrs`.\nResponse:\n* Successful operation uses 204 No Content.\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      description: 'This operation allows to create, update and/or delete several entities in a single batch operation.
+
+        The payload is an object with two properties:
+
+        + `actionType`, to specify the kind of update action to do: either `append`, `appendStrict`, `update`,
+
+        `delete`, or `replace`.
+
+        + `entities`, an array of entities, each entity specified using the JSON entity representation format
+
+        (described in the section "JSON Entity Representation").
+
+        This operation is split in as many individual operations as entities in the `entities` vector, so
+
+        the `actionType` is executed for each one of them. Depending on the `actionType`, a mapping with
+
+        regular non-batch operations can be done:
+
+        * `append`: maps to `POST /v2/entities` (if the entity does not already exist) or `POST /v2/entities//attrs`
+
+        (if the entity already exists).
+
+        * `appendStrict`: maps to `POST /v2/entities` (if the entity does not already exist) or
+
+        `POST /v2/entities//attrs?options=append` (if the entity already exists).
+
+        * `update`: maps to `PATCH /v2/entities//attrs`.
+
+        * `delete`: maps to `DELETE /v2/entities//attrs/` on every attribute included in the entity or
+
+        to `DELETE /v2/entities/` if no attribute were included in the entity.
+
+        * `replace`: maps to `PUT /v2/entities//attrs`.
+
+        Response:
+
+        * Successful operation uses 204 No Content.
+
+        * Errors use a non-2xx and (optionally) an error payload. See subsection on "Error Responses" for
+
+        more details.'
       summary: Update
       tags:
       - Batch Operations
       operationId: Update
-      produces:
-      - application/json
       parameters:
       - name: Content-Type
         in: header
         required: true
-        type: string
-        description: ''
-      - name: body
-        in: body
-        required: true
         description: ''
         schema:
-          $ref: '#/definitions/UpdateRequest'
+          type: string
       - name: options
         in: query
         required: false
-        enum:
-        - keyValues
         x-enum-elements:
         - name: keyValues
           description: ''
-        type: string
         description: Options dictionary
+        schema:
+          type: string
+          enum:
+          - keyValues
       responses:
         '204':
           description: ''
@@ -186,58 +228,89 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRequest'
+        required: true
+    servers:
+    - url: http://orion.lab.fiware.org/
   /v2/op/query:
     post:
-      description: "The response payload is an Array containing one object per matching entity, or an empty array `[]` if \nno entities are found. The entities follow the JSON entity representation format\n(described in the section \"JSON Entity Representation\").\nThe payload may contain the following elements (all of them optional):\n+ `entities`: a list of entites to search for. Each element is represented by a JSON object with the\n  following elements:\n    + `id` or `idPattern`: Id or pattern of the affected entities. Both cannot be used at the same\n      time, but one of them must be present.\n    + `type` or `typePattern`: Type or type pattern of the entities to search for. Both cannot be used at\n      the same time. If omitted, it means \"any entity type\".\n+ `attrs`: List of attributes to be provided (if not specified, all attributes).\n+ `expression`: an expression composed of `q`, `mq`, `georel`, `geometry` and `coords` (see \"List\n   entities\" operation above about this field).\n+ `metadata`: a list of metadata names to include in the response.\n   See \"Filtering out attributes and metadata\" section for more detail.\nResponse code:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      description: 'The response payload is an Array containing one object per matching entity, or an empty array `[]` if
+
+        no entities are found. The entities follow the JSON entity representation format
+
+        (described in the section "JSON Entity Representation").
+
+        The payload may contain the following elements (all of them optional):
+
+        + `entities`: a list of entites to search for. Each element is represented by a JSON object with the
+
+        following elements:
+
+        + `id` or `idPattern`: Id or pattern of the affected entities. Both cannot be used at the same
+
+        time, but one of them must be present.
+
+        + `type` or `typePattern`: Type or type pattern of the entities to search for. Both cannot be used at
+
+        the same time. If omitted, it means "any entity type".
+
+        + `attrs`: List of attributes to be provided (if not specified, all attributes).
+
+        + `expression`: an expression composed of `q`, `mq`, `georel`, `geometry` and `coords` (see "List
+
+        entities" operation above about this field).
+
+        + `metadata`: a list of metadata names to include in the response.
+
+        See "Filtering out attributes and metadata" section for more detail.
+
+        Response code:
+
+        * Successful operation uses 200 OK
+
+        * Errors use a non-2xx and (optionally) an error payload. See subsection on "Error Responses" for
+
+        more details.'
       summary: Query
       tags:
       - Batch Operations
       operationId: Query
-      produces:
-      - application/json
       parameters:
       - name: Content-Type
         in: header
         required: true
-        type: string
-        description: ''
-      - name: body
-        in: body
-        required: true
         description: ''
         schema:
-          $ref: '#/definitions/QueryRequest'
+          type: string
       - name: limit
         in: query
         required: false
-        type: number
-        format: double
-        exclusiveMaximum: false
-        exclusiveMinimum: false
         description: Limit the number of entities to be retrieved.
+        schema:
+          type: number
+          format: double
       - name: offset
         in: query
         required: false
-        type: number
-        format: double
-        exclusiveMaximum: false
-        exclusiveMinimum: false
         description: Skip a number of records.
+        schema:
+          type: number
+          format: double
       - name: orderBy
         in: query
         required: false
-        type: string
         description: 'Criteria for ordering results.
 
           See "Ordering Results" section for details.'
+        schema:
+          type: string
       - name: options
         in: query
         required: false
-        enum:
-        - count
-        - keyValues
-        - values
-        - unique
         x-enum-elements:
         - name: count
           description: ''
@@ -247,36 +320,43 @@ paths:
           description: ''
         - name: unique
           description: ''
-        type: string
         description: Options dictionary
+        schema:
+          type: string
+          enum:
+          - count
+          - keyValues
+          - values
+          - unique
       responses:
         '200':
           description: ''
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/QueryResponse'
-          examples:
+          content:
             application/json:
-            - type: Room
-              id: DC_S1-D41
-              temperature:
-                value: 35.6
-                type: Number
-            - type: Room
-              id: Boe-Idearium
-              temperature:
-                value: 22.5
-                type: Number
-            - type: Car
-              id: P-9873-K
-              temperature:
-                value: 40
-                type: Number
-                accuracy: 2
-                timestamp:
-                  value: '2015-06-04T07:20:27.378Z'
-                  type: DateTime
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/QueryResponse'
+              example:
+              - type: Room
+                id: DC_S1-D41
+                temperature:
+                  value: 35.6
+                  type: Number
+              - type: Room
+                id: Boe-Idearium
+                temperature:
+                  value: 22.5
+                  type: Number
+              - type: Car
+                id: P-9873-K
+                temperature:
+                  value: 40
+                  type: Number
+                  accuracy: 2
+                  timestamp:
+                    value: '2015-06-04T07:20:27.378Z'
+                    type: DateTime
       x-unitTests:
       - request:
           method: POST
@@ -302,37 +382,53 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+        required: true
+    servers:
+    - url: http://orion.lab.fiware.org/
   /v2/op/notify:
     post:
-      description: "This operation is intended to consume a notification payload so that all the entity data included by such notification is persisted, overwriting if necessary.\nThis operation is useful when one NGSIv2 endpoint is subscribed to another NGSIv2 endpoint (federation scenarios). \nThe request payload must be an NGSIv2 notification payload. \nThe behaviour must be exactly the same as `POST /v2/op/update` with `actionType` equal to `append`.\nResponse code:\n* Successful operation uses 200 OK\n* Errors use a non-2xx and (optionally) an error payload. See subsection on \"Error Responses\" for\n  more details."
+      description: 'This operation is intended to consume a notification payload so that all the entity data included by such notification is persisted, overwriting if necessary.
+
+        This operation is useful when one NGSIv2 endpoint is subscribed to another NGSIv2 endpoint (federation scenarios).
+
+        The request payload must be an NGSIv2 notification payload.
+
+        The behaviour must be exactly the same as `POST /v2/op/update` with `actionType` equal to `append`.
+
+        Response code:
+
+        * Successful operation uses 200 OK
+
+        * Errors use a non-2xx and (optionally) an error payload. See subsection on "Error Responses" for
+
+        more details.'
       summary: Notify
       tags:
       - Batch Operations
       operationId: Notify
-      produces:
-      - application/json
       parameters:
       - name: Content-Type
         in: header
         required: true
-        type: string
-        description: ''
-      - name: body
-        in: body
-        required: true
         description: ''
         schema:
-          $ref: '#/definitions/NotifyRequest'
+          type: string
       - name: options
         in: query
         required: false
-        enum:
-        - keyValues
         x-enum-elements:
         - name: keyValues
           description: ''
-        type: string
         description: Options dictionary
+        schema:
+          type: string
+          enum:
+          - keyValues
       responses:
         '200':
           description: ''
@@ -360,6 +456,14 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotifyRequest'
+        required: true
+    servers:
+    - url: http://orion.lab.fiware.org/
 components:
   schemas:
     Entity:
@@ -368,55 +472,32 @@ components:
         - id
         - type
       - $ref: '#/components/schemas/EntityFragment'
-    positionArray:
-      description: An array of positions
+    polygon:
+      description: An array of linear rings
       type: array
       items:
-        $ref: '#/components/schemas/position'
-    LineString:
+        $ref: '#/components/schemas/linearRing'
+    EntityList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Entity'
+    position:
+      description: A single position
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        type: number
+      additionalProperties: false
+    GeoProperty:
       type: object
       properties:
         type:
           type: string
           enum:
-          - LineString
-        coordinates:
-          $ref: '#/components/schemas/lineString'
-    MultiLineString:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - MultiLineString
-        coordinates:
-          type: array
-          items:
-            $ref: '#/components/schemas/lineString'
-    Point:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - Point
-        coordinates:
-          $ref: '#/components/schemas/position'
-    Name:
-      type: string
-      pattern: ^((\d|[a-zA-Z]|_)+(:(\d|[a-zA-Z]|_)+)?(#\d+)?)$
-      minLength: 1
-      description: NGSI-LD Name
-    Relationship:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - Relationship
-        object:
-          type: string
-          format: uri
+          - GeoProperty
+        value:
+          $ref: '#/components/schemas/Geometry'
         observedAt:
           $ref: '#/components/schemas/observedAt'
         createdAt:
@@ -429,23 +510,17 @@ components:
           $ref: '#/components/schemas/instanceId'
       required:
       - type
-      - object
+      - value
       additionalProperties:
         oneOf:
         - $ref: '#/components/schemas/Property'
         - $ref: '#/components/schemas/Relationship'
-    BatchOperationResult:
-      type: object
-      properties:
-        success:
-          type: array
-          items:
-            type: string
-            format: uri
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchEntityError'
+    createdAt:
+      type: string
+      format: date-time
+    datasetId:
+      type: string
+      format: uri
     Property:
       type: object
       properties:
@@ -477,18 +552,39 @@ components:
         oneOf:
         - $ref: '#/components/schemas/Property'
         - $ref: '#/components/schemas/Relationship'
-    modifiedAt:
-      type: string
-      format: date-time
-    Polygon:
+    lineString:
+      description: An array of two or more positions
+      allOf:
+      - $ref: '#/components/schemas/positionArray'
+      - minItems: 2
+    MultiLineString:
       type: object
       properties:
         type:
           type: string
           enum:
-          - Polygon
+          - MultiLineString
         coordinates:
-          $ref: '#/components/schemas/polygon'
+          type: array
+          items:
+            $ref: '#/components/schemas/lineString'
+    Geometry:
+      description: ' Avalid GeoJSON geometry object'
+      oneOf:
+      - $ref: '#/components/schemas/Point'
+      - $ref: '#/components/schemas/MultiPoint'
+      - $ref: '#/components/schemas/Polygon'
+      - $ref: '#/components/schemas/LineString'
+      - $ref: '#/components/schemas/MultiLineString'
+      - $ref: '#/components/schemas/MultiPolygon'
+    instanceId:
+      type: string
+      format: uri
+    positionArray:
+      description: An array of positions
+      type: array
+      items:
+        $ref: '#/components/schemas/position'
     EntityFragment:
       type: object
       properties:
@@ -514,14 +610,27 @@ components:
         - $ref: '#/components/schemas/Property'
         - $ref: '#/components/schemas/Relationship'
         - $ref: '#/components/schemas/GeoProperty'
-    position:
-      description: A single position
-      type: array
-      minItems: 2
-      maxItems: 2
-      items:
-        type: number
-      additionalProperties: false
+    Point:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Point
+        coordinates:
+          $ref: '#/components/schemas/position'
+    Polygon:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Polygon
+        coordinates:
+          $ref: '#/components/schemas/polygon'
+    observedAt:
+      type: string
+      format: date-time
     BatchEntityError:
       type: object
       properties:
@@ -530,6 +639,9 @@ components:
           format: uri
         error:
           $ref: '#/components/schemas/ProblemDetails'
+    modifiedAt:
+      type: string
+      format: date-time
     ProblemDetails:
       type: object
       properties:
@@ -542,46 +654,48 @@ components:
           type: string
       required:
       - type
-    linearRing:
-      description: An array of four positions where the first equals the last
-      allOf:
-      - $ref: '#/components/schemas/positionArray'
-      - minItems: 4
-    MultiPoint:
+    LineString:
       type: object
       properties:
         type:
           type: string
           enum:
-          - MultiPoint
+          - LineString
         coordinates:
-          $ref: '#/components/schemas/positionArray'
-    datasetId:
-      type: string
-      format: uri
-    lineString:
-      description: An array of two or more positions
-      allOf:
-      - $ref: '#/components/schemas/positionArray'
-      - minItems: 2
-    EntityList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Entity'
-    polygon:
-      description: An array of linear rings
-      type: array
-      items:
-        $ref: '#/components/schemas/linearRing'
-    GeoProperty:
+          $ref: '#/components/schemas/lineString'
+    BatchOperationResult:
+      type: object
+      properties:
+        success:
+          type: array
+          items:
+            type: string
+            format: uri
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchEntityError'
+    MultiPolygon:
       type: object
       properties:
         type:
           type: string
           enum:
-          - GeoProperty
-        value:
-          $ref: '#/components/schemas/Geometry'
+          - MultiPolygon
+        coordinates:
+          type: array
+          items:
+            $ref: '#/components/schemas/polygon'
+    Relationship:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Relationship
+        object:
+          type: string
+          format: uri
         observedAt:
           $ref: '#/components/schemas/observedAt'
         createdAt:
@@ -594,28 +708,21 @@ components:
           $ref: '#/components/schemas/instanceId'
       required:
       - type
-      - value
+      - object
       additionalProperties:
         oneOf:
         - $ref: '#/components/schemas/Property'
         - $ref: '#/components/schemas/Relationship'
-    instanceId:
+    linearRing:
+      description: An array of four positions where the first equals the last
+      allOf:
+      - $ref: '#/components/schemas/positionArray'
+      - minItems: 4
+    Name:
       type: string
-      format: uri
-    observedAt:
-      type: string
-      format: date-time
-    MultiPolygon:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - MultiPolygon
-        coordinates:
-          type: array
-          items:
-            $ref: '#/components/schemas/polygon'
+      pattern: ^((\d|[a-zA-Z]|_)+(:(\d|[a-zA-Z]|_)+)?(#\d+)?)$
+      minLength: 1
+      description: NGSI-LD Name
     LdContext:
       oneOf:
       - type: object
@@ -628,167 +735,74 @@ components:
           - type: string
             format: uri
           - type: object
-    Geometry:
-      description: ' Avalid GeoJSON geometry object'
-      oneOf:
-      - $ref: '#/components/schemas/Point'
-      - $ref: '#/components/schemas/MultiPoint'
-      - $ref: '#/components/schemas/Polygon'
-      - $ref: '#/components/schemas/LineString'
-      - $ref: '#/components/schemas/MultiLineString'
-      - $ref: '#/components/schemas/MultiPolygon'
-    createdAt:
-      type: string
-      format: date-time
-definitions:
-  NotifyRequest:
-    title: Notify request
-    example:
-      subscriptionId: 5aeb0ee97d4ef10a12a0262f
-      data:
-      - type: Room
-        id: DC_S1-D41
-        temperature:
-          value: 35.6
-          type: Number
-      - type: Room
-        id: Boe-Idearium
-        temperature:
-          value: 22.5
-          type: Number
-    type: object
-    properties:
-      subscriptionId:
-        description: ''
-        example: 5aeb0ee97d4ef10a12a0262f
-        type: string
-      data:
-        description: ''
-        example:
-        - type: Room
-          id: DC_S1-D41
-          temperature:
-            value: 35.6
-            type: Number
-        - type: Room
-          id: Boe-Idearium
-          temperature:
-            value: 22.5
-            type: Number
-        type: array
-        items:
-          type: object
-    required:
-    - subscriptionId
-    - data
-  QueryRequest:
-    title: Query request
-    example:
-      entities:
-      - idPattern: .*
-        type: Room
-      - id: Car
-        type: P-9873-K
-      attrs:
-      - temperature
-      - humidity
-      expression:
-        q: temperature>20
-      metadata:
-      - accuracy
-      - timestamp
-    type: object
-    properties:
-      entities:
-        description: ''
-        example:
+    MultiPoint:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiPoint
+        coordinates:
+          $ref: '#/components/schemas/positionArray'
+    QueryRequest:
+      title: Query request
+      example:
+        entities:
         - idPattern: .*
           type: Room
         - id: Car
           type: P-9873-K
-        type: array
-        items:
-          type: object
-      attrs:
-        description: ''
-        example:
+        attrs:
         - temperature
         - humidity
-        type: array
-        items:
-          type: string
-      expression:
-        description: ''
-        example:
+        expression:
           q: temperature>20
-        type: object
-      metadata:
-        description: ''
-        example:
+        metadata:
         - accuracy
         - timestamp
-        type: array
-        items:
-          type: string
-    required:
-    - entities
-    - attrs
-    - expression
-    - metadata
-  QueryResponse:
-    title: Query response
-    example:
-      type: Room
-      id: DC_S1-D41
-      temperature:
-        value: 35.6
-        type: Number
-    type: object
-    properties:
-      type:
-        description: ''
-        example: Room
-        type: string
-      id:
-        description: ''
-        example: DC_S1-D41
-        type: string
-      temperature:
-        description: ''
-        example:
-          value: 35.6
-          type: Number
-        type: object
-    required:
-    - type
-    - id
-    - temperature
-  UpdateRequest:
-    title: Update request
-    example:
-      actionType: append
-      entities:
-      - type: Room
-        id: Bcn-Welt
-        temperature:
-          value: 21.7
-        humidity:
-          value: 60
-      - type: Room
-        id: Mad_Aud
-        temperature:
-          value: 22.9
-        humidity:
-          value: 85
-    type: object
-    properties:
-      actionType:
-        description: ''
-        example: append
-        type: string
-      entities:
-        description: ''
-        example:
+      type: object
+      properties:
+        entities:
+          description: ''
+          example:
+          - idPattern: .*
+            type: Room
+          - id: Car
+            type: P-9873-K
+          type: array
+          items:
+            type: object
+        attrs:
+          description: ''
+          example:
+          - temperature
+          - humidity
+          type: array
+          items:
+            type: string
+        expression:
+          description: ''
+          example:
+            q: temperature>20
+          type: object
+        metadata:
+          description: ''
+          example:
+          - accuracy
+          - timestamp
+          type: array
+          items:
+            type: string
+      required:
+      - entities
+      - attrs
+      - expression
+      - metadata
+    UpdateRequest:
+      title: Update request
+      example:
+        actionType: append
+        entities:
         - type: Room
           id: Bcn-Welt
           temperature:
@@ -801,12 +815,104 @@ definitions:
             value: 22.9
           humidity:
             value: 85
-        type: array
-        items:
+      type: object
+      properties:
+        actionType:
+          description: ''
+          example: append
+          type: string
+        entities:
+          description: ''
+          example:
+          - type: Room
+            id: Bcn-Welt
+            temperature:
+              value: 21.7
+            humidity:
+              value: 60
+          - type: Room
+            id: Mad_Aud
+            temperature:
+              value: 22.9
+            humidity:
+              value: 85
+          type: array
+          items:
+            type: object
+      required:
+      - actionType
+      - entities
+    QueryResponse:
+      title: Query response
+      example:
+        type: Room
+        id: DC_S1-D41
+        temperature:
+          value: 35.6
+          type: Number
+      type: object
+      properties:
+        type:
+          description: ''
+          example: Room
+          type: string
+        id:
+          description: ''
+          example: DC_S1-D41
+          type: string
+        temperature:
+          description: ''
+          example:
+            value: 35.6
+            type: Number
           type: object
-    required:
-    - actionType
-    - entities
+      required:
+      - type
+      - id
+      - temperature
+    NotifyRequest:
+      title: Notify request
+      example:
+        subscriptionId: 5aeb0ee97d4ef10a12a0262f
+        data:
+        - type: Room
+          id: DC_S1-D41
+          temperature:
+            value: 35.6
+            type: Number
+        - type: Room
+          id: Boe-Idearium
+          temperature:
+            value: 22.5
+            type: Number
+      type: object
+      properties:
+        subscriptionId:
+          description: ''
+          example: 5aeb0ee97d4ef10a12a0262f
+          type: string
+        data:
+          description: ''
+          example:
+          - type: Room
+            id: DC_S1-D41
+            temperature:
+              value: 35.6
+              type: Number
+          - type: Room
+            id: Boe-Idearium
+            temperature:
+              value: 22.5
+              type: Number
+          type: array
+          items:
+            type: object
+      required:
+      - subscriptionId
+      - data
 externalDocs:
   description: Find out more about the ETSI ISG Context Information Management
   url: https://portal.etsi.org/tb.aspx?tbid=854&SubTB=854
+x-refined-from:
+- fiware-ngsi-ld-openapi.yml
+- fiware-ngsiv2-openapi.yml
