@@ -24,7 +24,7 @@ paths:
       summary: Get attribute data
       tags:
       - Attributes
-      operationId: Get attribute data
+      operationId: GetAttributeData
       parameters:
       - name: entityId
         in: path
@@ -87,6 +87,8 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
+      x-operation-id-source: normalized
+      x-operation-id-original: Get attribute data
     put:
       description: 'The request payload is an object representing the new attribute data. Previous attribute data
 
@@ -104,7 +106,7 @@ paths:
       summary: Update Attribute Data
       tags:
       - Attributes
-      operationId: Update Attribute Data
+      operationId: UpdateAttributeData
       parameters:
       - name: entityId
         in: path
@@ -164,6 +166,8 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateAttributeDataRequest'
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Update Attribute Data
     delete:
       description: 'Removes an entity attribute.
 
@@ -177,7 +181,7 @@ paths:
       summary: Remove a Single Attribute
       tags:
       - Attributes
-      operationId: Remove a Single Attribute
+      operationId: RemoveASingleAttribute
       parameters:
       - name: entityId
         in: path
@@ -222,8 +226,33 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
+      x-operation-id-source: normalized
+      x-operation-id-original: Remove a Single Attribute
 components:
   schemas:
+    UpdateAttributeDataRequest:
+      title: Update Attribute Data request
+      example:
+        value: 25.0
+        metadata:
+          unitCode:
+            value: CEL
+      type: object
+      properties:
+        value:
+          description: ''
+          example: 25
+          type: number
+          format: double
+        metadata:
+          description: ''
+          example:
+            unitCode:
+              value: CEL
+          type: object
+      required:
+      - value
+      - metadata
     GetAttributeDataResponse:
       title: Get attribute data response
       example:
@@ -248,27 +277,4 @@ components:
       required:
       - value
       - type
-      - metadata
-    UpdateAttributeDataRequest:
-      title: Update Attribute Data request
-      example:
-        value: 25.0
-        metadata:
-          unitCode:
-            value: CEL
-      type: object
-      properties:
-        value:
-          description: ''
-          example: 25
-          type: number
-          format: double
-        metadata:
-          description: ''
-          example:
-            unitCode:
-              value: CEL
-          type: object
-      required:
-      - value
       - metadata

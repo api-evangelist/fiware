@@ -24,7 +24,7 @@ paths:
       summary: Retrieve API Resources
       tags:
       - API Entry Point
-      operationId: Retrieve API Resources
+      operationId: RetrieveAPIResources
       responses:
         '200':
           description: ''
@@ -69,6 +69,8 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieve API Resources
 components:
   schemas:
     RetrieveApiResourcesResponse:

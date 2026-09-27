@@ -42,7 +42,7 @@ paths:
       summary: List Entity Types
       tags:
       - Types
-      operationId: List Entity Types
+      operationId: ListEntityTypes
       parameters:
       - name: limit
         in: query
@@ -129,6 +129,8 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
+      x-operation-id-source: normalized
+      x-operation-id-original: List Entity Types
   /v2/types/{entityType}:
     get:
       description: 'This operation returns a JSON object with information about the type:
@@ -153,7 +155,7 @@ paths:
       summary: Retrieve entity type
       tags:
       - Types
-      operationId: Retrieve entity type
+      operationId: RetrieveEntityType
       parameters:
       - name: entityType
         in: path
@@ -202,6 +204,8 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieve entity type
 components:
   schemas:
     RetrieveEntityTypeResponse:

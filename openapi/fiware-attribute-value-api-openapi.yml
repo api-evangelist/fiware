@@ -40,7 +40,7 @@ paths:
       summary: Get Attribute Value
       tags:
       - Attribute Value
-      operationId: Get Attribute Value
+      operationId: GetAttributeValue
       parameters:
       - name: entityId
         in: path
@@ -96,6 +96,8 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Attribute Value
     put:
       description: 'The request payload is the new attribute value.
 
@@ -133,7 +135,7 @@ paths:
       summary: Update Attribute Value
       tags:
       - Attribute Value
-      operationId: Update Attribute Value
+      operationId: UpdateAttributeValue
       parameters:
       - name: entityId
         in: path
@@ -193,6 +195,8 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateAttributeValueRequest'
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Update Attribute Value
 components:
   schemas:
     UpdateAttributeValueRequest:

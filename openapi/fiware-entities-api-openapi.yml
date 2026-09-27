@@ -36,7 +36,7 @@ paths:
       summary: List Entities
       tags:
       - Entities
-      operationId: List Entities
+      operationId: ListEntities
       parameters:
       - name: id
         in: query
@@ -238,6 +238,8 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
+      x-operation-id-source: normalized
+      x-operation-id-original: List Entities
     post:
       description: 'The payload is an object representing the entity to be created. The object follows
 
@@ -257,7 +259,7 @@ paths:
       summary: Create Entity
       tags:
       - Entities
-      operationId: Create Entity
+      operationId: CreateEntity
       parameters:
       - name: Content-Type
         in: header
@@ -312,6 +314,8 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateEntityRequest'
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Create Entity
   /v2/entities/{entityId}:
     get:
       description: 'The response is an object representing the entity identified by the ID. The object follows
@@ -332,7 +336,7 @@ paths:
       summary: Retrieve Entity
       tags:
       - Entities
-      operationId: Retrieve Entity
+      operationId: RetrieveEntity
       parameters:
       - name: entityId
         in: path
@@ -416,6 +420,8 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieve Entity
     delete:
       description: 'Delete the entity.
 
@@ -429,7 +435,7 @@ paths:
       summary: Remove Entity
       tags:
       - Entities
-      operationId: Remove Entity
+      operationId: RemoveEntity
       parameters:
       - name: entityId
         in: path
@@ -454,6 +460,8 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
+      x-operation-id-source: normalized
+      x-operation-id-original: Remove Entity
   /v2/entities/{entityId}/attrs:
     get:
       description: 'This request is similar to retreiving the whole entity, however this one omits the `id` and `type`
@@ -478,7 +486,7 @@ paths:
       summary: Retrieve Entity Attributes
       tags:
       - Entities
-      operationId: Retrieve Entity Attributes
+      operationId: RetrieveEntityAttributes
       parameters:
       - name: entityId
         in: path
@@ -562,6 +570,8 @@ paths:
         AllowDynamicQueryParameters: false
         AllowDynamicFormParameters: false
         IsMultiContentStreaming: false
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieve Entity Attributes
     put:
       description: 'The request payload is an object representing the new entity attributes. The object follows
 
@@ -583,7 +593,7 @@ paths:
       summary: Replace all entity attributes
       tags:
       - Entities
-      operationId: Replace all entity attributes
+      operationId: ReplaceAllEntityAttributes
       parameters:
       - name: entityId
         in: path
@@ -631,6 +641,8 @@ paths:
             schema:
               $ref: '#/components/schemas/ReplaceAllEntityAttributesRequest'
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Replace all entity attributes
     post:
       description: 'The request payload is an object representing the attributes to append or update. The object follows
 
@@ -662,7 +674,7 @@ paths:
       summary: Update or Append Entity Attributes
       tags:
       - Entities
-      operationId: Update or Append Entity Attributes
+      operationId: UpdateOrAppendEntityAttributes
       parameters:
       - name: entityId
         in: path
@@ -713,6 +725,8 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateOrAppendEntityAttributesRequest'
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Update or Append Entity Attributes
     patch:
       description: 'The request payload is an object representing the attributes to update. The object follows
 
@@ -734,7 +748,7 @@ paths:
       summary: Update Existing Entity Attributes
       tags:
       - Entities
-      operationId: Update Existing Entity Attributes
+      operationId: UpdateExistingEntityAttributes
       parameters:
       - name: entityId
         in: path
@@ -782,6 +796,8 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateExistingEntityAttributesRequest'
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Update Existing Entity Attributes
 components:
   schemas:
     UpdateOrAppendEntityAttributesRequest:
@@ -851,23 +867,6 @@ components:
       - temperature
       - humidity
       - location
-    ReplaceAllEntityAttributesRequest:
-      title: Replace all entity attributes request
-      type: object
-      properties:
-        temperature:
-          description: ''
-          example:
-            value: 25.5
-          type: object
-        seatNumber:
-          description: ''
-          example:
-            value: 6
-          type: object
-      required:
-      - temperature
-      - seatNumber
     RetrieveEntityAttributesResponse:
       title: Retrieve Entity Attributes response
       example:
@@ -912,23 +911,48 @@ components:
       - temperature
       - humidity
       - location
-    UpdateExistingEntityAttributesRequest:
-      title: Update Existing Entity Attributes request
+    ListEntitiesResponse:
+      title: List Entities response
+      example:
+        type: Room
+        id: DC_S1-D41
+        temperature:
+          value: 35.6
+          type: Number
+          metadata: {}
       type: object
       properties:
+        type:
+          description: ''
+          example: Room
+          type: string
+        id:
+          description: ''
+          example: DC_S1-D41
+          type: string
         temperature:
           description: ''
           example:
-            value: 25.5
+            value: 35.6
+            type: Number
+            metadata: {}
           type: object
-        seatNumber:
+        speed:
           description: ''
           example:
-            value: 6
+            value: 100
+            type: number
+            metadata:
+              accuracy:
+                value: 2
+                type: Number
+              timestamp:
+                value: '2015-06-04T07:20:27.378Z'
+                type: DateTime
           type: object
       required:
-      - temperature
-      - seatNumber
+      - type
+      - id
     CreateEntityRequest:
       title: Create Entity request
       example:
@@ -979,45 +1003,37 @@ components:
       - temperature
       - humidity
       - location
-    ListEntitiesResponse:
-      title: List Entities response
-      example:
-        type: Room
-        id: DC_S1-D41
-        temperature:
-          value: 35.6
-          type: Number
-          metadata: {}
+    UpdateExistingEntityAttributesRequest:
+      title: Update Existing Entity Attributes request
       type: object
       properties:
-        type:
-          description: ''
-          example: Room
-          type: string
-        id:
-          description: ''
-          example: DC_S1-D41
-          type: string
         temperature:
           description: ''
           example:
-            value: 35.6
-            type: Number
-            metadata: {}
+            value: 25.5
           type: object
-        speed:
+        seatNumber:
           description: ''
           example:
-            value: 100
-            type: number
-            metadata:
-              accuracy:
-                value: 2
-                type: Number
-              timestamp:
-                value: '2015-06-04T07:20:27.378Z'
-                type: DateTime
+            value: 6
           type: object
       required:
-      - type
-      - id
+      - temperature
+      - seatNumber
+    ReplaceAllEntityAttributesRequest:
+      title: Replace all entity attributes request
+      type: object
+      properties:
+        temperature:
+          description: ''
+          example:
+            value: 25.5
+          type: object
+        seatNumber:
+          description: ''
+          example:
+            value: 6
+          type: object
+      required:
+      - temperature
+      - seatNumber
