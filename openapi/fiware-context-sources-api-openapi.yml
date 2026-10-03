@@ -269,43 +269,19 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    MultiPolygon:
+    ContextSourceRegistrationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContextSourceRegistration'
+    Polygon:
       type: object
       properties:
         type:
           type: string
           enum:
-          - MultiPolygon
+          - Polygon
         coordinates:
-          type: array
-          items:
-            $ref: '#/components/schemas/polygon'
-    ContextSourceRegistrationList:
-      type: array
-      items:
-        $ref: '#/components/schemas/ContextSourceRegistration'
-    polygon:
-      description: An array of linear rings
-      type: array
-      items:
-        $ref: '#/components/schemas/linearRing'
-    Name:
-      type: string
-      pattern: ^((\d|[a-zA-Z]|_)+(:(\d|[a-zA-Z]|_)+)?(#\d+)?)$
-      minLength: 1
-      description: NGSI-LD Name
-    LdContext:
-      oneOf:
-      - type: object
-      - type: string
-        format: uri
-      - type: array
-        minItems: 1
-        items:
-          oneOf:
-          - type: string
-            format: uri
-          - type: object
+          $ref: '#/components/schemas/polygon'
     ContextSourceRegistrationFragment:
       type: object
       properties:
@@ -339,6 +315,151 @@ components:
           type: string
           format: uri
       additionalProperties: true
+    Subscription:
+      allOf:
+      - $ref: '#/components/schemas/SubscriptionFragment'
+      - type: object
+        properties:
+          id:
+            type: string
+            format: uri
+          type:
+            type: string
+            enum:
+            - Subscription
+          notification:
+            $ref: '#/components/schemas/NotificationParams'
+          status:
+            type: string
+            enum:
+            - active
+            - paused
+            - expired
+          createdAt:
+            $ref: '#/components/schemas/createdAt'
+          modifiedAt:
+            $ref: '#/components/schemas/modifiedAt'
+        allOf:
+        - required:
+          - id
+          - type
+          - notification
+        - anyOf:
+          - required:
+            - entities
+          - required:
+            - watchedAttributes
+    position:
+      description: A single position
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        type: number
+      additionalProperties: false
+    Name:
+      type: string
+      pattern: ^((\d|[a-zA-Z]|_)+(:(\d|[a-zA-Z]|_)+)?(#\d+)?)$
+      minLength: 1
+      description: NGSI-LD Name
+    createdAt:
+      type: string
+      format: date-time
+    Endpoint:
+      type: object
+      required:
+      - uri
+      properties:
+        uri:
+          type: string
+          format: uri
+        accept:
+          type: string
+          enum:
+          - application/json
+          - application/ld+json
+    polygon:
+      description: An array of linear rings
+      type: array
+      items:
+        $ref: '#/components/schemas/linearRing'
+    Geometry:
+      description: ' Avalid GeoJSON geometry object'
+      oneOf:
+      - $ref: '#/components/schemas/Point'
+      - $ref: '#/components/schemas/MultiPoint'
+      - $ref: '#/components/schemas/Polygon'
+      - $ref: '#/components/schemas/LineString'
+      - $ref: '#/components/schemas/MultiLineString'
+      - $ref: '#/components/schemas/MultiPolygon'
+    modifiedAt:
+      type: string
+      format: date-time
+    LdContext:
+      oneOf:
+      - type: object
+      - type: string
+        format: uri
+      - type: array
+        minItems: 1
+        items:
+          oneOf:
+          - type: string
+            format: uri
+          - type: object
+    MultiLineString:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiLineString
+        coordinates:
+          type: array
+          items:
+            $ref: '#/components/schemas/lineString'
+    MultiPoint:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiPoint
+        coordinates:
+          $ref: '#/components/schemas/positionArray'
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        detail:
+          type: string
+      required:
+      - type
+    geometry:
+      type: string
+      enum:
+      - Point
+      - MultiPoint
+      - LineString
+      - MultiLineString
+      - Polygon
+      - MultiPolygon
+    georel:
+      oneOf:
+      - type: string
+        enum:
+        - equals
+        - disjoint
+        - intersects
+        - within
+        - contains
+        - overlaps
+      - type: string
+        pattern: ^near;((maxDistance==\d+)|(minDistance==\d+))$
     TimeInterval:
       type: object
       required:
@@ -350,6 +471,50 @@ components:
         end:
           type: string
           format: date-time
+    lineString:
+      description: An array of two or more positions
+      allOf:
+      - $ref: '#/components/schemas/positionArray'
+      - minItems: 2
+    positionArray:
+      description: An array of positions
+      type: array
+      items:
+        $ref: '#/components/schemas/position'
+    ContextSourceRegistration:
+      allOf:
+      - $ref: '#/components/schemas/ContextSourceRegistrationFragment'
+      - type: object
+        properties:
+          id:
+            type: string
+            format: uri
+          type:
+            type: string
+            enum:
+            - ContextSourceRegistration
+          createdAt:
+            $ref: '#/components/schemas/createdAt'
+          modifiedAt:
+            $ref: '#/components/schemas/modifiedAt'
+        required:
+        - id
+        - type
+        - endpoint
+        - information
+    GeoQuery:
+      type: object
+      required:
+      - geometry
+      - coordinates
+      - georel
+      properties:
+        georel:
+          $ref: '#/components/schemas/georel'
+        coordinates:
+          $ref: '#/components/schemas/coordinates'
+        geometry:
+          $ref: '#/components/schemas/geometry'
     RegistrationInfo:
       type: object
       properties:
@@ -370,11 +535,17 @@ components:
           items:
             $ref: '#/components/schemas/Name'
           uniqueItems: true
-    linearRing:
-      description: An array of four positions where the first equals the last
-      allOf:
-      - $ref: '#/components/schemas/positionArray'
-      - minItems: 4
+    MultiPolygon:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiPolygon
+        coordinates:
+          type: array
+          items:
+            $ref: '#/components/schemas/polygon'
     LineString:
       type: object
       properties:
@@ -384,22 +555,39 @@ components:
           - LineString
         coordinates:
           $ref: '#/components/schemas/lineString'
-    Endpoint:
+    NotificationParams:
       type: object
-      required:
-      - uri
       properties:
-        uri:
+        attributes:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            minLength: 1
+          uniqueItems: true
+        format:
           type: string
-          format: uri
-        accept:
+        endpoint:
+          $ref: '#/components/schemas/Endpoint'
+        status:
           type: string
           enum:
-          - application/json
-          - application/ld+json
-    modifiedAt:
-      type: string
-      format: date-time
+          - ok
+          - failed
+        timesSent:
+          type: number
+          minimum: 1
+        lastNotification:
+          type: string
+          format: date-time
+        lastFailure:
+          type: string
+          format: date-time
+        lastSuccess:
+          type: string
+          format: date-time
+      required:
+      - endpoint
     Point:
       type: object
       properties:
@@ -409,28 +597,11 @@ components:
           - Point
         coordinates:
           $ref: '#/components/schemas/position'
-    MultiPoint:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - MultiPoint
-        coordinates:
-          $ref: '#/components/schemas/positionArray'
-    SubscriptionList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Subscription'
-    geometry:
-      type: string
-      enum:
-      - Point
-      - MultiPoint
-      - LineString
-      - MultiLineString
-      - Polygon
-      - MultiPolygon
+    linearRing:
+      description: An array of four positions where the first equals the last
+      allOf:
+      - $ref: '#/components/schemas/positionArray'
+      - minItems: 4
     EntityInfo:
       type: object
       properties:
@@ -444,20 +615,6 @@ components:
           format: regex
       required:
       - type
-    coordinates:
-      oneOf:
-      - $ref: '#/components/schemas/position'
-      - $ref: '#/components/schemas/positionArray'
-      - $ref: '#/components/schemas/lineString'
-      - $ref: '#/components/schemas/polygon'
-    position:
-      description: A single position
-      type: array
-      minItems: 2
-      maxItems: 2
-      items:
-        type: number
-      additionalProperties: false
     SubscriptionFragment:
       type: object
       properties:
@@ -497,236 +654,17 @@ components:
           $ref: '#/components/schemas/GeoQuery'
         csf:
           type: string
-    Geometry:
-      description: ' Avalid GeoJSON geometry object'
-      oneOf:
-      - $ref: '#/components/schemas/Point'
-      - $ref: '#/components/schemas/MultiPoint'
-      - $ref: '#/components/schemas/Polygon'
-      - $ref: '#/components/schemas/LineString'
-      - $ref: '#/components/schemas/MultiLineString'
-      - $ref: '#/components/schemas/MultiPolygon'
-    Subscription:
-      allOf:
-      - $ref: '#/components/schemas/SubscriptionFragment'
-      - type: object
-        properties:
-          id:
-            type: string
-            format: uri
-          type:
-            type: string
-            enum:
-            - Subscription
-          notification:
-            $ref: '#/components/schemas/NotificationParams'
-          status:
-            type: string
-            enum:
-            - active
-            - paused
-            - expired
-          createdAt:
-            $ref: '#/components/schemas/createdAt'
-          modifiedAt:
-            $ref: '#/components/schemas/modifiedAt'
-        allOf:
-        - required:
-          - id
-          - type
-          - notification
-        - anyOf:
-          - required:
-            - entities
-          - required:
-            - watchedAttributes
-    NotificationParams:
-      type: object
-      properties:
-        attributes:
-          type: array
-          minItems: 1
-          items:
-            type: string
-            minLength: 1
-          uniqueItems: true
-        format:
-          type: string
-        endpoint:
-          $ref: '#/components/schemas/Endpoint'
-        status:
-          type: string
-          enum:
-          - ok
-          - failed
-        timesSent:
-          type: number
-          minimum: 1
-        lastNotification:
-          type: string
-          format: date-time
-        lastFailure:
-          type: string
-          format: date-time
-        lastSuccess:
-          type: string
-          format: date-time
-      required:
-      - endpoint
-    ContextSourceRegistration:
-      allOf:
-      - $ref: '#/components/schemas/ContextSourceRegistrationFragment'
-      - type: object
-        properties:
-          id:
-            type: string
-            format: uri
-          type:
-            type: string
-            enum:
-            - ContextSourceRegistration
-          createdAt:
-            $ref: '#/components/schemas/createdAt'
-          modifiedAt:
-            $ref: '#/components/schemas/modifiedAt'
-        required:
-        - id
-        - type
-        - endpoint
-        - information
-    Polygon:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - Polygon
-        coordinates:
-          $ref: '#/components/schemas/polygon'
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type: string
-          format: uri
-        title:
-          type: string
-        detail:
-          type: string
-      required:
-      - type
-    georel:
-      oneOf:
-      - type: string
-        enum:
-        - equals
-        - disjoint
-        - intersects
-        - within
-        - contains
-        - overlaps
-      - type: string
-        pattern: ^near;((maxDistance==\d+)|(minDistance==\d+))$
-    MultiLineString:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - MultiLineString
-        coordinates:
-          type: array
-          items:
-            $ref: '#/components/schemas/lineString'
-    createdAt:
-      type: string
-      format: date-time
-    GeoQuery:
-      type: object
-      required:
-      - geometry
-      - coordinates
-      - georel
-      properties:
-        georel:
-          $ref: '#/components/schemas/georel'
-        coordinates:
-          $ref: '#/components/schemas/coordinates'
-        geometry:
-          $ref: '#/components/schemas/geometry'
-    positionArray:
-      description: An array of positions
+    SubscriptionList:
       type: array
       items:
-        $ref: '#/components/schemas/position'
-    lineString:
-      description: An array of two or more positions
-      allOf:
-      - $ref: '#/components/schemas/positionArray'
-      - minItems: 2
-  parameters:
-    registrationId:
-      name: registrationId
-      description: Registration Id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uri
-    type:
-      name: type
-      description: Comma separated list of Entity type names to be retrieved
-      in: query
-      required: false
-      schema:
-        type: string
-        minLength: 1
-    geometry:
-      name: geometry
-      description: Geometry
-      in: query
-      required: false
-      schema:
-        $ref: '#/components/schemas/geometry'
-    limit:
-      name: limit
-      description: Pagination limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 1
+        $ref: '#/components/schemas/Subscription'
     coordinates:
-      name: coordinates
-      description: Coordinates serialized as a string
-      in: query
-      required: false
-      schema:
-        $ref: '#/components/schemas/coordinates'
-    idPattern:
-      name: idPattern
-      description: Regular expression that must be matched by Entity ids
-      in: query
-      required: false
-      schema:
-        type: string
-        format: regexp
-    id:
-      name: id
-      description: Comma separated list of URIs to be retrieved
-      in: query
-      required: false
-      schema:
-        type: string
-        format: uri
-    attrs:
-      name: attrs
-      description: Comma separated list of attribute names (properties or relationships) to be retrieved
-      in: query
-      required: false
-      schema:
-        type: string
-        minLength: 1
+      oneOf:
+      - $ref: '#/components/schemas/position'
+      - $ref: '#/components/schemas/positionArray'
+      - $ref: '#/components/schemas/lineString'
+      - $ref: '#/components/schemas/polygon'
+  parameters:
     geoproperty:
       name: geoproperty
       description: The name of the property that contains the geo-spatial data that will be used to resolve the geoquery
@@ -735,14 +673,22 @@ components:
       schema:
         type: string
         minLength: 1
-    q:
-      name: q
-      description: Query
+    id:
+      name: id
+      description: Comma separated list of URIs to be retrieved
       in: query
       required: false
       schema:
         type: string
-        minLength: 1
+        format: uri
+    registrationId:
+      name: registrationId
+      description: Registration Id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uri
     subscriptionId:
       name: subscriptionId
       description: Subscription Id
@@ -751,6 +697,21 @@ components:
       schema:
         type: string
         format: uri
+    coordinates:
+      name: coordinates
+      description: Coordinates serialized as a string
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/coordinates'
+    type:
+      name: type
+      description: Comma separated list of Entity type names to be retrieved
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
     georel:
       name: georel
       description: Geo-relationship
@@ -758,6 +719,45 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/georel'
+    q:
+      name: q
+      description: Query
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+    limit:
+      name: limit
+      description: Pagination limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+    attrs:
+      name: attrs
+      description: Comma separated list of attribute names (properties or relationships) to be retrieved
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+    idPattern:
+      name: idPattern
+      description: Regular expression that must be matched by Entity ids
+      in: query
+      required: false
+      schema:
+        type: string
+        format: regexp
+    geometry:
+      name: geometry
+      description: Geometry
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/geometry'
 externalDocs:
   description: Find out more about the ETSI ISG Context Information Management
   url: https://portal.etsi.org/tb.aspx?tbid=854&SubTB=854

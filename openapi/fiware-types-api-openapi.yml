@@ -208,43 +208,6 @@ paths:
       x-operation-id-original: Retrieve entity type
 components:
   schemas:
-    RetrieveEntityTypeResponse:
-      title: Retrieve entity type response
-      example:
-        attrs:
-          pressure:
-            types:
-            - Number
-          humidity:
-            types:
-            - percentage
-          temperature:
-            types:
-            - urn:phenomenum:temperature
-        count: 7
-      type: object
-      properties:
-        attrs:
-          description: ''
-          example:
-            pressure:
-              types:
-              - Number
-            humidity:
-              types:
-              - percentage
-            temperature:
-              types:
-              - urn:phenomenum:temperature
-          type: object
-        count:
-          description: ''
-          example: 7
-          type: integer
-          format: int32
-      required:
-      - attrs
-      - count
     ListEntityTypesResponse:
       title: List Entity Types response
       example:
@@ -288,5 +251,42 @@ components:
           format: int32
       required:
       - type
+      - attrs
+      - count
+    RetrieveEntityTypeResponse:
+      title: Retrieve entity type response
+      example:
+        attrs:
+          pressure:
+            types:
+            - Number
+          humidity:
+            types:
+            - percentage
+          temperature:
+            types:
+            - urn:phenomenum:temperature
+        count: 7
+      type: object
+      properties:
+        attrs:
+          description: ''
+          example:
+            pressure:
+              types:
+              - Number
+            humidity:
+              types:
+              - percentage
+            temperature:
+              types:
+              - urn:phenomenum:temperature
+          type: object
+        count:
+          description: ''
+          example: 7
+          type: integer
+          format: int32
+      required:
       - attrs
       - count

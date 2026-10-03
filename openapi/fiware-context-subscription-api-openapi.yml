@@ -150,33 +150,56 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    polygon:
-      description: An array of linear rings
+    Subscription:
+      allOf:
+      - $ref: '#/components/schemas/SubscriptionFragment'
+      - type: object
+        properties:
+          id:
+            type: string
+            format: uri
+          type:
+            type: string
+            enum:
+            - Subscription
+          notification:
+            $ref: '#/components/schemas/NotificationParams'
+          status:
+            type: string
+            enum:
+            - active
+            - paused
+            - expired
+          createdAt:
+            $ref: '#/components/schemas/createdAt'
+          modifiedAt:
+            $ref: '#/components/schemas/modifiedAt'
+        allOf:
+        - required:
+          - id
+          - type
+          - notification
+        - anyOf:
+          - required:
+            - entities
+          - required:
+            - watchedAttributes
+    position:
+      description: A single position
       type: array
+      minItems: 2
+      maxItems: 2
       items:
-        $ref: '#/components/schemas/linearRing'
+        type: number
+      additionalProperties: false
     Name:
       type: string
       pattern: ^((\d|[a-zA-Z]|_)+(:(\d|[a-zA-Z]|_)+)?(#\d+)?)$
       minLength: 1
       description: NGSI-LD Name
-    LdContext:
-      oneOf:
-      - type: object
-      - type: string
-        format: uri
-      - type: array
-        minItems: 1
-        items:
-          oneOf:
-          - type: string
-            format: uri
-          - type: object
-    linearRing:
-      description: An array of four positions where the first equals the last
-      allOf:
-      - $ref: '#/components/schemas/positionArray'
-      - minItems: 4
+    createdAt:
+      type: string
+      format: date-time
     Endpoint:
       type: object
       required:
@@ -190,13 +213,38 @@ components:
           enum:
           - application/json
           - application/ld+json
+    polygon:
+      description: An array of linear rings
+      type: array
+      items:
+        $ref: '#/components/schemas/linearRing'
     modifiedAt:
       type: string
       format: date-time
-    SubscriptionList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Subscription'
+    LdContext:
+      oneOf:
+      - type: object
+      - type: string
+        format: uri
+      - type: array
+        minItems: 1
+        items:
+          oneOf:
+          - type: string
+            format: uri
+          - type: object
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        detail:
+          type: string
+      required:
+      - type
     geometry:
       type: string
       enum:
@@ -206,6 +254,79 @@ components:
       - MultiLineString
       - Polygon
       - MultiPolygon
+    georel:
+      oneOf:
+      - type: string
+        enum:
+        - equals
+        - disjoint
+        - intersects
+        - within
+        - contains
+        - overlaps
+      - type: string
+        pattern: ^near;((maxDistance==\d+)|(minDistance==\d+))$
+    lineString:
+      description: An array of two or more positions
+      allOf:
+      - $ref: '#/components/schemas/positionArray'
+      - minItems: 2
+    positionArray:
+      description: An array of positions
+      type: array
+      items:
+        $ref: '#/components/schemas/position'
+    GeoQuery:
+      type: object
+      required:
+      - geometry
+      - coordinates
+      - georel
+      properties:
+        georel:
+          $ref: '#/components/schemas/georel'
+        coordinates:
+          $ref: '#/components/schemas/coordinates'
+        geometry:
+          $ref: '#/components/schemas/geometry'
+    NotificationParams:
+      type: object
+      properties:
+        attributes:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            minLength: 1
+          uniqueItems: true
+        format:
+          type: string
+        endpoint:
+          $ref: '#/components/schemas/Endpoint'
+        status:
+          type: string
+          enum:
+          - ok
+          - failed
+        timesSent:
+          type: number
+          minimum: 1
+        lastNotification:
+          type: string
+          format: date-time
+        lastFailure:
+          type: string
+          format: date-time
+        lastSuccess:
+          type: string
+          format: date-time
+      required:
+      - endpoint
+    linearRing:
+      description: An array of four positions where the first equals the last
+      allOf:
+      - $ref: '#/components/schemas/positionArray'
+      - minItems: 4
     EntityInfo:
       type: object
       properties:
@@ -219,20 +340,6 @@ components:
           format: regex
       required:
       - type
-    coordinates:
-      oneOf:
-      - $ref: '#/components/schemas/position'
-      - $ref: '#/components/schemas/positionArray'
-      - $ref: '#/components/schemas/lineString'
-      - $ref: '#/components/schemas/polygon'
-    position:
-      description: A single position
-      type: array
-      minItems: 2
-      maxItems: 2
-      items:
-        type: number
-      additionalProperties: false
     SubscriptionFragment:
       type: object
       properties:
@@ -272,132 +379,17 @@ components:
           $ref: '#/components/schemas/GeoQuery'
         csf:
           type: string
-    NotificationParams:
-      type: object
-      properties:
-        attributes:
-          type: array
-          minItems: 1
-          items:
-            type: string
-            minLength: 1
-          uniqueItems: true
-        format:
-          type: string
-        endpoint:
-          $ref: '#/components/schemas/Endpoint'
-        status:
-          type: string
-          enum:
-          - ok
-          - failed
-        timesSent:
-          type: number
-          minimum: 1
-        lastNotification:
-          type: string
-          format: date-time
-        lastFailure:
-          type: string
-          format: date-time
-        lastSuccess:
-          type: string
-          format: date-time
-      required:
-      - endpoint
-    Subscription:
-      allOf:
-      - $ref: '#/components/schemas/SubscriptionFragment'
-      - type: object
-        properties:
-          id:
-            type: string
-            format: uri
-          type:
-            type: string
-            enum:
-            - Subscription
-          notification:
-            $ref: '#/components/schemas/NotificationParams'
-          status:
-            type: string
-            enum:
-            - active
-            - paused
-            - expired
-          createdAt:
-            $ref: '#/components/schemas/createdAt'
-          modifiedAt:
-            $ref: '#/components/schemas/modifiedAt'
-        allOf:
-        - required:
-          - id
-          - type
-          - notification
-        - anyOf:
-          - required:
-            - entities
-          - required:
-            - watchedAttributes
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type: string
-          format: uri
-        title:
-          type: string
-        detail:
-          type: string
-      required:
-      - type
-    georel:
-      oneOf:
-      - type: string
-        enum:
-        - equals
-        - disjoint
-        - intersects
-        - within
-        - contains
-        - overlaps
-      - type: string
-        pattern: ^near;((maxDistance==\d+)|(minDistance==\d+))$
-    createdAt:
-      type: string
-      format: date-time
-    GeoQuery:
-      type: object
-      required:
-      - geometry
-      - coordinates
-      - georel
-      properties:
-        georel:
-          $ref: '#/components/schemas/georel'
-        coordinates:
-          $ref: '#/components/schemas/coordinates'
-        geometry:
-          $ref: '#/components/schemas/geometry'
-    positionArray:
-      description: An array of positions
+    SubscriptionList:
       type: array
       items:
-        $ref: '#/components/schemas/position'
-    lineString:
-      description: An array of two or more positions
-      allOf:
+        $ref: '#/components/schemas/Subscription'
+    coordinates:
+      oneOf:
+      - $ref: '#/components/schemas/position'
       - $ref: '#/components/schemas/positionArray'
-      - minItems: 2
+      - $ref: '#/components/schemas/lineString'
+      - $ref: '#/components/schemas/polygon'
   parameters:
-    limit:
-      name: limit
-      description: Pagination limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 1
     subscriptionId:
       name: subscriptionId
       description: Subscription Id
@@ -406,6 +398,14 @@ components:
       schema:
         type: string
         format: uri
+    limit:
+      name: limit
+      description: Pagination limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
 externalDocs:
   description: Find out more about the ETSI ISG Context Information Management
   url: https://portal.etsi.org/tb.aspx?tbid=854&SubTB=854

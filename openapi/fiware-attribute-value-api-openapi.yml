@@ -199,8 +199,8 @@ paths:
       x-operation-id-original: Update Attribute Value
 components:
   schemas:
-    UpdateAttributeValueRequest:
-      title: Update Attribute Value request
+    GetAttributeValueResponse:
+      title: Get Attribute Value response
       example:
         address: Ronda de la Comunicacion s/n
         zipCode: 28050
@@ -230,8 +230,8 @@ components:
       - zipCode
       - city
       - country
-    GetAttributeValueResponse:
-      title: Get Attribute Value response
+    UpdateAttributeValueRequest:
+      title: Update Attribute Value request
       example:
         address: Ronda de la Comunicacion s/n
         zipCode: 28050
