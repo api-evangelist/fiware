@@ -230,29 +230,6 @@ paths:
       x-operation-id-original: Remove a Single Attribute
 components:
   schemas:
-    UpdateAttributeDataRequest:
-      title: Update Attribute Data request
-      example:
-        value: 25.0
-        metadata:
-          unitCode:
-            value: CEL
-      type: object
-      properties:
-        value:
-          description: ''
-          example: 25
-          type: number
-          format: double
-        metadata:
-          description: ''
-          example:
-            unitCode:
-              value: CEL
-          type: object
-      required:
-      - value
-      - metadata
     GetAttributeDataResponse:
       title: Get attribute data response
       example:
@@ -277,4 +254,27 @@ components:
       required:
       - value
       - type
+      - metadata
+    UpdateAttributeDataRequest:
+      title: Update Attribute Data request
+      example:
+        value: 25.0
+        metadata:
+          unitCode:
+            value: CEL
+      type: object
+      properties:
+        value:
+          description: ''
+          example: 25
+          type: number
+          format: double
+        metadata:
+          description: ''
+          example:
+            unitCode:
+              value: CEL
+          type: object
+      required:
+      - value
       - metadata

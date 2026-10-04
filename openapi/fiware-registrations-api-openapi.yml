@@ -337,18 +337,44 @@ paths:
       x-operation-id-original: Update Registration
 components:
   schemas:
-    UpdateRegistrationRequest:
-      title: Update Registration request
+    CreateRegistrationRequest:
+      title: Create Registration request
       example:
-        expires: '2017-10-04T00:00:00'
+        description: Relative Humidity Context Source
+        dataProvided:
+          entities:
+          - id: room2
+            type: Room
+          attrs:
+          - relativeHumidity
+        provider:
+          http:
+            url: http://localhost:1234
       type: object
       properties:
-        expires:
+        description:
           description: ''
-          example: 10/4/2017 12:00:00 AM
+          example: Relative Humidity Context Source
           type: string
+        dataProvided:
+          description: ''
+          example:
+            entities:
+            - id: room2
+              type: Room
+            attrs:
+            - relativeHumidity
+          type: object
+        provider:
+          description: ''
+          example:
+            http:
+              url: http://localhost:1234
+          type: object
       required:
-      - expires
+      - description
+      - dataProvided
+      - provider
     RetrieveRegistrationResponse:
       title: Retrieve Registration response
       example:
@@ -421,44 +447,18 @@ components:
       - expires
       - status
       - forwardingInformation
-    CreateRegistrationRequest:
-      title: Create Registration request
+    UpdateRegistrationRequest:
+      title: Update Registration request
       example:
-        description: Relative Humidity Context Source
-        dataProvided:
-          entities:
-          - id: room2
-            type: Room
-          attrs:
-          - relativeHumidity
-        provider:
-          http:
-            url: http://localhost:1234
+        expires: '2017-10-04T00:00:00'
       type: object
       properties:
-        description:
+        expires:
           description: ''
-          example: Relative Humidity Context Source
+          example: 10/4/2017 12:00:00 AM
           type: string
-        dataProvided:
-          description: ''
-          example:
-            entities:
-            - id: room2
-              type: Room
-            attrs:
-            - relativeHumidity
-          type: object
-        provider:
-          description: ''
-          example:
-            http:
-              url: http://localhost:1234
-          type: object
       required:
-      - description
-      - dataProvided
-      - provider
+      - expires
     ListRegistrationsResponse:
       title: List Registrations response
       example:
