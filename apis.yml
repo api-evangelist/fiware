@@ -34,6 +34,9 @@ access: 3rd-Party
 created: '2024-07-02'
 modified: '2026-05-19'
 position: Consuming
+x-docs-platform: mkdocs
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-10-03
 tags:
   - Context Information
   - Devices
