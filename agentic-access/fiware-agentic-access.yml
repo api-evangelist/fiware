@@ -1,19 +1,208 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/fiware-ngsi-ld-openapi.yml, openapi/fiware-ngsiv2-openapi.yml
+source: openapi/fiware-api-entry-point-api-openapi.yml, openapi/fiware-attribute-value-api-openapi.yml,
+  openapi/fiware-attributes-api-openapi.yml, openapi/fiware-batch-operations-api-openapi.yml,
+  openapi/fiware-context-information-api-openapi.yml, openapi/fiware-context-sources-api-openapi.yml,
+  openapi/fiware-context-subscription-api-openapi.yml, openapi/fiware-entities-api-openapi.yml,
+  openapi/fiware-registrations-api-openapi.yml, openapi/fiware-subscriptions-api-openapi.yml,
+  openapi/fiware-temporal-evolution-api-openapi.yml, openapi/fiware-types-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 63
   by_action_class:
-    connected: 22
-    acting: 41
+    connected: 23
+    acting: 40
   by_consequence:
-    read: 22
-    write: 41
+    read: 23
+    write: 40
   human_in_the_loop_required: 0
 operations:
+- path: /v2
+  method: get
+  operationId: Retrieve API Resources
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/entities/{entityId}/attrs/{attrName}/value
+  method: get
+  operationId: Get Attribute Value
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/entities/{entityId}/attrs/{attrName}/value
+  method: put
+  operationId: Update Attribute Value
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/entities/{entityId}/attrs/{attrName}
+  method: get
+  operationId: Get attribute data
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/entities/{entityId}/attrs/{attrName}
+  method: put
+  operationId: Update Attribute Data
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/entities/{entityId}/attrs/{attrName}
+  method: delete
+  operationId: Remove a Single Attribute
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /entityOperations/create
+  method: post
+  operationId: batchEntityCreation
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /entityOperations/update
+  method: post
+  operationId: batchEntityUpdate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /entityOperations/upsert
+  method: post
+  operationId: batchEntityUpsert
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /entityOperations/delete
+  method: post
+  operationId: batchEntityDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/op/update
+  method: post
+  operationId: Update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/op/query
+  method: post
+  operationId: Query
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/op/notify
+  method: post
+  operationId: Notify
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /entities/
   method: get
   operationId: queryEntities
@@ -117,74 +306,6 @@ operations:
 - path: /entities/{entityId}/attrs/{attrId}
   method: delete
   operationId: removeEntityAttr
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /subscriptions/
-  method: get
-  operationId: retrieveSubscriptions
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /subscriptions/
-  method: post
-  operationId: createSubscription
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /subscriptions/{subscriptionId}
-  method: get
-  operationId: retrieveSubscriptionById
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /subscriptions/{subscriptionId}
-  method: patch
-  operationId: updateSubscription
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /subscriptions/{subscriptionId}
-  method: delete
-  operationId: removeSubscription
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -318,9 +439,19 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /entityOperations/create
+- path: /subscriptions/
+  method: get
+  operationId: retrieveSubscriptions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /subscriptions/
   method: post
-  operationId: batchEntityCreation
+  operationId: createSubscription
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -334,9 +465,19 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /entityOperations/update
-  method: post
-  operationId: batchEntityUpdate
+- path: /subscriptions/{subscriptionId}
+  method: get
+  operationId: retrieveSubscriptionById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /subscriptions/{subscriptionId}
+  method: patch
+  operationId: updateSubscription
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -350,9 +491,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /entityOperations/upsert
-  method: post
-  operationId: batchEntityUpsert
+- path: /subscriptions/{subscriptionId}
+  method: delete
+  operationId: removeSubscription
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -366,9 +507,239 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /entityOperations/delete
+- path: /v2/entities
+  method: get
+  operationId: List Entities
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/entities
   method: post
-  operationId: batchEntityDelete
+  operationId: Create Entity
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/entities/{entityId}
+  method: get
+  operationId: Retrieve Entity
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/entities/{entityId}
+  method: delete
+  operationId: Remove Entity
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/entities/{entityId}/attrs
+  method: get
+  operationId: Retrieve Entity Attributes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/entities/{entityId}/attrs
+  method: put
+  operationId: Replace all entity attributes
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/entities/{entityId}/attrs
+  method: post
+  operationId: Update or Append Entity Attributes
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/entities/{entityId}/attrs
+  method: patch
+  operationId: Update Existing Entity Attributes
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/registrations
+  method: get
+  operationId: List Registrations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/registrations
+  method: post
+  operationId: Create Registration
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/registrations/{registrationId}
+  method: get
+  operationId: Retrieve Registration
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/registrations/{registrationId}
+  method: delete
+  operationId: Delete Registration
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/registrations/{registrationId}
+  method: patch
+  operationId: Update Registration
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/subscriptions
+  method: get
+  operationId: List Subscriptions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/subscriptions
+  method: post
+  operationId: Create Subscription
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/subscriptions/{subscriptionId}
+  method: get
+  operationId: Retrieve Subscription
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/subscriptions/{subscriptionId}
+  method: delete
+  operationId: Delete subscription
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/subscriptions/{subscriptionId}
+  method: patch
+  operationId: Update Subscription
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -498,194 +869,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v2
-  method: get
-  operationId: Retrieve API Resources
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v2/entities
-  method: get
-  operationId: List Entities
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v2/entities
-  method: post
-  operationId: Create Entity
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/entities/{entityId}
-  method: get
-  operationId: Retrieve Entity
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v2/entities/{entityId}
-  method: delete
-  operationId: Remove Entity
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/entities/{entityId}/attrs
-  method: get
-  operationId: Retrieve Entity Attributes
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v2/entities/{entityId}/attrs
-  method: put
-  operationId: Replace all entity attributes
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/entities/{entityId}/attrs
-  method: post
-  operationId: Update or Append Entity Attributes
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/entities/{entityId}/attrs
-  method: patch
-  operationId: Update Existing Entity Attributes
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/entities/{entityId}/attrs/{attrName}
-  method: get
-  operationId: Get attribute data
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v2/entities/{entityId}/attrs/{attrName}
-  method: put
-  operationId: Update Attribute Data
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/entities/{entityId}/attrs/{attrName}
-  method: delete
-  operationId: Remove a Single Attribute
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/entities/{entityId}/attrs/{attrName}/value
-  method: get
-  operationId: Get Attribute Value
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v2/entities/{entityId}/attrs/{attrName}/value
-  method: put
-  operationId: Update Attribute Value
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /v2/types/
   method: get
   operationId: List Entity Types
@@ -706,187 +889,3 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v2/subscriptions
-  method: get
-  operationId: List Subscriptions
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v2/subscriptions
-  method: post
-  operationId: Create Subscription
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/subscriptions/{subscriptionId}
-  method: get
-  operationId: Retrieve Subscription
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v2/subscriptions/{subscriptionId}
-  method: delete
-  operationId: Delete subscription
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/subscriptions/{subscriptionId}
-  method: patch
-  operationId: Update Subscription
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/registrations
-  method: get
-  operationId: List Registrations
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v2/registrations
-  method: post
-  operationId: Create Registration
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/registrations/{registrationId}
-  method: get
-  operationId: Retrieve Registration
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v2/registrations/{registrationId}
-  method: delete
-  operationId: Delete Registration
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/registrations/{registrationId}
-  method: patch
-  operationId: Update Registration
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/op/update
-  method: post
-  operationId: Update
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/op/query
-  method: post
-  operationId: Query
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/op/notify
-  method: post
-  operationId: Notify
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
