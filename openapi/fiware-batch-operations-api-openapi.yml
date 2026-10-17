@@ -497,6 +497,23 @@ components:
         oneOf:
         - $ref: '#/components/schemas/Property'
         - $ref: '#/components/schemas/Relationship'
+    BatchOperationResult:
+      type: object
+      properties:
+        success:
+          type: array
+          items:
+            type: string
+            format: uri
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchEntityError'
+    linearRing:
+      description: An array of four positions where the first equals the last
+      allOf:
+      - $ref: '#/components/schemas/positionArray'
+      - minItems: 4
     BatchEntityError:
       type: object
       properties:
@@ -505,11 +522,126 @@ components:
           format: uri
         error:
           $ref: '#/components/schemas/ProblemDetails'
+    modifiedAt:
+      type: string
+      format: date-time
+    LdContext:
+      oneOf:
+      - type: object
+      - type: string
+        format: uri
+      - type: array
+        minItems: 1
+        items:
+          oneOf:
+          - type: string
+            format: uri
+          - type: object
+    polygon:
+      description: An array of linear rings
+      type: array
+      items:
+        $ref: '#/components/schemas/linearRing'
+    LineString:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - LineString
+        coordinates:
+          $ref: '#/components/schemas/lineString'
+    MultiPoint:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiPoint
+        coordinates:
+          $ref: '#/components/schemas/positionArray'
+    Entity:
+      allOf:
+      - required:
+        - id
+        - type
+      - $ref: '#/components/schemas/EntityFragment'
+    lineString:
+      description: An array of two or more positions
+      allOf:
+      - $ref: '#/components/schemas/positionArray'
+      - minItems: 2
     positionArray:
       description: An array of positions
       type: array
       items:
         $ref: '#/components/schemas/position'
+    position:
+      description: A single position
+      type: array
+      minItems: 2
+      maxItems: 2
+      items:
+        type: number
+      additionalProperties: false
+    instanceId:
+      type: string
+      format: uri
+    EntityFragment:
+      type: object
+      properties:
+        '@context':
+          $ref: '#/components/schemas/LdContext'
+        location:
+          $ref: '#/components/schemas/GeoProperty'
+        observationSpace:
+          $ref: '#/components/schemas/GeoProperty'
+        operationSpace:
+          $ref: '#/components/schemas/GeoProperty'
+        id:
+          type: string
+          format: uri
+        type:
+          $ref: '#/components/schemas/Name'
+        createdAt:
+          $ref: '#/components/schemas/createdAt'
+        modifiedAt:
+          $ref: '#/components/schemas/modifiedAt'
+      additionalProperties:
+        oneOf:
+        - $ref: '#/components/schemas/Property'
+        - $ref: '#/components/schemas/Relationship'
+        - $ref: '#/components/schemas/GeoProperty'
+    observedAt:
+      type: string
+      format: date-time
+    Polygon:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Polygon
+        coordinates:
+          $ref: '#/components/schemas/polygon'
+    Point:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Point
+        coordinates:
+          $ref: '#/components/schemas/position'
+    Geometry:
+      description: ' Avalid GeoJSON geometry object'
+      oneOf:
+      - $ref: '#/components/schemas/Point'
+      - $ref: '#/components/schemas/MultiPoint'
+      - $ref: '#/components/schemas/Polygon'
+      - $ref: '#/components/schemas/LineString'
+      - $ref: '#/components/schemas/MultiLineString'
+      - $ref: '#/components/schemas/MultiPolygon'
     Relationship:
       type: object
       properties:
@@ -537,137 +669,17 @@ components:
         oneOf:
         - $ref: '#/components/schemas/Property'
         - $ref: '#/components/schemas/Relationship'
-    MultiPoint:
+    MultiLineString:
       type: object
       properties:
         type:
           type: string
           enum:
-          - MultiPoint
-        coordinates:
-          $ref: '#/components/schemas/positionArray'
-    BatchOperationResult:
-      type: object
-      properties:
-        success:
-          type: array
-          items:
-            type: string
-            format: uri
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/BatchEntityError'
-    instanceId:
-      type: string
-      format: uri
-    MultiPolygon:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - MultiPolygon
+          - MultiLineString
         coordinates:
           type: array
           items:
-            $ref: '#/components/schemas/polygon'
-    LineString:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - LineString
-        coordinates:
-          $ref: '#/components/schemas/lineString'
-    observedAt:
-      type: string
-      format: date-time
-    LdContext:
-      oneOf:
-      - type: object
-      - type: string
-        format: uri
-      - type: array
-        minItems: 1
-        items:
-          oneOf:
-          - type: string
-            format: uri
-          - type: object
-    Geometry:
-      description: ' Avalid GeoJSON geometry object'
-      oneOf:
-      - $ref: '#/components/schemas/Point'
-      - $ref: '#/components/schemas/MultiPoint'
-      - $ref: '#/components/schemas/Polygon'
-      - $ref: '#/components/schemas/LineString'
-      - $ref: '#/components/schemas/MultiLineString'
-      - $ref: '#/components/schemas/MultiPolygon'
-    modifiedAt:
-      type: string
-      format: date-time
-    Point:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - Point
-        coordinates:
-          $ref: '#/components/schemas/position'
-    Entity:
-      allOf:
-      - required:
-        - id
-        - type
-      - $ref: '#/components/schemas/EntityFragment'
-    EntityFragment:
-      type: object
-      properties:
-        '@context':
-          $ref: '#/components/schemas/LdContext'
-        location:
-          $ref: '#/components/schemas/GeoProperty'
-        observationSpace:
-          $ref: '#/components/schemas/GeoProperty'
-        operationSpace:
-          $ref: '#/components/schemas/GeoProperty'
-        id:
-          type: string
-          format: uri
-        type:
-          $ref: '#/components/schemas/Name'
-        createdAt:
-          $ref: '#/components/schemas/createdAt'
-        modifiedAt:
-          $ref: '#/components/schemas/modifiedAt'
-      additionalProperties:
-        oneOf:
-        - $ref: '#/components/schemas/Property'
-        - $ref: '#/components/schemas/Relationship'
-        - $ref: '#/components/schemas/GeoProperty'
-    Polygon:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - Polygon
-        coordinates:
-          $ref: '#/components/schemas/polygon'
-    datasetId:
-      type: string
-      format: uri
-    createdAt:
-      type: string
-      format: date-time
-    polygon:
-      description: An array of linear rings
-      type: array
-      items:
-        $ref: '#/components/schemas/linearRing'
+            $ref: '#/components/schemas/lineString'
     GeoProperty:
       type: object
       properties:
@@ -694,6 +706,32 @@ components:
         oneOf:
         - $ref: '#/components/schemas/Property'
         - $ref: '#/components/schemas/Relationship'
+    MultiPolygon:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - MultiPolygon
+        coordinates:
+          type: array
+          items:
+            $ref: '#/components/schemas/polygon'
+    Name:
+      type: string
+      pattern: ^((\d|[a-zA-Z]|_)+(:(\d|[a-zA-Z]|_)+)?(#\d+)?)$
+      minLength: 1
+      description: NGSI-LD Name
+    datasetId:
+      type: string
+      format: uri
+    EntityList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Entity'
+    createdAt:
+      type: string
+      format: date-time
     ProblemDetails:
       type: object
       properties:
@@ -706,88 +744,6 @@ components:
           type: string
       required:
       - type
-    Name:
-      type: string
-      pattern: ^((\d|[a-zA-Z]|_)+(:(\d|[a-zA-Z]|_)+)?(#\d+)?)$
-      minLength: 1
-      description: NGSI-LD Name
-    linearRing:
-      description: An array of four positions where the first equals the last
-      allOf:
-      - $ref: '#/components/schemas/positionArray'
-      - minItems: 4
-    position:
-      description: A single position
-      type: array
-      minItems: 2
-      maxItems: 2
-      items:
-        type: number
-      additionalProperties: false
-    lineString:
-      description: An array of two or more positions
-      allOf:
-      - $ref: '#/components/schemas/positionArray'
-      - minItems: 2
-    MultiLineString:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - MultiLineString
-        coordinates:
-          type: array
-          items:
-            $ref: '#/components/schemas/lineString'
-    EntityList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Entity'
-    UpdateRequest:
-      title: Update request
-      example:
-        actionType: append
-        entities:
-        - type: Room
-          id: Bcn-Welt
-          temperature:
-            value: 21.7
-          humidity:
-            value: 60
-        - type: Room
-          id: Mad_Aud
-          temperature:
-            value: 22.9
-          humidity:
-            value: 85
-      type: object
-      properties:
-        actionType:
-          description: ''
-          example: append
-          type: string
-        entities:
-          description: ''
-          example:
-          - type: Room
-            id: Bcn-Welt
-            temperature:
-              value: 21.7
-            humidity:
-              value: 60
-          - type: Room
-            id: Mad_Aud
-            temperature:
-              value: 22.9
-            humidity:
-              value: 85
-          type: array
-          items:
-            type: object
-      required:
-      - actionType
-      - entities
     QueryRequest:
       title: Query request
       example:
@@ -842,6 +798,78 @@ components:
       - attrs
       - expression
       - metadata
+    UpdateRequest:
+      title: Update request
+      example:
+        actionType: append
+        entities:
+        - type: Room
+          id: Bcn-Welt
+          temperature:
+            value: 21.7
+          humidity:
+            value: 60
+        - type: Room
+          id: Mad_Aud
+          temperature:
+            value: 22.9
+          humidity:
+            value: 85
+      type: object
+      properties:
+        actionType:
+          description: ''
+          example: append
+          type: string
+        entities:
+          description: ''
+          example:
+          - type: Room
+            id: Bcn-Welt
+            temperature:
+              value: 21.7
+            humidity:
+              value: 60
+          - type: Room
+            id: Mad_Aud
+            temperature:
+              value: 22.9
+            humidity:
+              value: 85
+          type: array
+          items:
+            type: object
+      required:
+      - actionType
+      - entities
+    QueryResponse:
+      title: Query response
+      example:
+        type: Room
+        id: DC_S1-D41
+        temperature:
+          value: 35.6
+          type: Number
+      type: object
+      properties:
+        type:
+          description: ''
+          example: Room
+          type: string
+        id:
+          description: ''
+          example: DC_S1-D41
+          type: string
+        temperature:
+          description: ''
+          example:
+            value: 35.6
+            type: Number
+          type: object
+      required:
+      - type
+      - id
+      - temperature
     NotifyRequest:
       title: Notify request
       example:
@@ -882,34 +910,6 @@ components:
       required:
       - subscriptionId
       - data
-    QueryResponse:
-      title: Query response
-      example:
-        type: Room
-        id: DC_S1-D41
-        temperature:
-          value: 35.6
-          type: Number
-      type: object
-      properties:
-        type:
-          description: ''
-          example: Room
-          type: string
-        id:
-          description: ''
-          example: DC_S1-D41
-          type: string
-        temperature:
-          description: ''
-          example:
-            value: 35.6
-            type: Number
-          type: object
-      required:
-      - type
-      - id
-      - temperature
 externalDocs:
   description: Find out more about the ETSI ISG Context Information Management
   url: https://portal.etsi.org/tb.aspx?tbid=854&SubTB=854

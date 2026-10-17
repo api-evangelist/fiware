@@ -800,17 +800,48 @@ paths:
       x-operation-id-original: Update Existing Entity Attributes
 components:
   schemas:
-    UpdateOrAppendEntityAttributesRequest:
-      title: Update or Append Entity Attributes request
+    ListEntitiesResponse:
+      title: List Entities response
+      example:
+        type: Room
+        id: DC_S1-D41
+        temperature:
+          value: 35.6
+          type: Number
+          metadata: {}
       type: object
       properties:
-        ambientNoise:
+        type:
+          description: ''
+          example: Room
+          type: string
+        id:
+          description: ''
+          example: DC_S1-D41
+          type: string
+        temperature:
           description: ''
           example:
-            value: 31.5
+            value: 35.6
+            type: Number
+            metadata: {}
+          type: object
+        speed:
+          description: ''
+          example:
+            value: 100
+            type: number
+            metadata:
+              accuracy:
+                value: 2
+                type: Number
+              timestamp:
+                value: '2015-06-04T07:20:27.378Z'
+                type: DateTime
           type: object
       required:
-      - ambientNoise
+      - type
+      - id
     CreateEntityRequest:
       title: Create Entity request
       example:
@@ -861,6 +892,95 @@ components:
       - temperature
       - humidity
       - location
+    RetrieveEntityAttributesResponse:
+      title: Retrieve Entity Attributes response
+      example:
+        temperature:
+          value: 21.7
+          type: Number
+        humidity:
+          value: 60
+          type: Number
+        location:
+          value: 41.3763726, 2.1864475
+          type: geo:point
+          metadata:
+            crs:
+              value: WGS84
+              type: Text
+      type: object
+      properties:
+        temperature:
+          description: ''
+          example:
+            value: 21.7
+            type: Number
+          type: object
+        humidity:
+          description: ''
+          example:
+            value: 60
+            type: Number
+          type: object
+        location:
+          description: ''
+          example:
+            value: 41.3763726, 2.1864475
+            type: geo:point
+            metadata:
+              crs:
+                value: WGS84
+                type: Text
+          type: object
+      required:
+      - temperature
+      - humidity
+      - location
+    UpdateOrAppendEntityAttributesRequest:
+      title: Update or Append Entity Attributes request
+      type: object
+      properties:
+        ambientNoise:
+          description: ''
+          example:
+            value: 31.5
+          type: object
+      required:
+      - ambientNoise
+    ReplaceAllEntityAttributesRequest:
+      title: Replace all entity attributes request
+      type: object
+      properties:
+        temperature:
+          description: ''
+          example:
+            value: 25.5
+          type: object
+        seatNumber:
+          description: ''
+          example:
+            value: 6
+          type: object
+      required:
+      - temperature
+      - seatNumber
+    UpdateExistingEntityAttributesRequest:
+      title: Update Existing Entity Attributes request
+      type: object
+      properties:
+        temperature:
+          description: ''
+          example:
+            value: 25.5
+          type: object
+        seatNumber:
+          description: ''
+          example:
+            value: 6
+          type: object
+      required:
+      - temperature
+      - seatNumber
     RetrieveEntityResponse:
       title: Retrieve Entity response
       example:
@@ -917,123 +1037,3 @@ components:
       - temperature
       - humidity
       - location
-    UpdateExistingEntityAttributesRequest:
-      title: Update Existing Entity Attributes request
-      type: object
-      properties:
-        temperature:
-          description: ''
-          example:
-            value: 25.5
-          type: object
-        seatNumber:
-          description: ''
-          example:
-            value: 6
-          type: object
-      required:
-      - temperature
-      - seatNumber
-    ListEntitiesResponse:
-      title: List Entities response
-      example:
-        type: Room
-        id: DC_S1-D41
-        temperature:
-          value: 35.6
-          type: Number
-          metadata: {}
-      type: object
-      properties:
-        type:
-          description: ''
-          example: Room
-          type: string
-        id:
-          description: ''
-          example: DC_S1-D41
-          type: string
-        temperature:
-          description: ''
-          example:
-            value: 35.6
-            type: Number
-            metadata: {}
-          type: object
-        speed:
-          description: ''
-          example:
-            value: 100
-            type: number
-            metadata:
-              accuracy:
-                value: 2
-                type: Number
-              timestamp:
-                value: '2015-06-04T07:20:27.378Z'
-                type: DateTime
-          type: object
-      required:
-      - type
-      - id
-    RetrieveEntityAttributesResponse:
-      title: Retrieve Entity Attributes response
-      example:
-        temperature:
-          value: 21.7
-          type: Number
-        humidity:
-          value: 60
-          type: Number
-        location:
-          value: 41.3763726, 2.1864475
-          type: geo:point
-          metadata:
-            crs:
-              value: WGS84
-              type: Text
-      type: object
-      properties:
-        temperature:
-          description: ''
-          example:
-            value: 21.7
-            type: Number
-          type: object
-        humidity:
-          description: ''
-          example:
-            value: 60
-            type: Number
-          type: object
-        location:
-          description: ''
-          example:
-            value: 41.3763726, 2.1864475
-            type: geo:point
-            metadata:
-              crs:
-                value: WGS84
-                type: Text
-          type: object
-      required:
-      - temperature
-      - humidity
-      - location
-    ReplaceAllEntityAttributesRequest:
-      title: Replace all entity attributes request
-      type: object
-      properties:
-        temperature:
-          description: ''
-          example:
-            value: 25.5
-          type: object
-        seatNumber:
-          description: ''
-          example:
-            value: 6
-          type: object
-      required:
-      - temperature
-      - seatNumber
