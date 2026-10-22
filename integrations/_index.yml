@@ -40,3 +40,47 @@
     detected: '2026-10-22'
   status: not-a-workflow
   arazzo: null
+- slug: fiware-openssf-best-practices-badge
+  label: OpenSSF Best Practices Badge
+  partner_name: OpenSSF Best Practices Badge
+  category: OpenSSF Best Practices badge (open-source project security conformance)
+  type: register
+  channel: standard-directory
+  evidence: https://www.bestpractices.dev/en/projects/4661
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: OpenSSF Best Practices badge projects (bestpractices.dev/en/projects.json, paged)
+    standard: OpenSSF Best Practices Badge criteria (formerly CII Best Practices; bestpractices.dev)
+    spec_file: null
+    role: badge-holder
+    registered_name: CanisMajor
+    matched_by: github-org
+    matched_on: fiware
+    certified_products:
+    - product: open-source project
+      product_type: open-source project
+      standard: OpenSSF Best Practices Badge criteria (formerly CII Best Practices; bestpractices.dev)
+      lapsed: false
+      partner_tier: passing
+      projects:
+      - name: CanisMajor
+        id: 4661
+        url: https://www.bestpractices.dev/en/projects/4661
+        badge_level: passing
+      - name: FIWARE Mintaka
+        id: 4751
+        url: https://www.bestpractices.dev/en/projects/4751
+        badge_level: passing
+      - name: context.Orion-LD
+        id: 4800
+        url: https://www.bestpractices.dev/en/projects/4800
+        badge_level: passing
+    signal_note: 'certified_products = ONE entry (product type: open-source project) with the highest CURRENT badge
+      level in partner_tier; a provider whose projects only lost the badge is lapsed: true; project names are context,
+      never counted; in_progress entries are not conformance'
+    detected_by: sweep-openssf-best-practices-badges.py
+    detected: '2026-10-22'
+    identity_source: apis.yml GitHubOrganization pointer (provider's own declaration)
+  status: not-a-workflow
+  arazzo: null
