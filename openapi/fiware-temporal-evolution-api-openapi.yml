@@ -749,3 +749,9 @@ components:
 externalDocs:
   description: Find out more about the ETSI ISG Context Information Management
   url: https://portal.etsi.org/tb.aspx?tbid=854&SubTB=854
+x-provenance:
+  method: harvested
+  publisher: FIWARE
+  source: https://raw.githubusercontent.com/fiware/specifications/HEAD/OpenAPI/ngsi-ld/full_api.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
