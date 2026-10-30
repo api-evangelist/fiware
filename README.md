@@ -1,4 +1,4 @@
-# FIWARE (fiware)
+# FIWARE
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,80 +66,141 @@
 
 FIWARE is an open-source framework that provides a curated set of standards and components for context information management. The cornerstone is the NGSI-LD API standardized by ETSI ISG CIM, which allows applications to provide, consume, and subscribe to context information in smart cities, smart industry, smart agriculture, and smart energy scenarios.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/fiware/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/fiware/refs/heads/main/apis.yml)
+**Areas:** Context Information · Devices · IoT · Linked Data · NGSI · Smart Cities · Standards
 
-## Scope
+## FIWARE on APIs.io
 
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for FIWARE is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/fiware/](https://apis.io/providers/fiware/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (12)
 
-- Context Information
-- Devices
-- Internet of Things
-- Linked Data
-- NGSI
-- Smart Cities
-- Standards
+- [FIWARE API Entry Point API](https://apis.io/apis/fiware/fiware-api-entry-point-api/) — The API Entry Point API from FIWARE — 1 operation(s) for api entry point.
+- [FIWARE Attribute Value API](https://apis.io/apis/fiware/fiware-attribute-value-api/) — The Attribute Value API from FIWARE — 1 operation(s) for attribute value.
+- [FIWARE Attributes API](https://apis.io/apis/fiware/fiware-attributes-api/) — The Attributes API from FIWARE — 1 operation(s) for attributes.
+- [FIWARE Batch Operations API](https://apis.io/apis/fiware/fiware-batch-operations-api/) — The Batch Operations API from FIWARE — 7 operation(s) for batch operations.
+- [FIWARE Context Information API](https://apis.io/apis/fiware/fiware-context-information-api/) — The Context Information API from FIWARE — 4 operation(s) for context information.
+- [FIWARE Context Sources API](https://apis.io/apis/fiware/fiware-context-sources-api/) — The Context Sources API from FIWARE — 4 operation(s) for context sources.
+- [FIWARE Context Subscription API](https://apis.io/apis/fiware/fiware-context-subscription-api/) — The Context Subscription API from FIWARE — 2 operation(s) for context subscription.
+- [FIWARE Entities API](https://apis.io/apis/fiware/fiware-entities-api/) — The Entities API from FIWARE — 11 operation(s) for entities.
+- [FIWARE Registrations API](https://apis.io/apis/fiware/fiware-registrations-api/) — The Registrations API from FIWARE — 2 operation(s) for registrations.
+- [FIWARE Subscriptions API](https://apis.io/apis/fiware/fiware-subscriptions-api/) — The Subscriptions API from FIWARE — 4 operation(s) for subscriptions.
+- [FIWARE Temporal Evolution API](https://apis.io/apis/fiware/fiware-temporal-evolution-api/) — The Temporal Evolution API from FIWARE — 5 operation(s) for temporal evolution.
+- [FIWARE Types API](https://apis.io/apis/fiware/fiware-types-api/) — The Types API from FIWARE — 2 operation(s) for types.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2024-07-02
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### FIWARE NGSI-LD API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The NGSI-LD API defined by ETSI ISG CIM is a Cross-domain Context Information Management API that allows applications to provide, consume, and subscribe to context information in multiple scenarios and involving multiple stakeholders. It is the linked-data evolution of the NGSI specification and forms the foundation of FIWARE-based smart solutions.
+- [Fiware Agentic Access](https://apis.io/agentic-access/fiware/fiware-agentic-access/)
 
-- **Human URL:** [https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld](https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld)
+#### Collections (17)
 
-#### Tags
+Postman and Open Collection request collections.
 
-- Context Information
-- Linked Data
-- NGSI-LD
-- Standards
+- [ETSI ISG CIM / NGSI-LD API Entry Point API](https://apis.io/collections/fiware/open-fiware-api-entry-point-api/)
+- [ETSI ISG CIM / NGSI-LD API Entry Point Attribute Value API](https://apis.io/collections/fiware/open-fiware-attribute-value-api/)
+- [ETSI ISG CIM / NGSI-LD API Entry Point Attributes API](https://apis.io/collections/fiware/open-fiware-attributes-api/)
+- [ETSI ISG CIM / NGSI-LD API Entry Point Batch Operations API](https://apis.io/collections/fiware/open-fiware-batch-operations-api/)
+- [ETSI ISG CIM / NGSI-LD API Entry Point Context Information API](https://apis.io/collections/fiware/open-fiware-context-information-api/)
+- [ETSI ISG CIM / NGSI-LD API Entry Point Context Sources API](https://apis.io/collections/fiware/open-fiware-context-sources-api/)
+- [ETSI ISG CIM / NGSI-LD API Entry Point Context Subscription API](https://apis.io/collections/fiware/open-fiware-context-subscription-api/)
+- [ETSI ISG CIM / NGSI-LD API Entry Point CSourceRegistrations API](https://apis.io/collections/fiware/open-fiware-csourceregistrations-api/)
+- [ETSI ISG CIM / NGSI-LD API Entry Point CSourceSubscriptions API](https://apis.io/collections/fiware/open-fiware-csourcesubscriptions-api/)
+- [ETSI ISG CIM / NGSI-LD API Entry Point Entities API](https://apis.io/collections/fiware/open-fiware-entities-api/)
+- [ETSI ISG CIM / NGSI-LD API](https://apis.io/collections/fiware/open-fiware-ngsi-ld/)
+- [FIWARE-NGSI v2 Specification](https://apis.io/collections/fiware/open-fiware-ngsiv2/)
+- [ETSI ISG CIM / NGSI-LD API Entry Point Registrations API](https://apis.io/collections/fiware/open-fiware-registrations-api/)
+- [ETSI ISG CIM / NGSI-LD API Entry Point Subscriptions API](https://apis.io/collections/fiware/open-fiware-subscriptions-api/)
+- [ETSI ISG CIM / NGSI-LD API Entry Point Temporal API](https://apis.io/collections/fiware/open-fiware-temporal-api/)
+- [ETSI ISG CIM / NGSI-LD API Entry Point Temporal Evolution API](https://apis.io/collections/fiware/open-fiware-temporal-evolution-api/)
+- [ETSI ISG CIM / NGSI-LD API Entry Point Types API](https://apis.io/collections/fiware/open-fiware-types-api/)
 
-#### Properties
+#### Security (1)
 
-- [Documentation](https://fiware-orion.readthedocs.io/)
-- [Specification](https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsi-ld)
-- [OpenAPI](openapi/fiware-ngsi-ld-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/fiware-ngsi-ld.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/fiware-ngsi-ld.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Authentication, trust centre, and vulnerability disclosure.
 
-### FIWARE NGSI v2 API
+- [Fiware Domain Security](https://apis.io/security/fiware/fiware-domain-security/)
 
-The NGSI v2 API is the previous generation context broker specification that established the patterns later evolved into NGSI-LD. It is widely implemented by Orion Context Broker and is still in use across many FIWARE-based deployments for managing entities, attributes, and subscriptions.
+#### Plans and pricing (1)
 
-- **Human URL:** [https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2](https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2)
+Published plans, tiers and prices.
 
-#### Tags
+- [Fiware Plans Pricing](https://apis.io/plans/fiware/fiware-plans-pricing/)
 
-- Context Information
-- NGSI
-- Standards
+#### Rate limits (1)
 
-#### Properties
+Published request limits.
 
-- [Documentation](https://fiware-orion.readthedocs.io/)
-- [Specification](https://github.com/FIWARE/specifications/tree/master/OpenAPI/ngsiv2)
-- [OpenAPI](openapi/fiware-ngsiv2-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/fiware-ngsiv2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/fiware-ngsiv2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Fiware Rate Limits](https://apis.io/rate-limits/fiware/fiware-rate-limits/)
 
-## Common Properties
+#### FinOps (1)
 
-- [LinkedIn](https://www.linkedin.com/company/fiware)
+What the API costs to run, by operation.
+
+- [Fiware Finops](https://apis.io/finops/fiware/fiware-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.fiware.org/)
-- [GitHub Organization](https://github.com/FIWARE)
 - [Documentation](https://fiware-orion.readthedocs.io/)
-- [Specifications](https://github.com/FIWARE/specifications)
+- [Blog](https://www.fiware.org/feed/)
+- [GitHub](https://github.com/FIWARE)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 24.3** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 46.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 11.9 |
+| Access clarity | 7.9 |
+
+**Agent readiness 23.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 5.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/fiware/](https://apis.io/providers/fiware/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for FIWARE: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/fiware/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
